@@ -1,0 +1,229 @@
+.homeBox {
+	background: #4aa3df;
+	padding: 25px;
+	color: #fff;
+	transition-delay: 0s;
+	transition-duration: 0.3s;
+	transition-property: all;
+	transition-timing-function: ease;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	
+	margin-bottom:30px;
+
+}
+ 
+ 
+ 
+.homeBox h1 {
+	color: #fff;
+	margin-top: 0;
+	
+	
+}
+.homeBox p {
+	margin-bottom: 0;
+}
+.homeBoxLeftPadding {
+	padding-right: 15px;
+}
+.homeBoxRightPadding {
+	padding-left: 15px;
+}
+.homeBox.row {
+	margin-left: 0;
+	margin-right: 0;
+	width: 300px;
+}
+.boxTopMargin {
+	/*margin-top: 30px;*/
+	
+}
+.homeBtmText {
+	padding-top: 30px;
+}
+
+
+
+
+
+/* rotate gears */
+
+@-webkit-keyframes ckw {
+    0% {
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-moz-keyframes ckw {
+    0% {
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes cckw {
+    0% {
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+    100% {
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+}
+@-moz-keyframes cckw {
+    0% {
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+    100% {
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+.gear {
+    float: none;
+    position: absolute;
+    text-align: center;
+
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: normal;
+    -moz-animation-delay: 0;
+    -moz-animation-play-state: running;
+    -moz-animation-fill-mode: forwards;
+
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: normal;
+    -webkit-animation-delay: 0;
+    -webkit-animation-play-state: running;
+    -webkit-animation-fill-mode: forwards;
+}
+
+#gear1 {
+    background: url('../images/wheel.png') no-repeat 0 0;
+    height: 100px;
+    left: 5;
+    top: 100px;
+    width: 100px;
+}
+#gear3 {
+    background: url('../images/wheel.png') no-repeat 0 0;
+    height: 100px;
+    left: 145px;
+    top: 162px;
+    width: 100px;
+}
+
+#gear2 {
+    background: url('../images/wheel2.png') no-repeat 0 0;
+    height: 43px;
+    left: 112px;
+    top: 150px;
+    width: 43px;
+}
+
+
+.homeBox #gear1{
+	opacity:1;
+	 -moz-animation-name: ckw;
+    -moz-animation-duration: 10s;
+
+    -webkit-animation-name: ckw;
+    -webkit-animation-duration: 10s;
+}
+
+.homeBox #gear3{
+	opacity:1;
+	 -moz-animation-name: ckw;
+    -moz-animation-duration: 10s;
+
+    -webkit-animation-name: ckw;
+    -webkit-animation-duration: 10s;
+}
+
+.homeBox #gear2{
+	opacity:1;
+	-moz-animation-name: cckw;
+    -moz-animation-duration: 16.84s;
+
+    -webkit-animation-name: cckw;
+    -webkit-animation-duration: 16.84s;
+}
+
+.halo{
+	width:24px;
+	height:9px;
+	background:#fff;
+	border-radius:10px;
+	position:absolute;
+	z-index:1;
+	opacity:.5;
+}
+
+.halo.one{
+	top:90px;
+	left:16px;
+	-ms-transform: rotate(135deg); /* IE 9 */
+    -webkit-transform: rotate(135deg); /* Chrome, Safari, Opera */
+    transform: rotate(135deg);
+}
+
+.halo.two{
+	top:55px;
+	left:0;
+}
+
+.halo.three{
+	top:23px;
+	left:17px;
+	-ms-transform: rotate(40deg); /* IE 9 */
+    -webkit-transform: rotate(40deg); /* Chrome, Safari, Opera */
+    transform: rotate(40deg);
+}
+
+.halo.four{
+	top:10px;
+	left:50px;
+	-ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+.halo.five{
+	top:23px;
+	right:17px;
+	-ms-transform: rotate(-40deg); /* IE 9 */
+    -webkit-transform: rotate(-40deg); /* Chrome, Safari, Opera */
+    transform: rotate(-40deg);
+}
+.halo.six{
+	top:55px;
+	right:2px;
+}
+
+.halo.seven{
+	top:90px;
+	right:16px;
+	-ms-transform: rotate(-135deg); /* IE 9 */
+    -webkit-transform: rotate(-135deg); /* Chrome, Safari, Opera */
+    transform: rotate(-135deg);
+}
+
+
+.solWidth{
+	width:124px;
+}
+
+
