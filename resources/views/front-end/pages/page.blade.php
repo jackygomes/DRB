@@ -73,13 +73,6 @@
                             <p class="text-justify word-break">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, deleniti eius expedita facere natus nemo placeat quas quisquam, quos repudiandae voluptate voluptatem? A aliquam aperiam autem cumque maxime recusandae ullam.
                             </p>
-{{--                            <div class="row">--}}
-{{--                                <div class="ml-auto pr-2 news-share-button-mobile">--}}
-{{--                                    <div data-url="http://dataresources-bd.com//single-news/3584" data-title="Poverty rate rises to 35pc" data-description="New Age" data-media="https://data-resources-bd.s3-ap-southeast-1.amazonaws.com/production/news/images/Xk1JCys7lHoxOecHgloUuYMGFldVXrR0LBqTdbP3.jpeg" class="addthis_toolbox addthis_inline_share_toolbox news-share-buttons">--}}
-
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                         </div>
                         <div class="col-md-3">
                             <div class="card-right-section">

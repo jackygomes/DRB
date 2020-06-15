@@ -24,4 +24,8 @@ class Company extends DrbModel
     public function scopeWithStockInfo($query){
         return $this->stockInfo != null;
     }
+
+    public function sector_id() {
+        return $this->hasone(Sector::class, 'id', 'sector_id');
+    }
 }

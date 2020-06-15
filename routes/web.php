@@ -28,6 +28,8 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         //Page
         Route::resource('page', 'PageController')->except(['create']);
 
+        Route::get('/research', 'ResearchController@researchAdmin')->name('admin.research');
+
         //Page
         //TODO:: Clean the route below. Only keep necessary route methods.
         Route::resource('page-item', 'PageItemController')->except(['create']);
@@ -128,7 +130,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/invoice/{id}', 'InvoiceController@invoiceShow')->name('invoice.show');
     Route::post('/invoice/postuser', 'InvoiceController@postUser')->name('invoice.postuser');
 
-    Route::get('/researches', 'ResearchController@index')->name('researches');
+    Route::get('/research', 'ResearchController@researchUser')->name('research');
+    Route::get('/research/create', 'ResearchController@create')->name('research.create');
+    Route::post('/research/store', 'ResearchController@store')->name('research.store');
 
     Route::delete('/subscriber/{id}', 'InvoiceController@destroy')->name('subscriber.destroy');
 
@@ -192,5 +196,6 @@ Route::delete('/comment/{id}', 'CommentController@destroy')->name('comment.destr
 
 
 //Page
+Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('{slug}', 'PageController@page')->name('page');
 

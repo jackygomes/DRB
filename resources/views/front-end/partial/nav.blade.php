@@ -72,11 +72,19 @@
                         </div>
                     </li>
                     @else
-                        <li class="nav-item nav-custom-margin-top">
-                            <a class="nav-link font-weight-bold text-white" href="{{ $menu->page ? route('page',  $menu->page->slug) : "#" }}" >
-                                <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
-                            </a>
-                        </li>
+                        @if($menu->title == "RESEARCH")
+                            <li class="nav-item nav-custom-margin-top">
+                                <a class="nav-link font-weight-bold text-white" href="{{ route('research.list') }}" >
+                                    <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item nav-custom-margin-top">
+                                <a class="nav-link font-weight-bold text-white" href="{{ $menu->page ? route('page',  $menu->page->slug) : "#" }}" >
+                                    <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                                </a>
+                            </li>
+                            @endif
                     @endif
                 @endforeach
 

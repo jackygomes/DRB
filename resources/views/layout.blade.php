@@ -49,7 +49,7 @@
         gtag('js', new Date());
         gtag('config', 'UA-165851846-1');
     </script>
-    
+
     @yield('meta')
 
 </head>
@@ -90,7 +90,7 @@
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dce8059e10469a8"></script> --}}
     <script type="text/javascript" src="/js/addthis_widget.js#pubid=ra-5dce8059e10469a8" >
-    
+
     </script>
 
     <script>
@@ -104,6 +104,7 @@
     }
     });
     </script>
+    @yield('scripts')
 
 
     <script>

@@ -19,8 +19,8 @@
             <li class="{{ request()->url() == route('invoice.getuser') ? 'sidebar-active' : '' }}">
                 <a href="{{route('invoice.getuser')}}">Subscriber</a>
             </li>
-            <li class="{{ request()->url() == route('researches') ? 'sidebar-active' : '' }}">
-                <a href="{{route('researches')}}">Research List</a>
+            <li class="{{ request()->url() == route('research') ? 'sidebar-active' : '' }}">
+                <a href="{{route('research')}}">Research List</a>
             </li>
         @else
             <li class="{{ request()->url() == route('menu.index') ? 'sidebar-active' : '' }}">
@@ -31,6 +31,9 @@
             </li>
             <li class="{{ request()->url() == route('sector.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('sector.index')}}">Sector</a>
+            </li>
+            <li class="{{ request()->url() == route('admin.research') ? 'sidebar-active' : '' }}">
+                <a href="{{route('admin.research')}}">Research List</a>
             </li>
             <li class="{{ request()->url() == route('company.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('company.index')}}">Company</a>

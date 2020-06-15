@@ -3,9 +3,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <a href="" class="btn btn-outline-primary mb-4">
+        <a href="{{route('research.create')}}" class="btn btn-outline-primary mb-4">
             <span class="fa-clickable" data-toggle="modal" data-target="#academics">
-                <i class="fas fa-pen"></i><small>Add Research</small>
+                <i class="fas fa-pen"></i>Add Research
             </span>
         </a>
     </div>
@@ -25,9 +25,12 @@
                     <th>Date</th>
                     <th>Analysts</th>
                     <th>Description</th>
+                    <th>Status</th>
                     <th>Excel File</th>
                     <th>PDF File</th>
-                    <th>Action</th>
+                    @if(Auth::user()->type == 'admin' )
+                        <th>Action</th>
+                    @endif
                 </tr>
                 </thead>
                 <tfoot>
@@ -40,42 +43,40 @@
                     <th>Date</th>
                     <th>Analysts</th>
                     <th>Description</th>
+                    <th>Status</th>
                     <th>Excel File</th>
                     <th>PDF File</th>
-                    <th>Action</th>
+                    @if(Auth::user()->type == 'admin' )
+                        <th>Action</th>
+                    @endif
                 </tr>
                 </tfoot>
                 <tbody>
+                @foreach($products as $product)
                     <tr>
-                        <td>Jacky</td>
-                        <td>ticker</td>
-                        <td>sector</td>
-                        <td>Provider</td>
-                        <td>Category</td>
-                        <td>Date</td>
-                        <td>Jacky, Simon</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                        <td>file</td>
-                        <td>file</td>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->company->ticker}}</td>
+                        <td>{{$product->sector->name}}</td>
+                        <td>{{$product->provider}}</td>
+                        <td>{{$product->category->name}}</td>
+                        <td>{{$product->date}}</td>
                         <td>
-                            <a href="" class="btn btn-outline-primary">view</a>
+                            {{implode(', ', json_decode($product->analysts))}}
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Jacky</td>
-                        <td>ticker</td>
-                        <td>sector</td>
-                        <td>Provider</td>
-                        <td>Category</td>
-                        <td>Date</td>
-                        <td>Jacky, Simon</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                        <td>{{$product->description}}</td>
+                        <td><span class="badge {{$product->status =='Approved'? 'badge-success': 'badge-warning'}}">{{$product->status}}</span></td>
                         <td>file</td>
                         <td>file</td>
-                        <td>
-                            <a href="" class="btn btn-outline-primary">view</a>
-                        </td>
+                        @if(Auth::user()->type == 'admin' )
+                            <td>
+                                <a href="" class="btn btn-outline-primary">Edit</a>
+                            </td>
+                        @endif
                     </tr>
+                    @endforeach
+                    @if(count($products) == 0)
+                        <h5 class="text-center text-muted">No Toolkit to Show</h5>
+                    @endif
                 </tbody>
             </table>
         </div>
