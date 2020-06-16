@@ -21,11 +21,16 @@ class ResearchController extends Controller
      */
     public function index()
     {
-        $products = Product::with('company')->with('sector')->with('category')->get();
-        return $products;
-        return view('back-end.user-dashboard.research.index');
+        $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->get();
+//        $products = Product::with('company')->with('sector')->with('category')->get();
+//        return $products;
+        return view('front-end.research.research', compact('products'));
     }
 
+    /**
+     * Show all product in admin account
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function researchAdmin() {
         $userId = Auth::id();
         $user_info = User::where('id', '=', $userId)->first();
@@ -35,17 +40,15 @@ class ResearchController extends Controller
             return abort(404);
         }
 
-        $products = DB::select("
-                select p.* , c.ticker as ticker_name, s.name as sector_name, cat.name as category_name
-                from products as p
-                JOIN companies as c ON c.id = p.ticker_id
-                JOIN sectors as s ON s.id = p.sector_id
-                JOIN research_categories as cat ON cat.id = p.category_id
-            ");
+        $products = Product::with('company')->with('sector')->with('category')->get();
 
         return view('back-end.user-dashboard.research.index', compact('products'));
     }
 
+    /**
+     * Show user's own uploaded product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function researchUser() {
         $userId = Auth::id();
         $user_info = User::where('id', '=', $userId)->first();
@@ -56,8 +59,6 @@ class ResearchController extends Controller
         }
 
         $products = Product::where('user_id', $userId)->with('company')->with('sector')->with('category')->get();
-
-//        return $products;
 
         return view('back-end.user-dashboard.research.index', compact('products'));
     }
@@ -115,7 +116,7 @@ class ResearchController extends Controller
         if($excelFile) {
             $excelFileNameOriginal = explode('.', $excelFile->getClientOriginalName());
             $excelFileName = $excelFileNameOriginal[0].'-'.time().'.'.$excelFile->getClientOriginalExtension();
-            $excelFile->move(public_path("img/files"), $excelFileName);
+            $excelFile->move(public_path("files"), $excelFileName);
         }
 
         $pdfFile = $request->file('pdfFile');
@@ -123,7 +124,7 @@ class ResearchController extends Controller
         if($pdfFile) {
             $pdfFileNameOriginal = explode('.', $pdfFile->getClientOriginalName());
             $pdfFileName = $pdfFileNameOriginal[0].'-'.time().'.'.$pdfFile->getClientOriginalExtension();
-            $pdfFile->move(public_path("img/files"), $pdfFileName);
+            $pdfFile->move(public_path("files"), $pdfFileName);
         }
 
         try{
@@ -148,11 +149,6 @@ class ResearchController extends Controller
             return "Quiz insertion error: " . $e->getMessage();
         }
 
-//        $sectors = Sector::all();
-//        $tickers = Company::all();
-//        $categories = ResearchCategory::all();
-//        return view('back-end.user-dashboard.research.create', compact('sectors', 'tickers', 'categories'))
-//            ->with('success','Successfully uploaded');
         return redirect()->route('research.create')->with('success', 'Successfully Uploaded');
 
     }

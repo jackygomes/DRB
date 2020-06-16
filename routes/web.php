@@ -199,3 +199,6 @@ Route::delete('/comment/{id}', 'CommentController@destroy')->name('comment.destr
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('{slug}', 'PageController@page')->name('page');
 
+//Cart
+Route::get('/cart/{id}', 'CartController@cart')->name('addtocart');
+

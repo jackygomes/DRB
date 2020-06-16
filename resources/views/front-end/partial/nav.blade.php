@@ -90,7 +90,14 @@
 
 
 
-                <form class="form-inline my-2 my-lg-0">
+                <form class="signin-buttons form-inline my-2 my-lg-0">
+                    <a href="" class="shopping-cart">
+                        <div id="ex4">
+                          <span class="p1 fa-stack fa-2x has-badge" data-count="{{ App\Cart::getCartCount() }}">
+                            <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>
+                          </span>
+                        </div>
+                    </a>
                     @if(Auth::check())
                         @if(Auth::user()->type == 'admin')
                             <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="/admin/menu">Admin Panel</a>
