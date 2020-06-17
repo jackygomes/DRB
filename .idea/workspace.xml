@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5d96c82a-6534-44f5-99da-dcd557de5598" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Cart.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -199,7 +197,7 @@
       <workItem from="1592218257465" duration="6562000" />
       <workItem from="1592233377733" duration="3579000" />
       <workItem from="1592285863060" duration="18808000" />
-      <workItem from="1592372787889" duration="85000" />
+      <workItem from="1592372787889" duration="292000" />
     </task>
     <servers />
   </component>
