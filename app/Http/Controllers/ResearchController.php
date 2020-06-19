@@ -187,6 +187,28 @@ class ResearchController extends Controller
         //
     }
 
+    public function adminEdit($productId) {
+        $product = Product::where('id', $productId)->with('company')->with('sector')->with('category')->first();
+        return view('back-end.user-dashboard.research.status_edit', compact('product'));
+    }
+
+    public function adminUpdate(Request $request, $productId) {
+        try {
+            $product = Product::find($productId);
+            $product->status = $request->status;
+
+            $product->save();
+
+        } catch (\Exception $e) {
+            return "product update error: " . $e->getMessage();
+        }
+        $successMessage = '';
+        if($request->status == "Approved") $successMessage = 'Product Status Approved';
+        else $successMessage = 'Product Status Pending';
+
+        return redirect()->route('admin.research.admin.edit', $productId)->with('success', $successMessage);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

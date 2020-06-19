@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            category-news-img    <form action="{{route('search')}}" method="GET">
+                            <form action="{{route('search')}}" method="GET">
                                 <div class="input-group search-bar-index">
                                     <input class="form-control py-4 " type="search" value="" name="search" placeholder="search for Company, Industry &amp News">
                                     <div class="input-group-append">

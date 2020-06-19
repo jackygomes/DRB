@@ -29,6 +29,8 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         Route::resource('page', 'PageController')->except(['create']);
 
         Route::get('/research', 'ResearchController@researchAdmin')->name('admin.research');
+        Route::get('/research/statusEdit/{id}', 'ResearchController@adminEdit')->name('admin.research.admin.edit');
+        Route::post('/research/statusUpdate/{id}', 'ResearchController@adminUpdate')->name('admin.research.admin.update');
 
         //Page
         //TODO:: Clean the route below. Only keep necessary route methods.

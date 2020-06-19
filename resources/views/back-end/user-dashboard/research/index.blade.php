@@ -65,11 +65,12 @@
                         </td>
                         <td>{{$product->description}}</td>
                         <td><span class="badge {{$product->status =='Approved'? 'badge-success': 'badge-warning'}}">{{$product->status}}</span></td>
-                        <td>file</td>
-                        <td>file</td>
+                        <td>{{isset($product->report_excel) ? $product->report_excel : 'No file'}}</td>
+                        <td>{{isset($product->report_pdf) ? $product->report_pdf : 'No File'}}</td>
                         @if(Auth::user()->type == 'admin' )
                             <td>
-                                <a href="" class="btn btn-outline-primary">Edit</a>
+                                <a href="{{route('admin.research.admin.edit', $product->id)}}" class="btn btn-outline-primary">Edit</a>
+                                <a href="#" class="btn btn-outline-danger">Remove</a>
                             </td>
                         @endif
                     </tr>
