@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d96c82a-6534-44f5-99da-dcd557de5598" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CartItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CartItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/partial/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/partial/nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -160,8 +163,9 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.env.example" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/.env.example" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -209,7 +213,21 @@
       <workItem from="1592285863060" duration="18808000" />
       <workItem from="1592372787889" duration="292000" />
       <workItem from="1592375094992" duration="4903000" />
-      <workItem from="1592574673498" duration="4862000" />
+      <workItem from="1592574673498" duration="5440000" />
+      <workItem from="1592675470219" duration="1685000" />
+      <workItem from="1592721996980" duration="3930000" />
+      <workItem from="1592725997883" duration="6061000" />
+      <workItem from="1592741315592" duration="1455000" />
+      <workItem from="1592806471964" duration="2040000" />
+      <workItem from="1592811268662" duration="1484000" />
+      <workItem from="1592821449182" duration="3355000" />
+      <workItem from="1592826582859" duration="1755000" />
+      <workItem from="1592828925049" duration="46000" />
+      <workItem from="1592896707538" duration="3967000" />
+      <workItem from="1592979930511" duration="605000" />
+      <workItem from="1593065473306" duration="9912000" />
+      <workItem from="1593084467835" duration="3594000" />
+      <workItem from="1593326150665" duration="101000" />
     </task>
     <servers />
   </component>

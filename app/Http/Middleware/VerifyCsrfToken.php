@@ -20,6 +20,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'subscriptionplan/success',
-        'subscriptionplan/fail'
+        'subscriptionplan/fail',
+        'payment-complete'
     ];
 }

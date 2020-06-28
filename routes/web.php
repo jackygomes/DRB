@@ -196,11 +196,22 @@ Route::patch('/comment/{id}', 'CommentController@update')->name('comment.update'
 Route::patch('/commentadmin/{id}', 'CommentController@commentAdmin')->name('commentAdmin.update');
 Route::delete('/comment/{id}', 'CommentController@destroy')->name('comment.destroy');
 
+//Cart
+Route::group(['prefix' => 'cart'], function() {
+    Route::get('', 'CartController@index')->name('cart');
+    Route::get('{id}', 'CartController@cart')->name('addtocart');
+    Route::get('delete/{id}', 'CartController@delete')->name('cart.item.delete');
+});
+//Checkout
+//Route::post('/checkout', 'CheckOutController@checkoutPage')->name('checkout');
+Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
+Route::any('/payment-complete', 'CheckOutController@paymentComplete')->name('payment.complete');
+
+Route::get('/research-list', 'ResearchController@index')->name('research.list');
+
 
 //Page
-Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('{slug}', 'PageController@page')->name('page');
 
-//Cart
-Route::get('/cart/{id}', 'CartController@cart')->name('addtocart');
+
 

@@ -37,18 +37,6 @@
                     </select>
                 </div>
             </div>
-{{--            <div class="col-md-4">--}}
-{{--                <div class="form-group">--}}
-{{--                    <label>Sector</label>--}}
-{{--                    <select class="custom-select mr-sm-2" name="sector" id="inlineFormCustomSelect">--}}
-{{--                        <option selected>Choose...</option>--}}
-{{--                        @foreach($sectors as $sector)--}}
-{{--                            <option value="{{$sector->$name}}">{{ $sector->$name }}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-{{--                    <input class="form-control" name="sector" type="text" placeholder="Enter Sector">--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
         <div class="row">
             <div class="col-md-7">

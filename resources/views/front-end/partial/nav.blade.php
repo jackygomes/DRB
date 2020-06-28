@@ -91,7 +91,7 @@
 
 
                 <form class="signin-buttons form-inline my-2 my-lg-0">
-                    <a href="" class="shopping-cart">
+                    <a href="{{route('cart')}}" class="shopping-cart">
                         <div id="ex4">
                           <span class="p1 fa-stack fa-2x has-badge" data-count="{{ App\Cart::getCartCount() }}">
                             <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>

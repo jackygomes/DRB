@@ -22,7 +22,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::id();
+        $cart = Cart::where('user_id', $userId)->with('cartItems')->first();
+
+//        foreach ($cart->cartItems as $item) {
+//            dump($item->product);
+//        }
+//        return $cart->cartItems;
+        return view('front-end.cart.index', compact('cart'));
     }
 
     /**
@@ -157,6 +164,35 @@ class CartController extends Controller
                 'message'   => $e->getMessage(),
             ], 420);
         }
+    }
+
+    /**
+     * take cart item id for delete
+     * @param $id
+     */
+    public function delete($cartItemId) {
+        try {
+
+            $cartItem = CartItem::find($cartItemId);
+
+            if($cartItem) {
+                $cart = Cart::find($cartItem->cart_id);
+
+                $cartTotal = $cart->total - $cartItem->price;
+                $cart->total = $cartTotal;
+                $cart->save();
+
+                $cartItem->delete();
+            }
+
+        } catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+
+        return redirect()->route('cart')->with('success', 'Item Removed from cart.');
     }
 
     /**
