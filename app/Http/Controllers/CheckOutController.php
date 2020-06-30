@@ -234,7 +234,7 @@ class CheckOutController extends Controller
         curl_setopt($handle, CURLOPT_POST, 1 );
         curl_setopt($handle, CURLOPT_POSTFIELDS, $paymentData);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, TRUE); # KEEP IT FALSE IF YOU RUN FROM LOCAL PC
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, FALSE); # KEEP IT FALSE IF YOU RUN FROM LOCAL PC
 
 
         $content = curl_exec($handle );

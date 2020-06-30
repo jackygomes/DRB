@@ -3,15 +3,57 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
    {
+
        $users = User::orderBy('full_name')->get()->sortBy('full_name', SORT_NATURAL|SORT_FLAG_CASE);
        return view('back-end.user.index', compact('users'));
    }
+
+    public function create()
+    {
+        return view('back-end.user.create');
+    }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'full_name' => 'required',
+            'contact_number' => 'required',
+            'profession' => 'required',
+            'institution' => 'required',
+            'type' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+
+        try{
+            $data = [
+                'full_name'         => $request->full_name,
+                'contact_number'    => $request->contact_number,
+                'profession'        => $request->profession,
+                'institution'       => $request->institution,
+                'type'              => $request->type,
+                'email'             => $request->email,
+                'email_verified_at' => Carbon::now(),
+                'password'          => Hash::make($request->password),
+            ];
+//            return $data;
+            User::create($data);
+        } catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+
+        return redirect()->route('user.create')->with('success','User created successfully');
+    }
 
    public function edit($id)
    {

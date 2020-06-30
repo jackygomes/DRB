@@ -89,6 +89,8 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
 
         //User
         Route::get('/user', 'UserController@index')->name('user.index');
+        Route::get('/user/create', 'UserController@create')->name('user.create');
+        Route::post('/user/store', 'UserController@store')->name('user.store');
         Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
         Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
         Route::patch('/user/{id}', 'UserController@update')->name('user.update');

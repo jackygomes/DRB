@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Company;
 use App\Product;
 use App\ResearchCategory;
@@ -21,10 +22,11 @@ class ResearchController extends Controller
      */
     public function index()
     {
+        $userId = Auth::id();
+
         $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->get();
-//        $products = Product::with('company')->with('sector')->with('category')->get();
-//        return $products;
-        return view('front-end.research.research', compact('products'));
+        $cart = Cart::where('user_id', $userId)->with('cartItems')->first();
+        return view('front-end.research.research', compact('products','cart'));
     }
 
     /**

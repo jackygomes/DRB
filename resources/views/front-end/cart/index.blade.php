@@ -40,44 +40,49 @@
                                 {{$message}}
                             </div>
                         @endif
-                        @foreach ($cart->cartItems as $item)
-                        <div class="shadow-sm mb-3 single-news-border item_{{$item->id}}">
-                            <div id="3584" class="row">
-{{--                                <div class="col-md-1">--}}
-{{--                                    <div class="form-check">--}}
-{{--                                        <input id="cartItem_{{$item->id}}" onClick="totalCalculate({{$item->id}})" type="checkbox" class="form-check-input" name="cartItem_{{$item->id}}">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-                                <div class="col-md-3">
-                                    <img src="https://data-resources-bd.s3-ap-southeast-1.amazonaws.com/production/news/images/Xk1JCys7lHoxOecHgloUuYMGFldVXrR0LBqTdbP3.jpeg" alt="..." class="img-fluid news-index-img">
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <a href="https://www.newagebd.net/article/107855/poverty-rate-rises-to-35pc" target="_blank">
-                                                <h5>{{$item->product->name}}</h5>
-                                            </a>
-                                            <p class="text-secondary ">Unit Price: {{$item->product->price}} BDT</p>
-                                            <p class="text-secondary ">Quantity: {{$item->quantity}} </p>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div id="subtotal_{{$item->id}}" class="card-right-section" data-subtotal="{{$item->price}}">
-                                                Subtotal : {{$item->price}} BDT
+                        @if(isset($cart))
+                            @foreach ($cart->cartItems as $item)
+                            <div class="shadow-sm mb-3 single-news-border item_{{$item->id}}">
+                                <div id="3584" class="row">
+    {{--                                <div class="col-md-1">--}}
+    {{--                                    <div class="form-check">--}}
+    {{--                                        <input id="cartItem_{{$item->id}}" onClick="totalCalculate({{$item->id}})" type="checkbox" class="form-check-input" name="cartItem_{{$item->id}}">--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+                                    <div class="col-md-3">
+                                        <img src="https://data-resources-bd.s3-ap-southeast-1.amazonaws.com/production/news/images/Xk1JCys7lHoxOecHgloUuYMGFldVXrR0LBqTdbP3.jpeg" alt="..." class="img-fluid news-index-img">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <a href="https://www.newagebd.net/article/107855/poverty-rate-rises-to-35pc" target="_blank">
+                                                    <h5>{{$item->product->name}}</h5>
+                                                </a>
+                                                <p class="text-secondary ">Unit Price: {{$item->product->price}} BDT</p>
+                                                <p class="text-secondary ">Quantity: {{$item->quantity}} </p>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div id="subtotal_{{$item->id}}" class="card-right-section" data-subtotal="{{$item->price}}">
+                                                    Subtotal : {{$item->price}} BDT
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8"></div>
-                                        <div class="col-md-4">
-                                            <a href="{{route('cart.item.delete', $item->id)}}" class="btn btn-outline-danger float-right">Remove</a>
+                                        <div class="row">
+                                            <div class="col-md-8"></div>
+                                            <div class="col-md-4">
+                                                <a href="{{route('cart.item.delete', $item->id)}}" class="btn btn-outline-danger float-right">Remove</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+                        @else
+                            <h2 class="mt-4">No Item In This Cart.</h2>
+                        @endif
                     </div>
 
+                    @if(isset($cart))
                     <div class="col-md-4">
                         <div class="total">
                             <span>Payable Total</span>
@@ -88,6 +93,18 @@
                             <button type="submit" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1 mt-3 float-right">Checkout</button>
                         </div>
                     </div>
+                    @else
+                        <div class="col-md-4">
+                            <div class="total">
+                                <span>Payable Total</span>
+                                <span id="grandTotal" data-grandtotal="0.00" class="float-right">0 BDT</span>
+                            </div>
+{{--                            <div class="checkout mt-4">--}}
+{{--                                <input type="hidden" name="cart_id" value="{{$cart->id}}"/>--}}
+{{--                                <button type="submit" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1 mt-3 float-right">Checkout</button>--}}
+{{--                            </div>--}}
+                        </div>
+                    @endif
                 </div>
             </form>
         </div>

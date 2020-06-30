@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d96c82a-6534-44f5-99da-dcd557de5598" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CartItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CartItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/partial/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/partial/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckOutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckOutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/cart/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/cart/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front-end/research/research.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/research/research.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -227,7 +230,13 @@
       <workItem from="1592979930511" duration="605000" />
       <workItem from="1593065473306" duration="9912000" />
       <workItem from="1593084467835" duration="3594000" />
-      <workItem from="1593326150665" duration="101000" />
+      <workItem from="1593326150665" duration="5697000" />
+      <workItem from="1593333865012" duration="412000" />
+      <workItem from="1593348088304" duration="50000" />
+      <workItem from="1593410081732" duration="8717000" />
+      <workItem from="1593426770630" duration="3037000" />
+      <workItem from="1593451560479" duration="434000" />
+      <workItem from="1593498419148" duration="311000" />
     </task>
     <servers />
   </component>

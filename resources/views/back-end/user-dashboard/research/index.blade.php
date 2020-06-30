@@ -1,11 +1,12 @@
 @extends('back-end.admin-layout')
 
 @section('content')
+    <?php $i = 1 ?>
 <div class="row">
     <div class="col-md-12">
         <a href="{{route('research.create')}}" class="btn btn-outline-primary mb-4">
             <span class="fa-clickable" data-toggle="modal" data-target="#academics">
-                <i class="fas fa-pen"></i>Add Research
+                <i class="fas fa-pen"></i> Add Research
             </span>
         </a>
     </div>
@@ -17,6 +18,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
+                    <th>Sl.</th>
                     <th>Name</th>
                     <th>Ticker</th>
                     <th>Sector</th>
@@ -35,6 +37,7 @@
                 </thead>
                 <tfoot>
                 <tr>
+                    <th>Sl.</th>
                     <th>Name</th>
                     <th>Ticker</th>
                     <th>Sector</th>
@@ -54,6 +57,7 @@
                 <tbody>
                 @foreach($products as $product)
                     <tr>
+                        <td>{{$i++}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->company->ticker}}</td>
                         <td>{{$product->sector->name}}</td>
