@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Company;
+use App\Order;
 use App\Product;
 use App\ResearchCategory;
 use App\Sector;
@@ -42,8 +43,9 @@ class ResearchController extends Controller
             return abort(404);
         }
 
-        $products = Product::with('company')->with('sector')->with('category')->get();
+        $products = Product::with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC')->get();
 
+//        return $products;
         return view('back-end.user-dashboard.research.index', compact('products'));
     }
 
@@ -189,11 +191,22 @@ class ResearchController extends Controller
         //
     }
 
+    /**
+     * admin research edit for aprrove
+     * @param $productId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminEdit($productId) {
         $product = Product::where('id', $productId)->with('company')->with('sector')->with('category')->first();
         return view('back-end.user-dashboard.research.status_edit', compact('product'));
     }
 
+    /**
+     * admin product status update
+     * @param Request $request
+     * @param $productId
+     * @return \Illuminate\Http\RedirectResponse|string
+     */
     public function adminUpdate(Request $request, $productId) {
         try {
             $product = Product::find($productId);
@@ -209,6 +222,26 @@ class ResearchController extends Controller
         else $successMessage = 'Product Status Pending';
 
         return redirect()->route('admin.research.admin.edit', $productId)->with('success', $successMessage);
+    }
+
+    public function purchasedItem() {
+        $userId = Auth::id();
+        try {
+            $orders = Order::where('user_id','=', $userId)->get();
+            $products = [];
+            foreach ($orders as $order) {
+                foreach ($order->orderItems as $item){
+                    array_push($products, $item->product);
+                }
+            }
+//            return $product;
+        } catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+        return view('back-end.user-dashboard.purchased-item.index', compact('products'));
     }
 
     /**

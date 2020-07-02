@@ -28,6 +28,7 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         //Page
         Route::resource('page', 'PageController')->except(['create']);
 
+
         Route::get('/research', 'ResearchController@researchAdmin')->name('admin.research');
         Route::get('/research/statusEdit/{id}', 'ResearchController@adminEdit')->name('admin.research.admin.edit');
         Route::post('/research/statusUpdate/{id}', 'ResearchController@adminUpdate')->name('admin.research.admin.update');
@@ -78,6 +79,10 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
 
         //category
         Route::resource('category', 'CategoryController')->except(['show','create']);
+
+        // research category
+        Route::get('/category', 'CategoryController@researchCategory')->name('admin.category');
+        Route::post('/category/store', 'CategoryController@researchCategoryStore')->name('admin.category.store');
 
         //Most Recent
         Route::get('/most-recent', 'MostRecentController@index')->name('recent.index');
@@ -139,6 +144,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/research/store', 'ResearchController@store')->name('research.store');
 
     Route::delete('/subscriber/{id}', 'InvoiceController@destroy')->name('subscriber.destroy');
+
+    Route::get('/purchased-item', 'ResearchController@purchasedItem')->name('purchased.item');
+
 
     //download
     Route::post('download', 'DownloadController@store')->name('download.store');

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\ResearchCategory;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -51,7 +55,7 @@ class CategoryController extends Controller
           } else {
             $is_published = request('is_published');
         }
-        
+
         $category = Category::find($id);
         $category->name = $request->get('name');
         $category->order = $request->get('order');
@@ -65,5 +69,51 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->delete();
         return redirect()->back()->with('success', 'Category has been deleted successfully');
+    }
+
+    public function researchCategory() {
+        $userId = Auth::id();
+        $user_info = User::where('id', '=', $userId)->first();
+
+        if($user_info->type == 'admin'){
+        } else {
+            return abort(404);
+        }
+        $categories = ResearchCategory::all();
+        return view('back-end.research-category.index', compact('categories'));
+    }
+
+    public function researchCategoryStore(Request $request) {
+        $userId = Auth::id();
+        $user_info = User::where('id', '=', $userId)->first();
+
+        if($user_info->type == 'admin'){
+        } else {
+            return abort(404);
+        }
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        try{
+            $data = [
+                'name' => $request->name,
+                'slug' => '',
+            ];
+            $slug = Str::slug($request->name, '_');
+            if($category = ResearchCategory::create($data)){
+                $slug = $slug.'_'.$category->id;
+
+                $category->slug = $slug;
+                $category->save();
+            }
+        } catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+
+        return redirect()->back()->with('success', 'Category Created Successfully');
     }
 }

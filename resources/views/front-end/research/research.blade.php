@@ -11,6 +11,8 @@
             .custom-news-nav-header-top { margin-top: 0; }
             .card-right-section {
                 float: right;
+                position: relative;
+                height: 100%;
             }
             .word-break {padding-bottom: 0;}
             .single-news-border p {
@@ -26,14 +28,19 @@
                 overflow: hidden;
             }
             .read-more-button {
-                color: #1432bb;
+                color: #9a9da8;
                 cursor: pointer;
-                margin-bottom: 25px;
-                font-size: 13px !important;
+                font-size: 12px !important;
+                font-weight: bold;
             }
             .price {
                 font-size: 16px !important;
                 bottom: 0;
+            }
+            .purchase-count {
+                position: absolute;
+                bottom: 30px;
+                right: 7px;
             }
         </style>
         <div class="container-fluid">
@@ -94,6 +101,7 @@
                                     @else
                                         <a href="{{ route('addtocart', $product->id) }}" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1"><i class="p3 fa fa-shopping-cart" ></i> Add To Cart</a>
                                     @endif
+                                    <p class="purchase-count">Purchased: {{$product->sell_count}}</p>
                                 </div>
                             </div>
                         </div>
@@ -110,11 +118,11 @@
         $(document).ready(function() {
             $('.read-more-button').click(function(){
                 if($(this).text() == "Read More") {
-                    $(this).text('Read Less');
+                    $(this).html('Read Less');
                     let id = this.id.split('_');
                     $('#content_'+id[1]).css('height','100%');
                 } else {
-                    $(this).text('Read More');
+                    $(this).html('Read More');
                     let id = this.id.split('_');
                     $('#content_'+id[1]).css('height','20px');
                 }

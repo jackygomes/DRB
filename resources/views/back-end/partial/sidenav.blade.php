@@ -9,8 +9,11 @@
             <li class="{{ request()->url() == route('invoice.user') ? 'sidebar-active' : '' }}">
                 <a href="{{route('invoice.user')}}">Invoice</a>
             </li>
-             <li class="{{ request()->url() == route('invoice.getuser') ? 'sidebar-active' : '' }}">
+            <li class="{{ request()->url() == route('invoice.getuser') ? 'sidebar-active' : '' }}">
                 <a href="{{route('invoice.getuser')}}">Subscriber</a>
+            </li>
+            <li class="{{ request()->url() == route('purchased.item') ? 'sidebar-active' : '' }}">
+                <a href="{{route('purchased.item')}}">Purchased Research List</a>
             </li>
         @elseif(Auth::user()->type == 'provider')
             <li class="{{ request()->url() == route('invoice.user') ? 'sidebar-active' : '' }}">
@@ -33,7 +36,10 @@
                 <a href="{{route('sector.index')}}">Sector</a>
             </li>
             <li class="{{ request()->url() == route('admin.research') ? 'sidebar-active' : '' }}">
-                <a href="{{route('admin.research')}}">Research List</a>
+                <a href="{{route('admin.research')}}">Research list</a>
+            </li>
+            <li class="{{ request()->url() == route('admin.category') ? 'sidebar-active' : '' }}">
+                <a href="{{route('admin.category')}}">Research Category</a>
             </li>
             <li class="{{ request()->url() == route('company.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('company.index')}}">Company</a>

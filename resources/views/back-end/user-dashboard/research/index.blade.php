@@ -12,7 +12,7 @@
     </div>
 </div>
 <div class="card mb-3">
-    <div class="card-header"><i class="fas fa-table"></i>Menu List</div>
+    <div class="card-header"><i class="fas fa-table"></i> Research List</div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -67,7 +67,7 @@
                         <td>
                             {{implode(', ', json_decode($product->analysts))}}
                         </td>
-                        <td>{{$product->description}}</td>
+                        <td>{{Str::limit($product->description, 30)}}</td>
                         <td><span class="badge {{$product->status =='Approved'? 'badge-success': 'badge-warning'}}">{{$product->status}}</span></td>
                         <td>{{isset($product->report_excel) ? $product->report_excel : 'No file'}}</td>
                         <td>{{isset($product->report_pdf) ? $product->report_pdf : 'No File'}}</td>
@@ -80,7 +80,7 @@
                     </tr>
                     @endforeach
                     @if(count($products) == 0)
-                        <h5 class="text-center text-muted">No Toolkit to Show</h5>
+                        <h5 class="text-center text-muted">No Research to Show</h5>
                     @endif
                 </tbody>
             </table>

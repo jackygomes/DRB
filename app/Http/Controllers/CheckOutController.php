@@ -6,6 +6,7 @@ use App\Cart;
 use App\CartItem;
 use App\Order;
 use App\OrderItem;
+use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -158,6 +159,10 @@ class CheckOutController extends Controller
                             'total'         => $item->price,
                         ];
                         OrderItem::create($orderItemData);
+
+                        $product = Product::find($item->product_id);
+                        $product->sell_count += 1;
+                        $product->save();
                     }
                 }
             foreach ($cart->cartItems as $item) {
