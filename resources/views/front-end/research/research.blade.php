@@ -13,6 +13,8 @@
                 float: right;
                 position: relative;
                 height: 100%;
+                width: 100%;
+                text-align: right;
             }
             .word-break {padding-bottom: 0;}
             .single-news-border p {
@@ -41,6 +43,7 @@
                 position: absolute;
                 bottom: 30px;
                 right: 7px;
+                width: 100%;
             }
         </style>
         <div class="container-fluid">
@@ -101,7 +104,7 @@
                                     @else
                                         <a href="{{ route('addtocart', $product->id) }}" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1"><i class="p3 fa fa-shopping-cart" ></i> Add To Cart</a>
                                     @endif
-                                    <p class="purchase-count">Purchased: {{$product->sell_count}}</p>
+                                    <p class="purchase-count">Downloaded: {{$product->sell_count}}</p>
                                 </div>
                             </div>
                         </div>

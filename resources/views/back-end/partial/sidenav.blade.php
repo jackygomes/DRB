@@ -13,7 +13,7 @@
                 <a href="{{route('invoice.getuser')}}">Subscriber</a>
             </li>
             <li class="{{ request()->url() == route('purchased.item') ? 'sidebar-active' : '' }}">
-                <a href="{{route('purchased.item')}}">Purchased Research List</a>
+                <a href="{{route('purchased.item')}}">Purchased List</a>
             </li>
         @elseif(Auth::user()->type == 'provider')
             <li class="{{ request()->url() == route('invoice.user') ? 'sidebar-active' : '' }}">
@@ -24,6 +24,9 @@
             </li>
             <li class="{{ request()->url() == route('research') ? 'sidebar-active' : '' }}">
                 <a href="{{route('research')}}">Research List</a>
+            </li>
+            <li class="{{ request()->url() == route('purchased.item') ? 'sidebar-active' : '' }}">
+                <a href="{{route('purchased.item')}}">Purchased List</a>
             </li>
         @else
             <li class="{{ request()->url() == route('menu.index') ? 'sidebar-active' : '' }}">

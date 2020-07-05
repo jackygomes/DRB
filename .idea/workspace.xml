@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5d96c82a-6534-44f5-99da-dcd557de5598" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckOutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckOutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/OrderItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/OrderItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ResearchCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ResearchCategory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/back-end/partial/sidenav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/partial/sidenav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user-dashboard/research/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/front-end/research/research.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/research/research.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -240,7 +232,8 @@
       <workItem from="1593677198639" duration="2394000" />
       <workItem from="1593682364401" duration="1929000" />
       <workItem from="1593685511181" duration="5508000" />
-      <workItem from="1593691606003" duration="507000" />
+      <workItem from="1593691606003" duration="1427000" />
+      <workItem from="1593930081450" duration="685000" />
     </task>
     <servers />
   </component>
