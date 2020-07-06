@@ -9,8 +9,12 @@
                 <div class="alert alert-success">
                     {{$message}}
                 </div>
+            @elseif($message = Session::get('failed'))
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
             @endif
-            <form  method="post" action="{{route('admin.category.store')}}" enctype="multipart/form-data">
+            <form  method="post" action="{{route('admin.research.category.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="bg-white my-4 mx-1 p-3 shadow-sm">
                     <div class="row">
@@ -40,12 +44,14 @@
                     <tr>
                         <th>Sl.</th>
                         <th>Name</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>Sl.</th>
                         <th>Name</th>
+                        <th>Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -53,6 +59,14 @@
                         <tr>
                             <td>{{$i++}}</td>
                             <td>{{$category->name}}</td>
+                            <td>
+                                <a href="{{ route('admin.research.category.edit', $category->id)}}" class="btn btn-outline-primary">Edit</a>
+                                <form action="{{ route('admin.research.category.delete', $category->id)}}" onclick="return confirm('Are you sure, you want to delete this user?')" method="post" style="display: inline;">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     @if(count($categories) == 0)

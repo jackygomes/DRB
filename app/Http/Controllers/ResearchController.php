@@ -25,7 +25,7 @@ class ResearchController extends Controller
     {
         $userId = Auth::id();
 
-        $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->get();
+        $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC')->get();
         $cart = Cart::where('user_id', $userId)->with('cartItems')->first();
         return view('front-end.research.research', compact('products','cart'));
     }

@@ -41,8 +41,8 @@
             <li class="{{ request()->url() == route('admin.research') ? 'sidebar-active' : '' }}">
                 <a href="{{route('admin.research')}}">Research list</a>
             </li>
-            <li class="{{ request()->url() == route('admin.category') ? 'sidebar-active' : '' }}">
-                <a href="{{route('admin.category')}}">Research Category</a>
+            <li class="{{ request()->url() == route('admin.research.category') ? 'sidebar-active' : '' }}">
+                <a href="{{route('admin.research.category')}}">Research Category</a>
             </li>
             <li class="{{ request()->url() == route('company.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('company.index')}}">Company</a>

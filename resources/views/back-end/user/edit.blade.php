@@ -59,16 +59,25 @@
                                             <option value="visitor">Visitor</option>
                                             <option value="paid">Paid</option>
                                             <option value="admin">Admin</option>
+                                            <option value="provider">Provider</option>
                                         @endif
                                         @if($user->type == 'paid')
                                             <option value="paid">Paid</option>
                                             <option value="visitor">Visitor</option>
                                             <option value="admin">Admin</option>
+                                            <option value="provider">Provider</option>
                                         @endif
                                         @if($user->type == 'admin')
                                             <option value="admin">Admin</option>
                                             <option value="paid">Paid</option>
                                             <option value="visitor">Visitor</option>
+                                            <option value="provider">Provider</option>
+                                            @endif
+                                        @if($user->type == 'provider')
+                                            <option value="provider">Provider</option>
+                                            <option value="visitor">Visitor</option>
+                                            <option value="paid">Paid</option>
+                                            <option value="admin">Admin</option>
                                         @endif
                                     </select>
                                 </div>

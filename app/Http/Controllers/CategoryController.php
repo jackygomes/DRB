@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use App\ResearchCategory;
 use App\User;
 use Illuminate\Http\Request;
@@ -71,6 +72,10 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Category has been deleted successfully');
     }
 
+    /**
+     * research category list view
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function researchCategory() {
         $userId = Auth::id();
         $user_info = User::where('id', '=', $userId)->first();
@@ -79,10 +84,16 @@ class CategoryController extends Controller
         } else {
             return abort(404);
         }
-        $categories = ResearchCategory::all();
+        $categories = ResearchCategory::orderBy('created_at', 'DESC')->get();
         return view('back-end.research-category.index', compact('categories'));
     }
 
+    /**
+     * Research category store
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|void
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function researchCategoryStore(Request $request) {
         $userId = Auth::id();
         $user_info = User::where('id', '=', $userId)->first();
@@ -116,4 +127,69 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('success', 'Category Created Successfully');
     }
+
+    /**
+     * research category edit
+     * @param $CategoryId
+     */
+    public function researchCategoryEdit($categoryId) {
+        try {
+            $category = ResearchCategory::find($categoryId);
+            return view('back-end.research-category.edit', compact('category'));
+        }catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+    }
+
+    /**
+     * research category update method
+     * @param Request $request
+     * @param $categoryId
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function researchCategoryUpdate(Request $request, $categoryId) {
+        try {
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+            $slug = Str::slug($request->name, '_');
+            $slug = $slug.'_'.$categoryId;
+
+            $category = ResearchCategory::find($categoryId);
+            $category->name = $request->name;
+            $category->slug = $slug;
+            $category->save();
+
+            return redirect()->route('admin.research.category')->with('success', 'Category Updated Successfully');
+        }catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+    }
+
+    public function researchCategoryDelete($categoryId) {
+
+        try{
+            $productExist = Product::where('category_id', $categoryId)->first();
+
+            if($productExist){
+                return redirect()->back()->with('failed', 'This category has product. You cannot delete this category.');
+            } else {
+                $category = ResearchCategory::find($categoryId);
+                $category->delete();
+                return redirect()->back()->with('success', 'Category Has Been Deleted Successfully.');
+            }
+        } catch(\Exception $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $e->getMessage(),
+            ], 420);
+        }
+    }
+
 }

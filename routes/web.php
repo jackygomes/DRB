@@ -81,8 +81,11 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         Route::resource('category', 'CategoryController')->except(['show','create']);
 
         // research category
-        Route::get('/category', 'CategoryController@researchCategory')->name('admin.category');
-        Route::post('/category/store', 'CategoryController@researchCategoryStore')->name('admin.category.store');
+        Route::get('/research-category', 'CategoryController@researchCategory')->name('admin.research.category');
+        Route::post('/research-category/store', 'CategoryController@researchCategoryStore')->name('admin.research.category.store');
+        Route::get('/research-category/edit/{id}', 'CategoryController@researchCategoryEdit')->name('admin.research.category.edit');
+        Route::post('/research-category/update/{id}', 'CategoryController@researchCategoryUpdate')->name('admin.research.category.update');
+        Route::delete('/research-category/delete/{id}', 'CategoryController@researchCategoryDelete')->name('admin.research.category.delete');
 
         //Most Recent
         Route::get('/most-recent', 'MostRecentController@index')->name('recent.index');
