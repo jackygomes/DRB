@@ -230,7 +230,11 @@ class CheckOutController extends Controller
     private function makePayment($paymentData) {
 
         # REQUEST SEND TO SSLCOMMERZ
-        $direct_api_url = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+        if(env('APP_ENV') == 'local') {
+            $direct_api_url = env('TEST_SSL_TRANSACTION_API');
+        } elseif(env('APP_ENV') == 'production') {
+            $direct_api_url = env('LIVE_SSL_TRANSACTION_API');
+        }
 
         $handle = curl_init();
         curl_setopt($handle, CURLOPT_URL, $direct_api_url );

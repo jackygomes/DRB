@@ -88,13 +88,24 @@
                                         <h5>{{$product->name}}</h5>
                                     </a>
                                     <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}}</p>
-                                    <div class="description">
-                                        <p id="content_{{$product->id}}" class="text-justify word-break content">
-                                            {{$product->description}}
-                                        </p>
-                                        <p id="readMore_{{$product->id}}" class="read-more-button">Read More</p>
-                                    </div>
-                                    <p class="price">Price: <span>BDT {{$product->price}}</span></p>
+                                    <p class="text-secondary ">Research Date: {{date('F j, Y', strtotime($product->date))}}</p>
+                                    @if($product->description)
+                                        <div class="description">
+                                            <p id="content_{{$product->id}}" class="text-justify word-break content">
+                                                {{$product->description}}
+                                            </p>
+                                            <p id="readMore_{{$product->id}}" class="read-more-button">Read More</p>
+                                        </div>
+                                    @endif
+                                    <p class="text-secondary ">Provider: {{$product->provider}}</p>
+                                    <p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}: {{implode(', ', json_decode($product->analysts))}}</p>
+                                    <p class="price">Price:
+                                        @if($product->price > 0)
+                                        <span>BDT {{$product->price}}</span>
+                                        @else
+                                        <span>Free</span>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-md-3">
