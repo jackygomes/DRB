@@ -39,11 +39,18 @@
                 font-size: 16px !important;
                 bottom: 0;
             }
+            .price span {
+                color:#4758a8;
+                font-weight: bold;
+            }
             .purchase-count {
                 position: absolute;
                 bottom: 30px;
                 right: 7px;
                 width: 100%;
+            }
+            .text-secondary span {
+                color: #4758a8;
             }
         </style>
         <div class="container-fluid">
@@ -88,7 +95,9 @@
                                         <h5>{{$product->name}}</h5>
                                     </a>
                                     <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}}</p>
-                                    <p class="text-secondary ">Research Date: {{date('F j, Y', strtotime($product->date))}}</p>
+                                    <p class="text-secondary ">Research Date: <span>{{date('F j, Y', strtotime($product->date))}}</span></p>
+                                    <p class="text-secondary ">Provider: <span>{{$product->provider}}</span></p>
+                                    <p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}:<span> {{implode(', ', json_decode($product->analysts))}}</span></p>
                                     @if($product->description)
                                         <div class="description">
                                             <p id="content_{{$product->id}}" class="text-justify word-break content">
@@ -97,11 +106,9 @@
                                             <p id="readMore_{{$product->id}}" class="read-more-button">Read More</p>
                                         </div>
                                     @endif
-                                    <p class="text-secondary ">Provider: {{$product->provider}}</p>
-                                    <p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}: {{implode(', ', json_decode($product->analysts))}}</p>
                                     <p class="price">Price:
                                         @if($product->price > 0)
-                                        <span>BDT {{$product->price}}</span>
+                                        <span>BDT {{round($product->price, 2)}}</span>
                                         @else
                                         <span>Free</span>
                                         @endif
