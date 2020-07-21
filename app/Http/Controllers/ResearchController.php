@@ -21,13 +21,28 @@ class ResearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $userId = Auth::id();
 
-        $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC')->get();
+        $userId = Auth::id();
+        $companies = Company::get();
+
+        $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC');
         $cart = Cart::where('user_id', $userId)->with('cartItems')->first();
-        return view('front-end.research.research', compact('products','cart'));
+
+
+        if(isset($request->analyst_name)) {
+            $products = $products->where('analysts', 'Like', '%'.$request->analyst_name.'%');
+        }
+        if(isset($request->provider)) {
+            $products = $products->where('provider', 'Like', '%'.$request->provider.'%');
+        }
+        if(isset($request->company_id)){
+            $products = $products->where('ticker_id', $request->company_id);
+        }
+        $products = $products->get();
+
+        return view('front-end.research.research', compact('products','companies','cart'));
     }
 
     /**

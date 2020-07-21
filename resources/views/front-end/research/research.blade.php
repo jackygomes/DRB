@@ -55,27 +55,27 @@
         </style>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="wrapper">
-                        <!-- Sidebar  -->
-                        <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top">
+                <div class="col-md-2">
+{{--                    <div class="wrapper">--}}
+{{--                        <!-- Sidebar  -->--}}
+{{--                        <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top">--}}
 
-                            <ul class="list-unstyled components" style="padding-top: 0">
-                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
-                                    <a class="news-sidenav-hover" href="">All Research</a>
-                                </li>
-                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
-                                    <a class="news-sidenav-hover" href="">Latest Research</a>
-                                </li>
-                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
-                                    <a class="news-sidenav-hover" href="">City Brokerage</a>
-                                </li>
-                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
-                                    <a class="news-sidenav-hover" href="">Shanta Securities</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+{{--                            <ul class="list-unstyled components" style="padding-top: 0">--}}
+{{--                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">--}}
+{{--                                    <a class="news-sidenav-hover" href="">All Research</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">--}}
+{{--                                    <a class="news-sidenav-hover" href="">Latest Research</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">--}}
+{{--                                    <a class="news-sidenav-hover" href="">City Brokerage</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">--}}
+{{--                                    <a class="news-sidenav-hover" href="">Shanta Securities</a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </nav>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="col-md-7">
                     @if($message = Session::get('success'))
@@ -128,8 +128,53 @@
                         </div>
                     </div>
                     @endforeach
+                    @if(count($products) == 0)
+                        <h4>No Research Found </h4>
+                    @endif
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <div class="wrapper">
+                        <form action="{{route('research.list')}}" method="get" style="width: 100%;">
+                            <div class="bg-white my-0 mx-1 p-3 shadow-sm">
+                                <h4>Search Research </h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Company Name:</label>
+                                            <select class="custom-select mr-sm-2" name="company_id">
+                                                <option value="">All</option>
+                                                @foreach($companies as $company)
+                                                    <option value="{{$company->id}}" {{Request::get('company_id') == $company->id ? 'Selected' : ''}}>{{ $company->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Provider Name:</label>
+                                            <input class="form-control" name="provider" value="{{Request::get('provider')}}" type="text" placeholder="Enter Provider Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Analyst Name:</label>
+                                            <input class="form-control" name="analyst_name" value="{{Request::get('analyst_name')}}" type="text" placeholder="Enter Analyst Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
