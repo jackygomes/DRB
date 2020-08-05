@@ -1,3 +1,8 @@
+<style>
+    .navbar-nav {
+        display: -webkit-box;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top nav-bg border-bottom mt-lg-n5">
     <div class="container">
         <a class="navbar-brand text-white" href="/"><h2>DRB</h2></a>
@@ -78,13 +83,19 @@
                                     <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
                                 </a>
                             </li>
+                        @elseif($menu->title == "PRICING")
+                            <li class="nav-item nav-custom-margin-top">
+                                <a class="nav-link font-weight-bold text-white" href="{{ route('pricing') }}" >
+                                    <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                                </a>
+                            </li>
                         @else
                             <li class="nav-item nav-custom-margin-top">
                                 <a class="nav-link font-weight-bold text-white" href="{{ $menu->page ? route('page',  $menu->page->slug) : "#" }}" >
                                     <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
                                 </a>
                             </li>
-                            @endif
+                        @endif
                     @endif
                 @endforeach
 

@@ -221,6 +221,7 @@ Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
 Route::any('/payment-complete', 'CheckOutController@paymentComplete')->name('payment.complete');
 
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
+Route::get('/pricing', 'PricingController@index')->name('pricing');
 
 
 //Page
