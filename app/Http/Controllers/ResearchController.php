@@ -29,7 +29,8 @@ class ResearchController extends Controller
 
         $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC');
         $cart = Cart::where('user_id', $userId)->with('cartItems')->first();
-
+        $productForProviderNames = Product::where('status', 'Approved')->get();
+        $researchCategories = ResearchCategory::all();
 
         if(isset($request->analyst_name)) {
             $products = $products->where('analysts', 'Like', '%'.$request->analyst_name.'%');
@@ -40,9 +41,19 @@ class ResearchController extends Controller
         if(isset($request->company_id)){
             $products = $products->where('ticker_id', $request->company_id);
         }
+        if(isset($request->category_id)){
+            $products = $products->where('category_id', $request->category_id);
+        }
         $products = $products->get();
 
-        return view('front-end.research.research', compact('products','companies','cart'));
+        $providerNames = [];
+        foreach($productForProviderNames as $product) {
+            if (!in_array($product->provider, $providerNames)){
+                array_push($providerNames, $product->provider);
+            }
+        }
+
+        return view('front-end.research.research', compact('researchCategories','products','companies','cart','providerNames'));
     }
 
     /**

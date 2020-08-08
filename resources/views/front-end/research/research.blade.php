@@ -77,7 +77,25 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Provider Name:</label>
-                                            <input class="form-control" name="provider" value="{{Request::get('provider')}}" type="text" placeholder="Enter Provider Name">
+                                            <select class="custom-select mr-sm-2" name="provider">
+                                                <option value="">All</option>
+                                                @foreach($providerNames as $providerName)
+                                                    <option value="{{$providerName}}" {{Request::get('provider') == $providerName ? 'Selected' : ''}}>{{ $providerName }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Category:</label>
+                                            <select class="custom-select mr-sm-2" name="category_id">
+                                                <option value="">All</option>
+                                                @foreach($researchCategories as $researchCategory)
+                                                    <option value="{{$researchCategory->id}}" {{Request::get('category_id') == $researchCategory->id ? 'Selected' : ''}}>{{ $researchCategory->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
