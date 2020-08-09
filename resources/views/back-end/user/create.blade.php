@@ -14,7 +14,7 @@
                     <div class="card-header">Create user</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('user.store') }}">
+                        <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
@@ -58,7 +58,7 @@
                                 <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}*</label>
 
                                 <div class="col-md-6">
-                                    <select class="custom-select" name="type" id="inputGroupSelect02">
+                                    <select class="custom-select" name="type" id="role">
                                             <option value="visitor">Visitor</option>
                                             <option value="paid">Paid</option>
                                             <option value="provider">Provider</option>
@@ -94,6 +94,17 @@
                                 </div>
                             </div>
 
+                            <div id="thumbnailImage">
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Thumbnail Image</label>
+
+                                    <div class="col-md-6">
+                                        <input type="file" name="thumbnailImage" class="form-control-file" id="thumbnail_image">
+                                        <p style="margin: 5px 0 0; font-size: 14px; color: #721c24">* Thumbnail image ratio should be square.</p>
+                                    </div>
+                                </div>
+                            </div>
+
 
 
                             <div class="form-group row mb-0">
@@ -109,5 +120,16 @@
             </div>
         </div>
     </div>
-
+@section('scripts')
+    <script type="application/javascript">
+        $('#thumbnailImage').hide();
+        $( "#role" ).change(function() {
+            if($(this).val() == "provider"){
+                $('#thumbnailImage').show();
+            } else {
+                $('#thumbnailImage').hide();
+            }
+        });
+    </script>
+@endsection
 @endsection

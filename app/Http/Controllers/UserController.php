@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -32,6 +33,17 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
 
+        //user image store
+        $imageName = '';
+        if(isset($request->thumbnailImage) && $request->type == 'provider') {
+            $image = $request->file('thumbnailImage');
+            if($image) {
+                $imageNameOriginal = explode('.', $image->getClientOriginalName());
+                $imageName = $imageNameOriginal[0].'-'.time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path("storage"), $imageName);
+            }
+        }
+
         try{
             $data = [
                 'full_name'         => $request->full_name,
@@ -42,9 +54,11 @@ class UserController extends Controller
                 'email'             => $request->email,
                 'email_verified_at' => Carbon::now(),
                 'password'          => Hash::make($request->password),
+                'thumbnail_image'   => isset($imageName) ? $imageName : null,
             ];
-//            return $data;
+
             User::create($data);
+
         } catch(\Exception $e) {
             return response()->json([
                 'status'    => 'error',
@@ -72,6 +86,19 @@ class UserController extends Controller
             'email'=>'required|email|unique:users,email,'.$id ,
         ]);
 
+       //user image delete & store
+       $imageName = '';
+       if(isset($request->thumbnailImage) && $request->type == 'provider') {
+           $image = $request->file('thumbnailImage');
+           if($image) {
+               $imageNameOriginal = explode('.', $image->getClientOriginalName());
+               $imageName = $imageNameOriginal[0].'-'.time().'.'.$image->getClientOriginalExtension();
+               $image->move(public_path("storage"), $imageName);
+           }
+           $oldImagePath = 'storage/'.$request->oldThumbnailImage;
+           File::delete($oldImagePath);
+       }
+
         $user = User::find($id);
         $user->full_name = $request->get('full_name');
         $user->contact_number = $request->get('contact_number');
@@ -79,6 +106,7 @@ class UserController extends Controller
         $user->institution = $request->get('institution');
         $user->type = $request->get('type');
         $user->email = $request->get('email');
+        $user->thumbnail_image = isset($imageName) ? $imageName : null;
 
         $user->save();
         return redirect()->route('user.index')->with('success', 'User has been updated successfully');

@@ -9,7 +9,7 @@
                     <div class="card-header">{{ __('User Update') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('user.update', $user->id) }}">
+                        <form method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('patch')
                             <div class="form-group row">
@@ -54,7 +54,7 @@
                                 <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="custom-select" name="type" id="inputGroupSelect02">
+                                    <select class="custom-select" name="type" id="role">
                                         @if($user->type == 'visitor')
                                             <option value="visitor">Visitor</option>
                                             <option value="paid">Paid</option>
@@ -96,6 +96,29 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div id="thumbnailImage">
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Thumbnail Image</label>
+
+                                    <div class="col-md-6">
+                                        @if(isset($user->thumbnail_image))
+                                        <img class="img-thumbnail" src="{{asset('storage/'.$user->thumbnail_image)}}" alt=""/>
+                                        @else
+                                        <label for="password" class="col-md-4 col-form-label">No Image</label>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Update Thumbnail Image</label>
+
+                                    <div class="col-md-6">
+                                        <input type="hidden" name="oldThumbnailImage" value="{{$user->thumbnail_image}}" class="form-control-file" id="thumbnail_image">
+                                        <input type="file" name="thumbnailImage" class="form-control-file" id="thumbnail_image">
+                                        <p style="margin: 5px 0 0; font-size: 14px; color: #721c24">* Thumbnail image ratio should be square.</p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
@@ -112,5 +135,19 @@
             </div>
         </div>
     </div>
-
+@section('scripts')
+    <script type="application/javascript">
+        $('#thumbnailImage').hide();
+        if($("#role").val() == "provider"){
+            $('#thumbnailImage').show();
+        }
+        $( "#role" ).change(function() {
+            if($(this).val() == "provider"){
+                $('#thumbnailImage').show();
+            } else {
+                $('#thumbnailImage').hide();
+            }
+        });
+    </script>
+@endsection
 @endsection

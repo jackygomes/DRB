@@ -55,65 +55,22 @@
         </style>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="wrapper">
-                        <form action="{{route('research.list')}}" method="get" style="width: 100%;">
-                            <div class="bg-white my-0 mx-1 p-3 shadow-sm">
-                                <h4>Search Research By:</h4>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Company Name:</label>
-                                            <select class="custom-select mr-sm-2" name="company_id">
-                                                <option value="">All</option>
-                                                @foreach($companies as $company)
-                                                    <option value="{{$company->id}}" {{Request::get('company_id') == $company->id ? 'Selected' : ''}}>{{ $company->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Provider Name:</label>
-                                            <select class="custom-select mr-sm-2" name="provider">
-                                                <option value="">All</option>
-                                                @foreach($providerNames as $providerName)
-                                                    <option value="{{$providerName}}" {{Request::get('provider') == $providerName ? 'Selected' : ''}}>{{ $providerName }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Category:</label>
-                                            <select class="custom-select mr-sm-2" name="category_id">
-                                                <option value="">All</option>
-                                                @foreach($researchCategories as $researchCategory)
-                                                    <option value="{{$researchCategory->id}}" {{Request::get('category_id') == $researchCategory->id ? 'Selected' : ''}}>{{ $researchCategory->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Analyst Name:</label>
-                                            <input class="form-control" name="analyst_name" value="{{Request::get('analyst_name')}}" type="text" placeholder="Enter Analyst Name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1">Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        <!-- Sidebar  -->
+                        <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top">
+
+                            <ul class="list-unstyled components">
+                                <li class="{{ Request::get('provider') == '' ? 'news-sidenav-active' : '' }}">
+                                    <a class="provider" data-name="" href="#">All Provider</a>
+                                </li>
+                                @foreach($providerNames as $providerName)
+                                <li class="{{ Request::get('provider') == $providerName ? 'news-sidenav-active' : '' }}">
+                                    <a class="news-sidenav-hover provider" data-name="{{$providerName}}" href="#">{{$providerName}}</a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <div class="col-md-7">
@@ -126,13 +83,17 @@
                     <div class="shadow-sm mb-3 single-news-border">
                         <div id="3584" class="row">
                             <div class="col-md-3">
-                                <img src="https://data-resources-bd.s3-ap-southeast-1.amazonaws.com/production/news/images/Xk1JCys7lHoxOecHgloUuYMGFldVXrR0LBqTdbP3.jpeg" alt="..." class="img-fluid news-index-img">
+                                @if(isset($product->user->thumbnail_image))
+                                <img src="{{asset('storage/'.$product->user->thumbnail_image)}}" alt="..." class="img-fluid news-index-img">
+                                @else
+                                <img src="{{asset('img/DRB-logo.jpeg')}}" alt="..." class="img-fluid news-index-img">
+                                @endif
                             </div>
                             <div class="col-md-6">
                                 <div class="content-wrap">
-                                    <a href="https://www.newagebd.net/article/107855/poverty-rate-rises-to-35pc" target="_blank">
+{{--                                    <a href="#" target="_blank">--}}
                                         <h5>{{$product->name}}</h5>
-                                    </a>
+{{--                                    </a>--}}
                                     <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}}</p>
                                     <p class="text-secondary ">Research Date: <span>{{date('F j, Y', strtotime($product->date))}}</span></p>
                                     <p class="text-secondary ">Provider: <span>{{$product->provider}}</span></p>
@@ -171,8 +132,67 @@
                         <h4>No Research Found </h4>
                     @endif
                 </div>
-                <div class="col-md-2">
-
+                <div class="col-md-3">
+                    <div class="wrapper">
+                        <form id="searchForm" action="{{route('research.list')}}" method="get" style="width: 100%;">
+                            <div class="bg-white my-0 mx-1 p-3 shadow-sm">
+                                <h4>Search Research By:</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Company Name:</label>
+                                            <select class="custom-select mr-sm-2" name="company_id">
+                                                <option value="">All</option>
+                                                @foreach($companies as $company)
+                                                    <option value="{{$company->id}}" {{Request::get('company_id') == $company->id ? 'Selected' : ''}}>{{ $company->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-md-12">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label>Provider Name:</label>--}}
+{{--                                            <select class="custom-select mr-sm-2" name="provider">--}}
+{{--                                                <option value="">All</option>--}}
+{{--                                                @foreach($providerNames as $providerName)--}}
+{{--                                                    <option value="{{$providerName}}" {{Request::get('provider') == $providerName ? 'Selected' : ''}}>{{ $providerName }}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <input id="providerName" class="form-control" name="provider" value="{{Request::get('provider')}}" type="hidden" placeholder="Enter Analyst Name">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Category:</label>
+                                            <select class="custom-select mr-sm-2" name="category_id">
+                                                <option value="">All</option>
+                                                @foreach($researchCategories as $researchCategory)
+                                                    <option value="{{$researchCategory->id}}" {{Request::get('category_id') == $researchCategory->id ? 'Selected' : ''}}>{{ $researchCategory->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Analyst Name:</label>
+                                            <input class="form-control" name="analyst_name" value="{{Request::get('analyst_name')}}" type="text" placeholder="Enter Analyst Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,6 +201,11 @@
 @section('scripts')
     <script type="application/javascript">
         $(document).ready(function() {
+            $('.provider').click(function(){
+                $('#providerName').val($(this).data('name'));
+                $('#searchForm').submit();
+            });
+
             $('.read-more-button').click(function(){
                 if($(this).text() == "Read More") {
                     $(this).html('Read Less');

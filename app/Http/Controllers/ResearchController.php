@@ -27,7 +27,7 @@ class ResearchController extends Controller
         $userId = Auth::id();
         $companies = Company::get();
 
-        $products = Product::where('status', 'Approved')->with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC');
+        $products = Product::where('status', 'Approved')->with('user')->with('company')->with('sector')->with('category')->orderBy('created_at', 'DESC');
         $cart = Cart::where('user_id', $userId)->with('cartItems')->first();
         $productForProviderNames = Product::where('status', 'Approved')->get();
         $researchCategories = ResearchCategory::all();
