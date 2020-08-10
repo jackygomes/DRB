@@ -95,6 +95,7 @@
                                         <h5>{{$product->name}}</h5>
 {{--                                    </a>--}}
                                     <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}}</p>
+                                    <p class="text-secondary ">Category: {{$product->category->name}}</p>
                                     <p class="text-secondary ">Research Date: <span>{{date('F j, Y', strtotime($product->date))}}</span></p>
                                     <p class="text-secondary ">Provider: <span>{{$product->provider}}</span></p>
                                     <p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}:<span> {{implode(', ', json_decode($product->analysts))}}</span></p>

@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5d96c82a-6534-44f5-99da-dcd557de5598" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/user/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/user/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front-end/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/home/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/front-end/research/research.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front-end/research/research.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -265,7 +258,8 @@
       <workItem from="1596612032795" duration="40000" />
       <workItem from="1596892238890" duration="2717000" />
       <workItem from="1596950860976" duration="11553000" />
-      <workItem from="1596979579752" duration="261000" />
+      <workItem from="1596979579752" duration="566000" />
+      <workItem from="1597038195445" duration="1620000" />
     </task>
     <servers />
   </component>
