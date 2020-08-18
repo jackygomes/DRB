@@ -77,7 +77,7 @@
                         </div>
                     </li>
                     @else
-                        @if($menu->title == "RESEARCH")
+                        @if($menu->title == "RESEARCHEX")
                             <li class="nav-item nav-custom-margin-top">
                                 <a class="nav-link font-weight-bold text-white" href="{{ route('research.list') }}" >
                                     <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
