@@ -84,11 +84,11 @@
                                 </a>
                             </li>
                         @elseif($menu->title == "PRICING")
-                            <li class="nav-item nav-custom-margin-top">
-                                <a class="nav-link font-weight-bold text-white" href="{{ route('pricing') }}" >
-                                    <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
-                                </a>
-                            </li>
+{{--                            <li class="nav-item nav-custom-margin-top float-right">--}}
+{{--                                <a class="nav-link font-weight-bold text-white" href="{{ route('pricing') }}" >--}}
+{{--                                    <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                         @else
                             <li class="nav-item nav-custom-margin-top">
                                 <a class="nav-link font-weight-bold text-white" href="{{ $menu->page ? route('page',  $menu->page->slug) : "#" }}" >
@@ -96,6 +96,15 @@
                                 </a>
                             </li>
                         @endif
+                    @endif
+                @endforeach
+                @foreach($menus as $menu)
+                    @if($menu->title == "PRICING")
+                        <li class="nav-item nav-custom-margin-top float-right">
+                            <a class="nav-link font-weight-bold text-white" href="{{ route('pricing') }}" >
+                                <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                            </a>
+                        </li>
                     @endif
                 @endforeach
 

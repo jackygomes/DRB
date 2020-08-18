@@ -50,7 +50,11 @@
     {{--                                    </div>--}}
     {{--                                </div>--}}
                                     <div class="col-md-3">
-                                        <img src="https://data-resources-bd.s3-ap-southeast-1.amazonaws.com/production/news/images/Xk1JCys7lHoxOecHgloUuYMGFldVXrR0LBqTdbP3.jpeg" alt="..." class="img-fluid news-index-img">
+                                        @if(isset($item->product->user->thumbnail_image))
+                                        <img src="{{asset('storage/'.$item->product->user->thumbnail_image)}}" alt="..." class="img-fluid news-index-img">
+                                        @else
+                                        <img src="{{asset('img/DRB-logo.jpeg')}}" alt="..." class="img-fluid news-index-img">
+                                        @endif
                                     </div>
                                     <div class="col-md-9">
                                         <div class="row">
