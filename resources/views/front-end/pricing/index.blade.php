@@ -92,19 +92,22 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script >
-        var mycheckbox = new Vue({
-            el: '#mycheckbox',
-            data() {
-                return {
-                    isButton: false,
-                }
-            },
-            methods: {
-                isShowButton: function(){
-                    console.log('hello');
-                    this.isButton = !this.isButton;
+        $(function () {
+            var mycheckbox = new Vue({
+                el: '#mycheckbox',
+                data() {
+                    return {
+                        isButton: false,
+                    }
                 },
-            },
+                methods: {
+                    isShowButton: function(){
+                        console.log('hello');
+                        this.isButton = !this.isButton;
+                    },
+                },
+            })
         })
+
     </script>
 @endsection
