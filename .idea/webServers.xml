@@ -5,7 +5,15 @@
       <webServer id="34680874-09b2-493c-8adf-46116a9f9b57" name="DRB" url="http://103.253.147.89">
         <fileTransfer host="103.253.147.89" port="22" accessType="SFTP">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="f96ccf0a-e744-4a3a-9228-2a317c91bd89" name="BhaloKhabo" url="http://bhalokhabobhalothakbo.com">
+        <fileTransfer host="bhalokhabobhalothakbo.com" port="22" privateKey="C:\Users\mahfu\Downloads\bhalokhabo.pem" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
           <option name="port" value="22" />
         </fileTransfer>
