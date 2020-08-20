@@ -7,5 +7,5 @@
 @yield('content')
 
 @include('front-end.partial.footer')
-@yield('scripts')
+{{--@yield('scripts')--}}
 @endsection
