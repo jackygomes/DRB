@@ -18,6 +18,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="701f2d05-f368-4531-9de4-b9322c2b26c5" name="DRB_staging_aws" url="http://ec2-3-0-98-170.ap-southeast-1.compute.amazonaws.com">
+        <fileTransfer host="ec2-3-0-98-170.ap-southeast-1.compute.amazonaws.com" port="22" privateKey="C:\Users\mahfu\OneDrive\Desktop\drb files\drb_staging.pem" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

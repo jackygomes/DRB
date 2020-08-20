@@ -59,7 +59,7 @@
                                 <div  class="col-md-12 mb-n4" >
                                     <button type="button" class="btn btn-light btn-sm mb-3 border border-secondary comment-btn-top" @click='isshowcomment({{$news->id}})'><i class="far fa-comment-alt"></i> Comment</button>
                                 </div>
-                            @endif    
+                            @endif
                             {{-- <div  class="col-md-9"> --}}
                                 {{-- <div class="text-right">
                                     <h6>Share</h6>
@@ -72,7 +72,7 @@
                             <div class="ml-auto pr-2">
                                 <div class="addthis_inline_share_toolbox news-share-buttons" data-url="{{ env('APP_URL') }}single-news/{{$news->id}}" data-title="{{$news->heading}}" data-description="{{$news->body}}" data-media="{{ env('S3_URL') }}{{$news->image}}"></div>
                             </div>
-                        </div>    
+                        </div>
                         <div class="comment-field-top" v-if='isShowComment == {{$news->id}}'>
                             @if (Auth::check())
                                 <form method="POST" action="{{ route('comment.store') }}">
@@ -89,13 +89,13 @@
                                         </div>
                                     </div>
                                 </form>
-                            @endif    
+                            @endif
                             <ul class="list-group">
                                 @foreach ($news->comments as $comment)
                                     <li class="list-group-item rounded small border-0 mb-1 bg-light">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <b>{{$comment->user_id != null ? $comment->user->full_name : 'Anonymous'}}:</b> 
+                                                <b>{{$comment->user_id != null ? $comment->user->full_name : 'Anonymous'}}:</b>
                                                 <span v-if="isShowCommentBox == {{$comment->id}}">
                                                     <form method="POST" action="{{ route('comment.update', $comment->id) }}">
                                                         @csrf
@@ -112,7 +112,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </span> 
+                                                </span>
                                                 <span v-else>{{$comment->body}}</span>
                                             </div>
 
@@ -122,7 +122,7 @@
 
                                             <div class="col-md-6 text-right">
                                                 @if(Auth::user())
-                                                    @if(Auth::user()->id == $comment->user_id) 
+                                                    @if(Auth::user()->id == $comment->user_id)
                                                         <button class="bg-transparent border-0 small text-secondary" @click="isComment({{$comment->id}})"  v-if="isShowCommentBox != {{$comment->id}}">Edit</button>
                                                         <button class="bg-transparent border-0 small text-secondary" @click="isComment(null)"  v-if="isShowCommentBox == {{$comment->id}}">Cancel</button>
                                                         <form action="{{ route('comment.destroy', $comment->id)}}" onclick="return confirm('Are you sure, you want to delete this Comment?')" method="post" style="display: inline;" v-if="isShowCommentBox != {{$comment->id}}">
@@ -131,14 +131,14 @@
                                                             <button type="submit" class="bg-transparent border-0 small text-secondary">Delete</button>
                                                         </form>
                                                     @endif
-                                                @endif  
+                                                @endif
                                             </div>
-                                    
+
                                         </div>
                                     </li>
                                 @endforeach
                             </ul>
-                        </div> 
+                        </div>
                     </div>    
                     @endforeach
                 @endif    
