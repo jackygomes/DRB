@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row custom-news-header-top">
                 <div class="col-md-12">
-                    {{-- <h3>News</h3> --}}
+                     <h3>News</h3>
                     <button type="button" id="sidebarCollapse"
                             class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide">
                         <i id="news-sidenav" class="fas fa-chevron-right"></i>
@@ -190,11 +190,12 @@
             </div>
         </div>
     </section>
+@endsection
+
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-        $(function() {
-            var example1 = new Vue({
+            var example2 = new Vue({
                 el: '#example-2',
                 data() {
                     return {
@@ -332,20 +333,16 @@
                             referrer: 'no-referrer', // no-referrer, *client
 
                         })
-                            .then(function (response) {
-                                return response.json();
-                            })
-                            .then(response => {
-                                this.initial = response.items;
-                                this.last_id = response.last_id;
+                            .then(res => res.json())
+                            .then(data => {
+//                                console.log(data)
+                                this.initial = data.items;
+                                this.last_id = data.last_id;
                             });
                     }
                 },
             })
-        })
     </script>
 
-
-@endsection
 
 @endsection
