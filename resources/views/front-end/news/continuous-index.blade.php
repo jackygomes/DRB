@@ -54,6 +54,12 @@
                                         </a>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="ml-auto pr-2">
+                                        <div class="addthis_inline_share_toolbox news-share-buttons" :data-url="'{{ env('APP_URL') }}/single-news/' + item.id" :data-title="item.heading" :data-description="item.body" :data-media="'{{ env('S3_URL') }}' + item.image"></div>
+                                    </div>
+                                </div>
                                 {{--<div class="row">--}}
                                 {{-- @if(@{{item.comments.length}} > 0 || Auth::check()) --}}
                                 {{--<div v-if="isAuth || item.comments.length > 0" class="col-md-12 mb-n4" >--}}
@@ -186,6 +192,7 @@
                 }
             },
             mounted() {
+                this.initial_call();
                 this.isShowComment = localStorage.isShowComment;
             },
             created() {
@@ -300,4 +307,4 @@
 
 @endsection
 
-@endsection
+{{--@endsection--}}

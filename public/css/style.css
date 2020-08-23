@@ -523,7 +523,7 @@ input[type="search"]::placeholder {
 }
 
 .custom-news-header-top {
-    margin-top: 125px;
+    margin-top: 100px;
 }
 
 .custom-news-nav-header-top {
@@ -535,6 +535,10 @@ input[type="search"]::placeholder {
 
 .custom-news-nav-header-top::-webkit-scrollbar {
     display: none;
+}
+
+.top-news-bar{
+    margin-left: -5px;
 }
 
 @media (max-width: 767px) {

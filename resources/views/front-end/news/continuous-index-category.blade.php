@@ -4,7 +4,7 @@
     <section class="news" id="app">
         <div class="container-fluid">
             <div class="row custom-news-header-top">
-                <div class="col-md-12">
+                <div class="col-md-12 top-news-bar">
                      <h3>News</h3>
                     <button type="button" id="sidebarCollapse"
                             class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide">
