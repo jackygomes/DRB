@@ -265,8 +265,12 @@ a.article:hover {
     display: inline-block;
     vertical-align: middle;
   }
+  .analyzing-header{
+    width: 100%;
+  }
+
   .inner-header {
-    width: 100vw;
+    /*width: 100vw;*/
     margin: 0;
     padding: 0;
   }

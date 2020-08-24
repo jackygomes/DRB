@@ -14,7 +14,12 @@ class VisualizeController extends Controller
     }
 
     public function dataMatrix(){
-        DSE::fetch();
+        try{
+            DSE::fetch();
+        }catch (\Exception $e){
+            //Dse url is not available
+        }
+
         $sectors = Sector::all();
         return view('front-end.visualize.data-matrix', compact('sectors'));
     }

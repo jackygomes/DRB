@@ -120,46 +120,53 @@ class SubscriptionPlanController extends Controller
         }
         $subscriber->save();
 
-
-        $appURl = config('app.url');
+        $user = Auth::user();
         $store_id = env('SSL_STORE_ID', false);
         $store_pass =  env('SSL_STORE_PASS', false);
-        $total_amount = $request->price;
-        $currency = 'BDT';
-        $tran_id = $tran_id->format('Y-m-d::H:i:s.u');
-        $success_url = $appURl.'subscriptionplan/success';
-        $fail_url = $appURl.'subscriptionplan/fail';
-        $cancel_url = $appURl;
-        $customer_name = Auth::user()->full_name;
-        $customer_email = Auth::user()->email;
-        $customer_phone = Auth::user()->contact_number;
-        $client = new Client();
-        $response = $client->request('POST', 'https://securepay.sslcommerz.com/gwprocess/v4/api.php', [
-            'form_params' => [
-                'store_id' => $store_id,
-                'store_passwd' => $store_pass,
-                'total_amount' => $total_amount,
-                'currency' => $currency,
-                'tran_id' => $tran_id,
-                'success_url' => $success_url,
-                'fail_url' => $fail_url,
-                'cancel_url' => $cancel_url,
-                'cus_name' => $customer_name,
-                'cus_email' => $customer_email,
-                'cus_phone' => $customer_phone,
-            ]
-        ]);
+
+        $requireSslData = [
+            'store_id' => $store_id,
+            'store_passwd' => $store_pass,
+            'total_amount' => $request->price,
+            'currency' => 'BDT',
+            'tran_id' => $tran_id->format('Y-m-d::H:i:s.u'),
+            'success_url' => route('subscriptionplan.success'),
+            'fail_url' => route('subscriptionplan.fail'),
+            'cancel_url' => route('home'),
+            'cus_name' => $user->full_name,
+            'cus_email' => $user->email,
+            'cus_add1' => 'Dhaka',
+            'cus_city' => 'Dhaka',
+            'cus_postcode' => '1215',
+            'cus_country' => 'Bangladesh',
+            'cus_phone' => $user->contact_number,
+            'shipping_method' => 'NO',
+            'num_of_item' => 1,
+            'product_name' => 'Package',
+            'product_category' => 'package',
+            'product_profile' => 'non-physical-goods',
+        ];
+
+        try{
+            $client = new Client(['verify' => false]);
+            $response = $client->request('POST', 'https://securepay.sslcommerz.com/gwprocess/v4/api.php', [
+                'form_params' => $requireSslData
+            ]);
+
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
 
 
 
-        return redirect(json_decode($response->getBody())->redirectGatewayURL);
+        return redirect(json_decode($response->getBody())->GatewayPageURL);
     }
 
     public function success()
     {
         $val_id=urlencode($_POST['val_id']);
-        $store_id=env('SSL_STORE_ID', false);
-        $store_passwd=env('SSL_STORE_PASS', false);
+        $store_id=env('TEST_SSL_STORE_ID', false);
+        $store_passwd=env('TEST_SSL_STORE_PASSWORD', false);
         $requested_url = ("https://securepay.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$val_id."&store_id=".$store_id."&store_passwd=".$store_passwd."&v=1&format=json");
 
         $handle = curl_init();
@@ -181,6 +188,8 @@ class SubscriptionPlanController extends Controller
 
             # TO CONVERT AS OBJECT
             $result = json_decode($result);
+
+            //return json_encode($result);
 
             # TRANSACTION INFO
             $status = $result->status;

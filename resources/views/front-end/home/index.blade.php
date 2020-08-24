@@ -172,7 +172,7 @@
 <section class="analyze mb-5">
     <div class="container-fluid">
         <div class="row">
-            <div class="header">
+            <div class="header analyzing-header">
                 <div class="inner-header flex mt-4">
                     <h1 class="my-md-5 main-text-color">Start Analyzing With</h1>
                     <div class="col-12">
