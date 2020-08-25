@@ -5,7 +5,7 @@
     </div>
 
     <ul class="list-unstyled components">
-        @if(Auth::user()->type == 'visitor')
+        @if(Auth::user()->type == 'visitor' || Auth::user()->type == 'paid')
             <li class="{{ request()->url() == route('invoice.user') ? 'sidebar-active' : '' }}">
                 <a href="{{route('invoice.user')}}">Invoice</a>
             </li>
