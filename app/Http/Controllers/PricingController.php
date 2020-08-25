@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\SubscriptionPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class PricingController extends Controller
 {
@@ -14,8 +16,11 @@ class PricingController extends Controller
      */
     public function index()
     {
+        $activePlanId = null;
+        $invoice = Invoice::where('user_id', auth()->user()->id)->orderBy('expire_date', 'desc')->where('expire_date', '>=', Carbon::now()->toDateString())->first();
+        if($invoice) $activePlanId = $invoice->plan_id;
         $subscriptionplans = SubscriptionPlan::where('is_visible', 1)->get();
-        return view('front-end.pricing.index', compact('subscriptionplans'));
+        return view('front-end.pricing.index', compact('subscriptionplans', 'activePlanId'));
     }
 
     /**

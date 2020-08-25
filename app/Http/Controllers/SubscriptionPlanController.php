@@ -89,6 +89,13 @@ class SubscriptionPlanController extends Controller
 
     public function subscribePlan(Request $request)
     {
+        //if an user has an active plan then redirect back
+//        $activeInvoice = Invoice::where('user_id', auth()->user()->id)->orderBy('expire_date', 'desc')->where('expire_date', '>=', Carbon::now()->toDateString())->first();
+//        if($activeInvoice){
+//            return redirect()->back()->with('message', 'You Already Have An Activated Package');
+//        }
+
+
         $invoice = Invoice::all();
         $tran_id = new Carbon;
         $uniqueid =  '#'.'DRB'.date("Y").(count($invoice)+1);
@@ -165,8 +172,8 @@ class SubscriptionPlanController extends Controller
     public function success()
     {
         $val_id=urlencode($_POST['val_id']);
-        $store_id=env('TEST_SSL_STORE_ID', false);
-        $store_passwd=env('TEST_SSL_STORE_PASSWORD', false);
+        $store_id=env('SSL_STORE_ID', false);
+        $store_passwd=env('SSL_STORE_PASS', false);
         $requested_url = ("https://securepay.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$val_id."&store_id=".$store_id."&store_passwd=".$store_passwd."&v=1&format=json");
 
         $handle = curl_init();

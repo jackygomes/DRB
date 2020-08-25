@@ -8,6 +8,13 @@
         }
     </style>
     <section class="pricing mb-5">
+        {{--@if(Session::has('message'))--}}
+            {{--<div class="row">--}}
+                {{--<div class="alert alert-warning col-4 offset-4 text-center" role="alert">--}}
+                    {{--{{Session::get('message')}}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--@endif--}}
         <h1 class="text-center main-text-color mb-md-5">Our Pricing</h1>
         <div class="container-fluid">
             <div class="row" id="mycheckbox">
@@ -50,7 +57,11 @@
                                                 <input type="hidden" name="type" value="monthly">
                                                 <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}"> --}}
                                                 @include('front-end.home.partial.monthlyagreement')
-                                                <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Get Started</button>
+                                                 {{--@if($subscriptionplan->id != $activePlanId)--}}
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Get Started</button>
+                                                 {{--@else--}}
+                                                    {{--<button type="button" class="btn btn-outline-warning btn-sm">Activated</button>--}}
+                                                {{--@endif--}}
                                                 {{-- </form> --}}
                                             @else
                                                 <td><a href="/login" class="btn btn-warning">Login</a></td>
@@ -70,7 +81,11 @@
                                                     <input type="hidden" name="type" value="yearly">
                                                     <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}"> --}}
                                                 @include('front-end.home.partial.yearlyagreement')
-                                                <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModal{{ $subscriptionplan->id }}">Get Started </button>
+                                                {{--@if($subscriptionplan->id != $activePlanId)--}}
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Get Started</button>
+                                                {{--@else--}}
+                                                    {{--<button type="button" class="btn btn-outline-warning btn-sm">Activated</button>--}}
+                                                {{--@endif--}}
 
                                                 {{-- </form> --}}
                                             @else
@@ -108,4 +123,10 @@
         })
 
     </script>
+
+    {{--<script>--}}
+        {{--$(".alert").delay(6000).slideUp(200, function() {--}}
+            {{--$(this).alert('close');--}}
+        {{--});--}}
+    {{--</script>--}}
 @endsection
