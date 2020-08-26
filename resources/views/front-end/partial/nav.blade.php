@@ -110,26 +110,29 @@
 
 
 
-                <form class="signin-buttons form-inline my-2 my-lg-0">
-                    <a href="{{route('cart')}}" class="shopping-cart">
-                        <div id="ex4">
+                <li class="signin-buttons form-inline my-2 my-lg-0">
+                    <div class="signin-buttons-positioning">
+
+                        <a href="{{route('cart')}}" class="shopping-cart">
+                            <div id="ex4">
                           <span class="p1 fa-stack fa-2x has-badge" data-count="{{ App\Cart::getCartCount() }}">
                             <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>
                           </span>
-                        </div>
-                    </a>
-                    @if(Auth::check())
-                        @if(Auth::user()->type == 'admin')
-                            <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="/admin/menu">Admin Panel</a>
+                            </div>
+                        </a>
+                        @if(Auth::check())
+                            @if(Auth::user()->type == 'admin')
+                                <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="/admin/menu">Admin Panel</a>
+                            @else
+                                <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="/invoice-user">Admin Panel</a>
+                            @endif
+                            <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="{{route('logout')}}">Sign Out</a>
                         @else
-                            <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="/invoice-user">Admin Panel</a>
+                            <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="{{route('register')}}">Sign Up</a>
+                            <a class="btn btn-outline-warning btn-sm my-2 my-sm-0 text-white mx-1" href="{{route('login')}}">Sign In</a>
                         @endif
-                        <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="{{route('logout')}}">Sign Out</a>
-                    @else
-                        <a class="btn btn-warning btn-sm my-2 my-sm-0 mx-1" href="{{route('register')}}">Sign Up</a>
-                        <a class="btn btn-outline-warning btn-sm my-2 my-sm-0 text-white mx-1" href="{{route('login')}}">Sign In</a>
-                    @endif
-                </form>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

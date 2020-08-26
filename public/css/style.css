@@ -1054,6 +1054,42 @@ if it's not present, don't show loader */
     position: relative;
 }
 
+@media only screen and (max-width: 991px) {
+    .signin-buttons {
+        margin-left: 48px;
+    }
+    .shopping-cart{
+        top: -9px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .signin-buttons-positioning{
+        transition: 0.5s;
+        position: absolute;
+        width: 204px;
+        right: 38px;
+    }
+
+    .shopping-cart{
+        top: -16px;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .signin-buttons-positioning{
+        position: absolute;
+        width: 204px;
+        right: -45px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .signin-buttons-positioning{
+        right: -100px;
+    }
+}
+
 .shopping-cart {
     display: block;
     position: absolute;
