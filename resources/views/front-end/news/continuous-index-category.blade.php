@@ -5,7 +5,6 @@
         <div class="container-fluid">
             <div class="row custom-news-header-top">
                 <div class="col-md-12 top-news-bar">
-                     <h3>News</h3>
                     <button type="button" id="sidebarCollapse"
                             class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide">
                         <i id="news-sidenav" class="fas fa-chevron-right"></i>
@@ -32,7 +31,7 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col-12 col-md-7">
+                <div class="col-12 col-md-7 mt-4">
 
 
                     <!-- ///////////////////////////////////////////////// -->
@@ -171,7 +170,7 @@
                     </ul>
                 </div>
                 <!-- ////////////////////////////////////////////////// -->
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-md-3 mt-4">
                     <h5>Most Recent</h5>
                     <div class="table-responsive most-recent-border mb-3">
                         <table class="table table-hover">
