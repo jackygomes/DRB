@@ -179,6 +179,19 @@ class CheckOutController extends Controller
             ], 420);
         }
 
+        //if price is less than 10 (for ssl minimum amount purposes) make it successful by default
+        if($orderData['amount'] <= 10) {
+
+            $order = Order::where('transaction_id', $orderData['transaction_id'])->first();
+            $order->status = 'complete';
+            $order->payment = 'paid';
+
+            $order->save();
+
+            $status = 'success';
+            return view('front-end.payment-status.success', compact('status'));
+        }
+
         $this->makePayment($paymentData);
     }
 
