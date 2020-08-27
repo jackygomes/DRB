@@ -24,4 +24,10 @@ class OfflinePaymentController extends Controller
         $invoice->save();
         return redirect()->route('offline.payments')->with('success', 'Payment Is Approved');
     }
+
+    public function deletePayment($invoice_id)
+    {
+        Invoice::destroy($invoice_id);
+        return response()->json(['status' => 200]);
+    }
 }

@@ -122,6 +122,7 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         Route::get('/offline-payments', 'OfflinePaymentController@index')->name('offline.payments');
         Route::get('/offline-payments/details/{invoice_id}', 'OfflinePaymentController@invoiceDetails')->name('offline.payments.details');
         Route::get('/offline-payments/approve/{invoice_id}', 'OfflinePaymentController@approvePayment')->name('offline.payments.approve');
+        Route::get('/offline-payments/delete/{invoice_id}', 'OfflinePaymentController@deletePayment')->name('offline.payments.delete');
     });
 
     //Page
