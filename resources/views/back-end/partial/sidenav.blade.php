@@ -83,6 +83,9 @@
             <li class="{{ request()->url() == route('recent.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('recent.index')}}">Most Recent</a>
             </li>
+            <li class="{{ request()->url() == route('offline.payments') ? 'sidebar-active' : '' }}">
+                <a href="{{route('offline.payments')}}">Offline Payments</a>
+            </li>
             {{-- <li >
                 <a href="#">About</a>
             </li>

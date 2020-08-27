@@ -11,7 +11,8 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        $invoices = Invoice::orderBy('created_at', 'DESC')->get();
+        $invoices = Invoice::where('isApproved', 1)->orderBy('id', 'DESC')->get();
+        //return $invoices;
         return view('back-end.invoice.index', compact('invoices'));
     }
 

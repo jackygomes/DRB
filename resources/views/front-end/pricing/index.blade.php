@@ -8,13 +8,6 @@
         }
     </style>
     <section class="pricing mb-5">
-        {{--@if(Session::has('message'))--}}
-            {{--<div class="row">--}}
-                {{--<div class="alert alert-warning col-4 offset-4 text-center" role="alert">--}}
-                    {{--{{Session::get('message')}}--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--@endif--}}
         <h1 class="text-center main-text-color mb-md-5">Our Pricing</h1>
         <div class="container-fluid">
             <div class="row" id="mycheckbox">
@@ -43,7 +36,7 @@
                                 <div class="card-body text-center">
                                     <h6 class="card-title text-uppercase">{{ $subscriptionplan->name}} <small>({{ $subscriptionplan->user_limit }} User)</small></h6>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-6 text-center">
                                             <p class="font-weight-bold price-text-2">BDT {{ number_format($subscriptionplan->price_per_month) }}/<br>month</p>
                                             <hr class="small d-block d-sm-none">
                                             <p class="price-text"><i class="fas fa-check d-none d-sm-block"></i><span class="small d-block d-sm-none">News Aggregator</span></p>
@@ -57,11 +50,17 @@
                                                 <input type="hidden" name="type" value="monthly">
                                                 <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}"> --}}
                                                 @include('front-end.home.partial.monthlyagreement')
-                                                 {{--@if($subscriptionplan->id != $activePlanId)--}}
-                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Get Started</button>
-                                                 {{--@else--}}
-                                                    {{--<button type="button" class="btn btn-outline-warning btn-sm">Activated</button>--}}
-                                                {{--@endif--}}
+                                                @if(in_array($subscriptionplan->id, $purchasedActivePlans))
+                                                    <button type="button" class="btn btn-outline-warning btn-sm">Activated</button>
+
+                                                @elseif(in_array($subscriptionplan->id, $purchasedInactivePlans))
+                                                    <button type="button" class="btn btn-outline-warning btn-sm">Pending</button>
+                                                 @else
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
+
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
+
+                                                @endif
                                                 {{-- </form> --}}
                                             @else
                                                 <td><a href="/login" class="btn btn-warning">Login</a></td>
@@ -81,11 +80,17 @@
                                                     <input type="hidden" name="type" value="yearly">
                                                     <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}"> --}}
                                                 @include('front-end.home.partial.yearlyagreement')
-                                                {{--@if($subscriptionplan->id != $activePlanId)--}}
-                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Get Started</button>
-                                                {{--@else--}}
-                                                    {{--<button type="button" class="btn btn-outline-warning btn-sm">Activated</button>--}}
-                                                {{--@endif--}}
+
+                                                @if(in_array($subscriptionplan->id, $purchasedActivePlans))
+                                                    <button type="button" class="btn btn-outline-warning btn-sm">Activated</button>
+
+                                                @elseif(in_array($subscriptionplan->id, $purchasedInactivePlans))
+                                                        <button type="button" class="btn btn-outline-warning btn-sm">Pending</button>
+                                                @else
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
+
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
+                                                @endif
 
                                                 {{-- </form> --}}
                                             @else
@@ -123,10 +128,4 @@
         })
 
     </script>
-
-    {{--<script>--}}
-        {{--$(".alert").delay(6000).slideUp(200, function() {--}}
-            {{--$(this).alert('close');--}}
-        {{--});--}}
-    {{--</script>--}}
 @endsection

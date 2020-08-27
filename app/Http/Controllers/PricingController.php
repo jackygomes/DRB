@@ -16,11 +16,10 @@ class PricingController extends Controller
      */
     public function index()
     {
-        $activePlanId = null;
-        $invoice = Invoice::where('user_id', auth()->user()->id)->orderBy('expire_date', 'desc')->where('expire_date', '>=', Carbon::now()->toDateString())->first();
-        if($invoice) $activePlanId = $invoice->plan_id;
+        $purchasedActivePlans = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 1)->where('expire_date', '>=', Carbon::now()->toDateString())->pluck('plan_id')->toArray();
+        $purchasedInactivePlans = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 0)->where('expire_date', '>=', Carbon::now()->toDateString())->pluck('plan_id')->toArray();
         $subscriptionplans = SubscriptionPlan::where('is_visible', 1)->get();
-        return view('front-end.pricing.index', compact('subscriptionplans', 'activePlanId'));
+        return view('front-end.pricing.index', compact('subscriptionplans', 'purchasedActivePlans', 'purchasedInactivePlans'));
     }
 
     /**

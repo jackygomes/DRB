@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Auth;
+use Kreait\Firebase\Storage;
 
 class SubscriptionPlanController extends Controller
 {
@@ -89,12 +90,7 @@ class SubscriptionPlanController extends Controller
 
     public function subscribePlan(Request $request)
     {
-        //if an user has an active plan then redirect back
-//        $activeInvoice = Invoice::where('user_id', auth()->user()->id)->orderBy('expire_date', 'desc')->where('expire_date', '>=', Carbon::now()->toDateString())->first();
-//        if($activeInvoice){
-//            return redirect()->back()->with('message', 'You Already Have An Activated Package');
-//        }
-
+        //return time().'.' .$request->check_image->extension();
 
         $invoice = Invoice::all();
         $tran_id = new Carbon;
@@ -113,6 +109,18 @@ class SubscriptionPlanController extends Controller
         }else {
             $invoice->expire_date =  $this->original()->addMonths(12);
         }
+
+        //offline payment
+        if($request->transaction_id && $request->hasFile('check_image')) {
+            $invoice->transaction_id = $request->transaction_id ;
+            $invoice->check_image = time(). '.' .$request->check_image->extension() ;
+            $invoice->isApproved = 0;
+
+            $request->file('check_image')->move(storage_path('app/public/bank_checks'), $invoice->check_image);
+
+            $offlineInvoiceFlag = true;
+        }
+
         $invoice->save();
 
         $subscriber = new Subscriber;
@@ -126,6 +134,10 @@ class SubscriptionPlanController extends Controller
             $subscriber->expire_date =  $this->original()->addMonths(12);
         }
         $subscriber->save();
+
+        if(isset($offlineInvoiceFlag) && $offlineInvoiceFlag){
+            return view('back-end.subscription-plan.success');
+        }
 
         $user = Auth::user();
         $store_id = env('SSL_STORE_ID', false);
