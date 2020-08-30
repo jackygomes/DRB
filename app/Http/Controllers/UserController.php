@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
+use App\Subscriber;
+use App\SubscriptionPlan;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,8 +15,11 @@ class UserController extends Controller
 {
     public function index()
    {
+       if(auth()->user()->type == 'admin')
+           $users = User::orderBy('full_name')->get()->sortBy('full_name', SORT_NATURAL|SORT_FLAG_CASE);
 
-       $users = User::orderBy('full_name')->get()->sortBy('full_name', SORT_NATURAL|SORT_FLAG_CASE);
+       elseif(auth()->user()->type == 'paid')
+           $users = User::where('created_by', auth()->user()->id)->orderBy('full_name')->get()->sortBy('full_name', SORT_NATURAL|SORT_FLAG_CASE);
        return view('back-end.user.index', compact('users'));
    }
 
@@ -21,6 +27,7 @@ class UserController extends Controller
     {
         return view('back-end.user.create');
     }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -32,6 +39,11 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
+
+        //user limit check for a package
+        if(!$this->canCreateMoreUsers()){
+            return redirect()->back()->with('error', 'Your User Limit Exceeds!');
+        }
 
         //user image store
         $imageName = '';
@@ -56,6 +68,9 @@ class UserController extends Controller
                 'password'          => Hash::make($request->password),
                 'thumbnail_image'   => isset($imageName) ? $imageName : null,
             ];
+
+            if(auth()->user()->type == 'paid')
+                $data['created_by'] = auth()->user()->id;
 
             User::create($data);
 
@@ -117,6 +132,21 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->route('user.index')->with('success', 'User has been deleted successfully');
+    }
+
+    /**
+     * @return bool
+     */
+    public function canCreateMoreUsers()
+    {
+        if(auth()->user()->type == 'paid') {
+            $activeInvoice = Invoice::where('user_id', auth()->user()->id)->where('expire_date', '>=', Carbon::now()->toDateString())->where('isApproved', 1)->orderby('id', 'DESC')->first();
+            $createdUsersCount = User::where('created_by', auth()->user()->id)->count();
+            if($activeInvoice->user_limit > $createdUsersCount){
+                return true;
+            }else
+                return false;
+        }
     }
 
 }

@@ -15,6 +15,12 @@
             <li class="{{ request()->url() == route('purchased.item') ? 'sidebar-active' : '' }}">
                 <a href="{{route('purchased.item')}}">Purchased List</a>
             </li>
+
+            @if(Auth::user()->type == 'paid')
+                <li class="{{ request()->url() == route('user.index') ? 'sidebar-active' : '' }}">
+                    <a href="{{route('user.index')}}">Users</a>
+                </li>
+            @endif
         @elseif(Auth::user()->type == 'provider')
             <li class="{{ request()->url() == route('invoice.user') ? 'sidebar-active' : '' }}">
                 <a href="{{route('invoice.user')}}">Invoice</a>

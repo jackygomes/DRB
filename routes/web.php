@@ -96,13 +96,13 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         // Route::get('/news-portal', function () {
 
         //User
-        Route::get('/user', 'UserController@index')->name('user.index');
-        Route::get('/user/create', 'UserController@create')->name('user.create');
-        Route::post('/user/store', 'UserController@store')->name('user.store');
-        Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
-        Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
-        Route::patch('/user/{id}', 'UserController@update')->name('user.update');
-        Route::delete('/user/{id} ', 'UserController@destroy')->name('user.destroy');
+//        Route::get('/user', 'UserController@index')->name('user.index');
+//        Route::get('/user/create', 'UserController@create')->name('user.create');
+//        Route::post('/user/store', 'UserController@store')->name('user.store');
+//        Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
+//        Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
+//        Route::patch('/user/{id}', 'UserController@update')->name('user.update');
+//        Route::delete('/user/{id} ', 'UserController@destroy')->name('user.destroy');
 
         //Finance Info
         //TODO:: constrain routes
@@ -127,6 +127,16 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
 
     //Page
     // Route::resource('page', 'PageController')->except(['show']);
+});
+
+Route::group(['middleware' => ['auth', 'verified', 'canModifyUser'], 'prefix' => 'modify'], function (){
+    Route::get('/user', 'UserController@index')->name('user.index');
+    Route::get('/user/create', 'UserController@create')->name('user.create');
+    Route::post('/user/store', 'UserController@store')->name('user.store');
+    Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
+    Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
+    Route::patch('/user/{id}', 'UserController@update')->name('user.update');
+    Route::delete('/user/{id} ', 'UserController@destroy')->name('user.destroy');
 });
 
 Auth::routes(['verify' => true]);

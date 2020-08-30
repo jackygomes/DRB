@@ -11,7 +11,7 @@
 
         @include('back-end.partial.topnav')
         @if(count($errors) > 0 )
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show col-md-4" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,12 +23,10 @@
             </div>
         @endif
         @if(session('error'))
-            <div class="row text-center alert alert-danger push-down">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            <div class="row text-center push-down">
+                <div class="col-md-4 offset-4 alert alert-danger">
                     {{session('error')}}
                 </div>
-                <div class="col-md-4"></div>
             </div>
         @endif
         <div id="content-wrapper">
