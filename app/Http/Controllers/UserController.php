@@ -146,7 +146,9 @@ class UserController extends Controller
                 return true;
             }else
                 return false;
-        }
+        }else
+            return true;
+
     }
 
 }
