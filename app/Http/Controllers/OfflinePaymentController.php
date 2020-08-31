@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class OfflinePaymentController extends Controller
 {
     public function index(){
-        $invoices = Invoice::where('isApproved', 0)->get();
+        $invoices = Invoice::where('payment_type', 'offline')->where('isApproved', 0)->get();
         return view('back-end.offline-payment.index', compact('invoices'));
     }
 

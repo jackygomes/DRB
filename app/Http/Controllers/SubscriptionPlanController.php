@@ -93,7 +93,7 @@ class SubscriptionPlanController extends Controller
         //return time().'.' .$request->check_image->extension();
 
         $invoice = Invoice::all();
-        $tran_id = new Carbon;
+        $tran_id = time().bin2hex(random_bytes(6));
         $uniqueid =  '#'.'DRB'.date("Y").(count($invoice)+1);
 
         $invoice = new Invoice;
@@ -103,6 +103,10 @@ class SubscriptionPlanController extends Controller
         $invoice->price = $request->price;
         $invoice->type = $request->type;
         $invoice->user_limit = $request->user_limit;
+        $invoice->transaction_id = $tran_id;
+        $invoice->payment_type = 'online';
+        $invoice->isApproved = 0;
+
         if ($request->type == 'monthly')
         {
             $invoice->expire_date =  $this->original()->addMonths(1);
@@ -112,12 +116,10 @@ class SubscriptionPlanController extends Controller
 
         //offline payment
         if($request->transaction_id && $request->hasFile('check_image')) {
+            $invoice->payment_type = 'offline';
             $invoice->transaction_id = $request->transaction_id ;
-            $invoice->check_image = time(). '.' .$request->check_image->extension() ;
-            $invoice->isApproved = 0;
-
+            $invoice->check_image = time(). '.' .$request->check_image->extension();
             $request->file('check_image')->move(storage_path('app/public/bank_checks'), $invoice->check_image);
-
             $offlineInvoiceFlag = true;
         }
 
@@ -148,7 +150,7 @@ class SubscriptionPlanController extends Controller
             'store_passwd' => $store_pass,
             'total_amount' => $request->price,
             'currency' => 'BDT',
-            'tran_id' => $tran_id->format('Y-m-d::H:i:s.u'),
+            'tran_id' => $tran_id,
             'success_url' => route('subscriptionplan.success'),
             'fail_url' => route('subscriptionplan.fail'),
             'cancel_url' => route('home'),
@@ -181,71 +183,25 @@ class SubscriptionPlanController extends Controller
         return redirect(json_decode($response->getBody())->GatewayPageURL);
     }
 
-    public function success()
+    public function success(Request $request)
     {
-        $val_id=urlencode($_POST['val_id']);
-        $store_id=env('SSL_STORE_ID', false);
-        $store_passwd=env('SSL_STORE_PASS', false);
-        $requested_url = ("https://securepay.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$val_id."&store_id=".$store_id."&store_passwd=".$store_passwd."&v=1&format=json");
+        if($request->status == 'VALID' && $request->tran_id){
+            $invoice = Invoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
+            $invoice->isApproved = 1;
+            $invoice->save();
 
-        $handle = curl_init();
-        curl_setopt($handle, CURLOPT_URL, $requested_url);
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false); # IF YOU RUN FROM LOCAL PC
-        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false); # IF YOU RUN FROM LOCAL PC
-
-        $result = curl_exec($handle);
-
-        $code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
-        if($code == 200 && !( curl_errno($handle)))
-        {
-
-            # TO CONVERT AS ARRAY
-            # $result = json_decode($result, true);
-            # $status = $result['status'];
-
-            # TO CONVERT AS OBJECT
-            $result = json_decode($result);
-
-            //return json_encode($result);
-
-            # TRANSACTION INFO
-            $status = $result->status;
-            $tran_date = $result->tran_date;
-            $tran_id = $result->tran_id;
-            $val_id = $result->val_id;
-            $amount = $result->amount;
-            $store_amount = $result->store_amount;
-            $bank_tran_id = $result->bank_tran_id;
-            $card_type = $result->card_type;
-
-            # EMI INFO
-            $emi_instalment = $result->emi_instalment;
-            $emi_amount = $result->emi_amount;
-            $emi_description = $result->emi_description;
-            $emi_issuer = $result->emi_issuer;
-
-            # ISSUER INFO
-            $card_no = $result->card_no;
-            $card_issuer = $result->card_issuer;
-            $card_brand = $result->card_brand;
-            $card_issuer_country = $result->card_issuer_country;
-            $card_issuer_country_code = $result->card_issuer_country_code;
-
-            # API AUTHENTICATION
-            $APIConnect = $result->APIConnect;
-            $validated_on = $result->validated_on;
-            $gw_version = $result->gw_version;
+            //upgraded user to paid user
+            $user = auth()->user();
+            if($user->type != 'paid' && $user->type != 'admin'){
+                $user->type = 'paid';
+                $user->save();
+            }
 
             return view('back-end.subscription-plan.success');
 
-        } else {
-
-            echo "Failed to connect with SSLCOMMERZ";
+        }else{
+            return view('back-end.subscription-plan.fail');
         }
-
-        
     }
 
     public function fail()
