@@ -16,6 +16,9 @@ class PricingController extends Controller
      */
     public function index()
     {
+        $purchasedActivePlans = null;
+        $purchasedInactivePlans = null;
+
         if(auth()->user()) {
             $purchasedActivePlans = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 1)->where('expire_date', '>=', Carbon::now()->toDateString())->pluck('plan_id')->toArray();
             $purchasedInactivePlans = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 0)->where('expire_date', '>=', Carbon::now()->toDateString())->pluck('plan_id')->toArray();
