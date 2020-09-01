@@ -15,7 +15,7 @@
                 <input type="hidden" name="type" value="yearly">
                 <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}">
                 <div class="form-check mb-4">
-                    <input type="checkbox" class="form-check-input" id="exampleChecky{{ $subscriptionplan->id }}" @change="isShowButton()">
+                    <input type="checkbox" class="form-check-input" id="exampleChecky{{ $subscriptionplan->id }}" @change="isShowButton($event)">
                     <label class="form-check-label" for="exampleChecky{{ $subscriptionplan->id }}">I’ve read and accept the <a class="text-warning" href="/terms-conditions" target="_blank">Terms & Conditions</a>, <a class="text-warning" href="/refund-policy" target="_blank">Refund Policy</a> and <a class="text-warning" href="/privacy-policy" target="_blank">Privacy Policy</a></label>
                 </div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -68,7 +68,7 @@
 
                     <div class="form-check mb-4">
                         <input type="checkbox" class="form-check-input" id="exampleCheckm{{ $subscriptionplan->id }}"
-                               @change="isShowButton()">
+                               @change="isShowButton($event)">
                         <label class="form-check-label" for="exampleCheckm{{ $subscriptionplan->id }}">I’ve read and
                             accept the <a class="text-warning" href="/terms-conditions" target="_blank">Terms &
                                 Conditions</a>, <a class="text-warning" href="/refund-policy" target="_blank">Refund

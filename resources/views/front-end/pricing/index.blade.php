@@ -56,9 +56,9 @@
                                                 @elseif(in_array($subscriptionplan->id, $purchasedInactivePlans))
                                                     <button type="button" class="btn btn-outline-warning btn-sm">Pending</button>
                                                  @else
-                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
+                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
 
-                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
+                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
 
                                                 @endif
                                                 {{-- </form> --}}
@@ -87,9 +87,9 @@
                                                 @elseif(in_array($subscriptionplan->id, $purchasedInactivePlans))
                                                         <button type="button" class="btn btn-outline-warning btn-sm">Pending</button>
                                                 @else
-                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
+                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
 
-                                                    <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
+                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
                                                 @endif
 
                                                 {{-- </form> --}}
@@ -120,10 +120,20 @@
                 }
             },
             methods: {
-                isShowButton: function(){
-                    console.log('hello');
-                    this.isButton = !this.isButton;
+                isShowButton: function(event){
+
+                    if(event.target.checked)
+                    {
+                        this.isButton = true
+                    }
+                    else{
+                        this.isButton = false
+                    }
                 },
+
+                setDefaultBtnValue: function () {
+                    this.isButton = false
+                }
             },
         })
 
