@@ -53,20 +53,20 @@
                 color: #4758a8;
             }
         </style>
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-top: -30px;">
             <div class="row">
                 <div class="col-md-2">
                     <div class="wrapper">
                         <!-- Sidebar  -->
                         <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top">
 
-                            <ul class="list-unstyled components">
+                            <ul class="list-unstyled components pt-0">
                                 <li class="{{ Request::get('provider') == '' ? 'news-sidenav-active' : '' }}">
-                                    <a class="provider" data-name="" href="#">All Provider</a>
+                                    <a class="{{ Request::get('provider') == '' ? 'news-sidenav-hover' : '' }} provider" data-name="" href="#">All Provider</a>
                                 </li>
                                 @foreach($providerNames as $providerName)
                                 <li class="{{ Request::get('provider') == $providerName ? 'news-sidenav-active' : '' }}">
-                                    <a class="news-sidenav-hover provider" data-name="{{$providerName}}" href="#">{{$providerName}}</a>
+                                    <a class="{{ Request::get('provider') == $providerName ? 'news-sidenav-hover' : '' }} provider" data-name="{{$providerName}}" href="#">{{$providerName}}</a>
                                 </li>
                                 @endforeach
                             </ul>
@@ -82,30 +82,30 @@
                     @foreach($products as $product)
                     <div class="shadow-sm mb-3 single-news-border">
                         <div id="3584" class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 @if(isset($product->user->thumbnail_image))
                                 <img src="{{asset('storage/'.$product->user->thumbnail_image)}}" alt="..." class="img-fluid news-index-img">
                                 @else
                                 <img src="{{asset('img/DRB-logo.jpeg')}}" alt="..." class="img-fluid news-index-img">
                                 @endif
                             </div>
-                            <div class="col-md-6">
-                                <div class="content-wrap">
+                            <div class="col-md-7">
+                                <div class="content-wrap research-block">
 {{--                                    <a href="#" target="_blank">--}}
                                         <h5>{{$product->name}}</h5>
 {{--                                    </a>--}}
                                     <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}}</p>
-                                    <p class="text-secondary ">Category: {{$product->category->name}}</p>
-                                    <p class="text-secondary ">Research Date: <span>{{date('F j, Y', strtotime($product->date))}}</span></p>
-                                    <p class="text-secondary ">Provider: <span>{{$product->provider}}</span></p>
-                                    <p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}:<span> {{implode(', ', json_decode($product->analysts))}}</span></p>
+                                    {{--<p class="text-secondary ">Category: {{$product->category->name}}</p>--}}
+                                    <p class="text-secondary ">Provider: {{$product->provider}}</p>
+                                    <p class="text-secondary ">Research Date: {{date('F j, Y', strtotime($product->date))}}</p>
+                                    {{--<p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}:{{implode(', ', json_decode($product->analysts))}}</p>--}}
                                     @if($product->description)
-                                        <div class="description">
-                                            <p id="content_{{$product->id}}" class="text-justify word-break content">
-                                                {{$product->description}}
-                                            </p>
-                                            <p id="readMore_{{$product->id}}" class="read-more-button">Read More</p>
-                                        </div>
+                                        {{--<div class="description">--}}
+                                            {{--<p id="content_{{$product->id}}" class="text-justify word-break content">--}}
+                                                {{--{{$product->description}}--}}
+                                            {{--</p>--}}
+                                            {{--<p id="readMore_{{$product->id}}" class="read-more-button">Read More</p>--}}
+                                        {{--</div>--}}
                                     @endif
                                     <p class="price">Price:
                                         @if($product->price > 0)
