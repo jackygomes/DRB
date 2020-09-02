@@ -6,6 +6,12 @@
             margin-top: 150px;
             height: 100%;
         }
+
+        @media only screen and (max-width: 1876px) {
+            .res-margin{
+                margin-top: 5px;
+            }
+        }
     </style>
     <section class="pricing mb-5">
         <h1 class="text-center main-text-color mb-md-5">Our Pricing</h1>
@@ -50,15 +56,15 @@
                                                 <input type="hidden" name="type" value="monthly">
                                                 <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}"> --}}
                                                 @include('front-end.home.partial.monthlyagreement')
-                                                @if(in_array($subscriptionplan->id, $purchasedActivePlans))
+                                                @if($subscriptionplan->id == $activePlan)
                                                     <button type="button" class="btn btn-outline-warning btn-sm">Activated</button>
 
-                                                @elseif(in_array($subscriptionplan->id, $purchasedInactivePlans))
+                                                @elseif($subscriptionplan->id == $pendingPlan)
                                                     <button type="button" class="btn btn-outline-warning btn-sm">Pending</button>
                                                  @else
                                                     <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
 
-                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#monthlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
+                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm res-margin" data-toggle="modal" data-target="#monthlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
 
                                                 @endif
                                                 {{-- </form> --}}
@@ -81,15 +87,15 @@
                                                     <input type="hidden" name="user_limit" value="{{ $subscriptionplan->user_limit }}"> --}}
                                                 @include('front-end.home.partial.yearlyagreement')
 
-                                                @if(in_array($subscriptionplan->id, $purchasedActivePlans))
+                                                @if($subscriptionplan->id == $activePlan)
                                                     <button type="button" class="btn btn-outline-warning btn-sm">Activated</button>
 
-                                                @elseif(in_array($subscriptionplan->id, $purchasedInactivePlans))
+                                                @elseif($subscriptionplan->id == $pendingPlan)
                                                         <button type="button" class="btn btn-outline-warning btn-sm">Pending</button>
                                                 @else
                                                     <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModal{{ $subscriptionplan->id }}">Buy Online</button>
 
-                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#yearlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
+                                                    <button @click="setDefaultBtnValue" type="button" class="btn btn-outline-warning btn-sm res-margin" data-toggle="modal" data-target="#yearlyexampleModalOffline{{ $subscriptionplan->id }}">Buy Offline</button>
                                                 @endif
 
                                                 {{-- </form> --}}
