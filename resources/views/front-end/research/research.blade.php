@@ -52,13 +52,53 @@
             .text-secondary span {
                 color: #4758a8;
             }
+
+
+            .research-price-section {
+                position: absolute;
+                bottom: 0;
+                right: 5px;
+            }
+
+            @media only screen and (max-width: 767px) {
+                .left-section{
+                    text-align: left;
+                }
+                .research-block{
+                    margin-top: 15px;
+                }
+
+                .amount-section{
+                    margin-top: 15px;
+                }
+
+                .mobile-margin{
+                    margin-top: 52px;
+                }
+
+                #sidebar{
+                    position: fixed;
+                    height: auto;
+                    width: 250px;
+                    margin-top: 173px;
+                }
+            }
+
         </style>
         <div class="container-fluid" style="margin-top: -30px;">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-12 top-news-bar">
+                    <button type="button" id="sidebarCollapse"
+                            class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide">
+                        <i id="news-sidenav" class="fas fa-chevron-right"></i>
+                        <span>Data Resource BD</span>
+                    </button>
+                </div>
+
+                <div class="col-md-2 mobile-margin">
                     <div class="wrapper">
                         <!-- Sidebar  -->
-                        <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top">
+                        <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide">
 
                             <ul class="list-unstyled components pt-0">
                                 <li class="{{ Request::get('provider') == '' ? 'news-sidenav-active' : '' }}">
@@ -94,37 +134,45 @@
 {{--                                    <a href="#" target="_blank">--}}
                                         <h5>{{$product->name}}</h5>
 {{--                                    </a>--}}
-                                    <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}}</p>
-                                    {{--<p class="text-secondary ">Category: {{$product->category->name}}</p>--}}
-                                    <p class="text-secondary ">Provider: {{$product->provider}}</p>
-                                    <p class="text-secondary ">Research Date: {{date('F j, Y', strtotime($product->date))}}</p>
-                                    {{--<p class="text-secondary ">{{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}:{{implode(', ', json_decode($product->analysts))}}</p>--}}
+                                    <p class="text-secondary ">Ticker: {{$product->company->ticker}} | Sector: {{$product->sector->name}} | {{$product->category->name}}</p>
                                     @if($product->description)
-                                        {{--<div class="description">--}}
-                                            {{--<p id="content_{{$product->id}}" class="text-justify word-break content">--}}
-                                                {{--{{$product->description}}--}}
-                                            {{--</p>--}}
-                                            {{--<p id="readMore_{{$product->id}}" class="read-more-button">Read More</p>--}}
-                                        {{--</div>--}}
+                                        <div class="description">
+                                            <p id="content_{{$product->id}}" class="text-justify word-break content">
+                                                {{$product->description}}
+                                            </p>
+                                            <p id="readMore_{{$product->id}}" class="read-more-button" style="color: #000; font-weight: 600;">Read More</p>
+                                        </div>
                                     @endif
-                                    <p class="price">Price:
-                                        @if($product->price > 0)
-                                        <span>BDT {{round($product->price, 2)}}</span>
-                                        @else
-                                        <span>Free</span>
-                                        @endif
-                                    </p>
+                                    <p class="text-secondary ">Provider: {{$product->provider}} | {{count(json_decode($product->analysts)) > 1 ? 'Analysts' : 'Analyst'}}: {{implode(', ', json_decode($product->analysts))}}</p>
+                                    <p class="text-secondary ">Date: {{date('F j, Y', strtotime($product->date))}}</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="card-right-section">
-                                    @if(isset($cart) && collect($cart->CartItems)->contains('product_id', $product->id))
-                                        <a href="#" class="btn btn-secondary btn-sm my-2 my-sm-0 mx-1 disabled"><i class="p3 fa fa-shopping-cart" ></i> Added</a>
-                                    @else
-                                        <a href="{{ route('addtocart', $product->id) }}" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1"><i class="p3 fa fa-shopping-cart" ></i> Add To Cart</a>
-                                    @endif
-                                    <p class="purchase-count">Downloaded: {{$product->sell_count}}</p>
+                            <div class="col-md-3 text-right amount-section">
+                                <div class="row">
+                                    <div class="col-md-12 col-6 left-section">
+
+                                        @if(isset($cart) && collect($cart->CartItems)->contains('product_id', $product->id))
+                                            <a href="#" class="btn btn-secondary btn-sm my-2 my-sm-0 mx-1 disabled"><i class="p3 fa fa-shopping-cart" ></i> Added</a>
+                                        @else
+                                            <a href="{{ route('addtocart', $product->id) }}" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1"><i class="p3 fa fa-shopping-cart" ></i> Add To Cart</a>
+                                        @endif
+
+                                    </div>
+
+                                    <div class="col-md-12 col-6 research-price-section">
+                                        <p class="price">Price:
+                                            @if($product->price > 0)
+                                                <span>BDT {{round($product->price, 2)}}</span>
+                                            @else
+                                                <span>Free</span>
+                                            @endif
+                                        </p>
+                                        <p >Downloaded: {{$product->sell_count}}</p>
+                                    </div>
                                 </div>
+
+
+
                             </div>
                         </div>
                     </div>
