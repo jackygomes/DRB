@@ -162,9 +162,9 @@
                                     <div class="col-md-12 col-6 research-price-section">
                                         <p class="price">Price:
                                             @if($product->price > 0)
-                                                <span>BDT {{round($product->price, 2)}}</span>
+                                                <span style="color: #000;">BDT {{round($product->price, 2)}}</span>
                                             @else
-                                                <span>Free</span>
+                                                <span style="color: #000;">Free</span>
                                             @endif
                                         </p>
                                         <p >Downloaded: {{$product->sell_count}}</p>
