@@ -1,5 +1,5 @@
 <!-- Sidebar  -->
-<nav id="sidebar">
+<nav id="sidebar" style="width: auto;">
     <div class="sidebar-header">
         <a href="{{route('home')}}"><h4>Data Resources BD</h4></a>
     </div>
