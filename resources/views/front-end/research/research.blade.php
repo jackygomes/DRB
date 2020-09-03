@@ -95,7 +95,7 @@
                     </button>
                 </div>
 
-                <div class="col-md-2 mobile-margin">
+                <div class="col-md-2 mobile-margin pl-0">
                     <div class="wrapper">
                         <!-- Sidebar  -->
                         <nav id="sidebar" class="bg-transparent text-dark custom-news-nav-header-top">
