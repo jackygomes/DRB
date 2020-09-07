@@ -60,8 +60,8 @@
                                 <p>Bank: The City Bank Limited</p>
                                 <p>Account Name: Data Resources BD Ltd.</p>
                                 <p>Account Number: 1322908881001</p>
-                                <p class="mt-2">For <b>Payment through Cheque</b>, please deposit the cheque and send us the copy of the bank received deposit slip</p>
-                                <p class="mt-2">For <b>Payment through Cash</b>, please write “Cash Deposit: Your full Name” in the description box and send us the copy of the bank received deposit slip</p>
+                                <p class="mt-2">For <span style="font-weight: 600">Payment through Cheque</span>, please deposit the cheque and send us the copy of the bank received deposit slip</p>
+                                <p class="mt-2">For <span style="font-weight: 600">Payment through Cash</span>, please write “Cash Deposit: Your full Name” in the description box and send us the copy of the bank received deposit slip</p>
 
                             </div>
 
