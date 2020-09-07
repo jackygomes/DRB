@@ -90,7 +90,6 @@ class SubscriptionPlanController extends Controller
 
     public function subscribePlan(Request $request)
     {
-        //return time().'.' .$request->check_image->extension();
 
         $invoice = Invoice::all();
         $tran_id = time().bin2hex(random_bytes(6));
@@ -115,12 +114,18 @@ class SubscriptionPlanController extends Controller
         }
 
         //offline payment
-        if($request->transaction_id && $request->hasFile('check_image')) {
-            $invoice->payment_type = 'offline';
-            $invoice->transaction_id = $request->transaction_id ;
-            $invoice->check_image = time(). '.' .$request->check_image->extension();
-            $request->file('check_image')->move(storage_path('app/public/bank_checks'), $invoice->check_image);
-            $offlineInvoiceFlag = true;
+        if($request->hasFile('check_image')) {
+            $image = $request->file('check_image');
+
+            //$image->getSize()/1000000 size in mb
+            if(($image->extension() == 'jpeg' || $image->extension() == 'png') && round($image->getSize()/1000000) <= 2 ){
+                $invoice->payment_type = 'offline';
+                $invoice->check_image = time(). '.' .$image->extension();
+                $request->file('check_image')->move(storage_path('app/public/bank_checks'), $invoice->check_image);
+                $offlineInvoiceFlag = true;
+            }else
+                return redirect()->back()->with('error', 'Upload Image Only & File Must Be Under 3Mb');
+
         }
 
         $invoice->save();
@@ -138,7 +143,8 @@ class SubscriptionPlanController extends Controller
         $subscriber->save();
 
         if(isset($offlineInvoiceFlag) && $offlineInvoiceFlag){
-            return view('back-end.subscription-plan.success');
+            $offlineSuccessMsg = 'Your subscription will be activated after 24 hours';
+            return view('back-end.subscription-plan.success', compact('offlineSuccessMsg'));
         }
 
         $user = Auth::user();

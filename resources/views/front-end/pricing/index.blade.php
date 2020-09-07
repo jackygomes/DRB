@@ -14,6 +14,16 @@
         }
     </style>
     <section class="pricing mb-5">
+        <div class="row">
+            <div class="col-4 offset-4">
+                @if(Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{Session::get('error')}}
+                    </div>
+                @endif
+            </div>
+        </div>
+
         <h1 class="text-center main-text-color mb-md-5">Our Pricing</h1>
         <div class="container-fluid">
             <div class="row" id="mycheckbox">

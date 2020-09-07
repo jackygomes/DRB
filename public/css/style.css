@@ -1124,3 +1124,16 @@ if it's not present, don't show loader */
     width: 56px;
     color:white;
 }
+
+.bankinfo{
+    font-size: 14px;
+    box-shadow: 0 0 2px grey;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.bankinfo p{
+    margin-bottom:0;
+    line-height:1.2;
+}

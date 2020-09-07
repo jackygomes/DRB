@@ -45,11 +45,8 @@
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header pt-2 pb-2">
                 <h5 class="modal-title col-12" id="exampleModalLabel">Agreement</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <form method="post" action="{{ route('subscribe.plan') }}" enctype="multipart/form-data">
@@ -61,12 +58,18 @@
 
                     <div class="row text-left">
                         <div class="col-10 offset-1">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Transaction Id:</label>
-                                <input type="text" name="transaction_id"  class="form-control" placeholder="Transaction Id" required>
+                            <div class="text-left bankinfo">
+                                <p class="mb-2">Please Deposit BDT {{ $subscriptionplan->price_per_month }} (BDT {{ $subscriptionplan->price_per_month }} is the amount of the package that you chose) in the following bank account:</p>
+                                <p>Bank: The City Bank Limited</p>
+                                <p>Account Name: Data Resources BD Ltd.</p>
+                                <p>Account Number: 1322908881001</p>
+                                <p class="mt-2">For <b>Payment through Cheque</b>, please deposit the cheque and send us the copy of the bank received deposit slip</p>
+                                <p class="mt-2">For <b>Payment through Cash</b>, please write “Cash Deposit: Your full Name” in the description box and send us the copy of the bank received deposit slip</p>
+
                             </div>
+
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Upload Check Image:</label>
+                                <label for="exampleInputPassword1">Upload the deposit slip image: jpg, png, 2mb max</label>
                                 <input type="file" name="check_image" class="form-control-file" required>
                             </div>
                         </div>
@@ -81,8 +84,8 @@
                                 Policy</a> and <a class="text-warning" href="/privacy-policy" target="_blank">Privacy
                                 Policy</a></label>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" :disabled="!isButton">Confirm</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary" :disabled="!isButton">Confirm</button>
                 </form>
             </div>
             {{-- <div class="modal-footer">

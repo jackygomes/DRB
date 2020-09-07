@@ -55,12 +55,18 @@
 
                     <div class="row text-left">
                         <div class="col-10 offset-1">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Transaction Id:</label>
-                                <input type="text" name="transaction_id"  class="form-control" placeholder="Transaction Id" required>
+                            <div class="text-left bankinfo">
+                                <p class="mb-2">Please Deposit BDT {{ $subscriptionplan->price_per_year }} (BDT {{ $subscriptionplan->price_per_year }} is the amount of the package that you chose) in the following bank account:</p>
+                                <p>Bank: The City Bank Limited</p>
+                                <p>Account Name: Data Resources BD Ltd.</p>
+                                <p>Account Number: 1322908881001</p>
+                                <p class="mt-2">For <b>Payment through Cheque</b>, please deposit the cheque and send us the copy of the bank received deposit slip</p>
+                                <p class="mt-2">For <b>Payment through Cash</b>, please write “Cash Deposit: Your full Name” in the description box and send us the copy of the bank received deposit slip</p>
+
                             </div>
+
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Upload Check Image:</label>
+                                <label for="exampleInputPassword1">Upload the deposit slip image: jpg, png, 3mb max</label>
                                 <input type="file" name="check_image" class="form-control-file" required>
                             </div>
                         </div>
