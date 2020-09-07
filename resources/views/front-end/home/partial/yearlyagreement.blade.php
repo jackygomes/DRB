@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Upload the deposit slip image: jpg, png, 3mb max</label>
+                                <label for="exampleInputPassword1">Upload the deposit slip image: jpg, png, pdf, 3mb max</label>
                                 <input type="file" name="check_image" class="form-control-file" required>
                             </div>
                         </div>
