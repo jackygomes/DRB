@@ -118,13 +118,13 @@ class SubscriptionPlanController extends Controller
             $image = $request->file('check_image');
 
             //$image->getSize()/1000000 size in mb
-            if(($image->extension() == 'jpeg' || $image->extension() == 'png') && round($image->getSize()/1000000) <= 2 ){
+            if(($image->extension() == 'jpeg' || $image->extension() == 'png' || $image->extension() == 'pdf') && round($image->getSize()/1000000) <= 2 ){
                 $invoice->payment_type = 'offline';
                 $invoice->check_image = time(). '.' .$image->extension();
                 $request->file('check_image')->move(storage_path('app/public/bank_checks'), $invoice->check_image);
                 $offlineInvoiceFlag = true;
             }else
-                return redirect()->back()->with('error', 'Upload Image Only & File Must Be Under 3Mb');
+                return redirect()->back()->with('error', 'Upload Image or Pdf Only & File Must Be Under 3Mb');
 
         }
 

@@ -1137,3 +1137,14 @@ if it's not present, don't show loader */
     margin-bottom:0;
     line-height:1.2;
 }
+
+.approve-btn-section{
+    list-style: none;
+    padding-left: 0;
+}
+
+@media (max-width: 767px){
+    .approve-btn-section{
+        margin-top:15px;
+    }
+}

@@ -64,8 +64,11 @@
                             <img src="{{asset('/storage/bank_checks/' . $invoice->check_image)}}" alt="" width="100%" height="300">
                         </div>
 
-                        <div class="col-md-2 col-sm-12 d-flex justify-content-center align-items-center">
-                            <a href="{{route('offline.payments.approve', $invoice->id)}}" class="btn btn-outline-warning">Approve</a>
+                        <div class="col-md-2 col-sm-12 text-center d-flex justify-content-center align-items-center">
+                            <ul class="approve-btn-section">
+                                <li><a href="{{route('offline.payments.approve', $invoice->id)}}" class="btn btn-outline-warning" style="padding-left: 18px;padding-right: 19px; margin-bottom:5px;">Approve</a></li>
+                                <li><a href="{{asset('/storage/bank_checks/' . $invoice->check_image)}}" download="" class="btn btn-outline-warning">Download</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
