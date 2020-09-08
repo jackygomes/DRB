@@ -49,39 +49,34 @@
                                     <input id="institution" type="text" class="form-control @error('institution') is-invalid @enderror" name="institution" value="{{ $user->institution }}" required autocomplete="name" autofocus>
                                 </div>
                             </div>
+                            @if(auth()->user()->type == 'admin')
+                                <div class="form-group row">
+                                    <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
-                            <div class="form-group row">
-                                <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-
-                                <div class="col-md-6">
-                                    <select class="custom-select" name="type" id="role">
-                                        @if($user->type == 'visitor')
-                                            <option value="visitor">Visitor</option>
-                                            <option value="paid">Paid</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="provider">Provider</option>
-                                        @endif
-                                        @if($user->type == 'paid')
-                                            <option value="paid">Paid</option>
-                                            <option value="visitor">Visitor</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="provider">Provider</option>
-                                        @endif
-                                        @if($user->type == 'admin')
-                                            <option value="admin">Admin</option>
-                                            <option value="paid">Paid</option>
-                                            <option value="visitor">Visitor</option>
-                                            <option value="provider">Provider</option>
-                                            @endif
-                                        @if($user->type == 'provider')
-                                            <option value="provider">Provider</option>
-                                            <option value="visitor">Visitor</option>
-                                            <option value="paid">Paid</option>
-                                            <option value="admin">Admin</option>
-                                        @endif
-                                    </select>
+                                    <div class="col-md-6">
+                                        <select class="custom-select" name="type" id="role">
+                                                <option value="admin">Admin</option>
+                                                <option value="paid">Paid</option>
+                                                <option value="visitor">Visitor</option>
+                                                <option value="provider">Provider</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
+
+                            @if(auth()->user()->type == 'admin' && $user->type != 'paid')
+                                <div class="form-group row">
+                                    <label for="institution" class="col-md-4 col-form-label text-md-right">Package</label>
+                                    <div class="col-md-6">
+                                        <select class="custom-select" name="plan" id="plan">
+                                            <option value="">Select Package</option>
+                                            @foreach($plans as  $plan)
+                                                <option value="{{$plan->id}}" >{{$plan->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>

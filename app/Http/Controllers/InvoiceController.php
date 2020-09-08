@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Invoice;
 use App\Subscriber;
+use App\SubscriptionPlan;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -76,5 +78,29 @@ class InvoiceController extends Controller
         $subscriber = Subscriber::find($id);
         $subscriber->delete();
         return redirect()->back();
+    }
+
+    public function makeManualInvoice($request, $user)
+    {
+        $plan = SubscriptionPlan::where('id', $request->plan)->first();
+
+        $invoiceCounter = Invoice::count();
+        $tran_id = time().bin2hex(random_bytes(6));
+        $uniqueid =  '#'.'DRB'.date("Y").($invoiceCounter + 1);
+
+        $invoice = new Invoice;
+        $invoice->user_id = $user->id;
+        $invoice->plan_id = $request->plan;
+        $invoice->unique_id = $uniqueid;
+        $invoice->price = 0;
+        $invoice->type = 'monthly';
+        $invoice->user_limit = $plan->user_limit;
+        $invoice->transaction_id = $tran_id;
+        $invoice->payment_type = 'trial';
+        $invoice->expire_date =  Carbon::now()->addMonth();
+        $invoice->isApproved = 1;
+        $invoice->save();
+
+        return $invoice->id;
     }
 }

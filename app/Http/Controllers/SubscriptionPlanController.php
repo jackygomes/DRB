@@ -218,4 +218,14 @@ class SubscriptionPlanController extends Controller
         $subscriber->delete();
         return view('back-end.subscription-plan.fail');
     }
+
+    public function makeManualSubscriber($invoiceId, $user)
+    {
+        $subscriber = new Subscriber;
+        $subscriber->invoice_id = $invoiceId;
+        $subscriber->creator = auth()->user()->id;
+        $subscriber->user_id = $user->id;
+        $subscriber->expire_date =  Carbon::now()->addMonth();
+        $subscriber->save();
+    }
 }

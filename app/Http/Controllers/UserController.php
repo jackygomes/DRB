@@ -87,7 +87,8 @@ class UserController extends Controller
    public function edit($id)
    {
         $user = User::find($id);
-        return view('back-end.user.edit', compact('user'));
+        $plans = SubscriptionPlan::get();
+        return view('back-end.user.edit', compact('user', 'plans'));
    }
 
    public function update(Request $request, $id)
@@ -100,6 +101,9 @@ class UserController extends Controller
             'type' => 'required',
             'email'=>'required|email|unique:users,email,'.$id ,
         ]);
+
+        if($request->type == 'paid' && $request->plan == null)
+            return redirect()->route('user.edit', $id)->with('error', 'Paid User Need A Package');
 
        //user image delete & store
        $imageName = '';
@@ -124,6 +128,20 @@ class UserController extends Controller
         $user->thumbnail_image = isset($imageName) ? $imageName : null;
 
         $user->save();
+
+       if($request->type != 'paid'){
+            $trialInvoice = Invoice::where('user_id', $user->id)->where('payment_type', 'trial')->orderby('id', 'DESC')->first();
+            if($trialInvoice) {
+                $trialInvoice->delete();
+                Subscriber::where('invoice_id', $trialInvoice->id)->delete();
+            }
+       }
+
+        if($request->type == 'paid'){
+            $invoiceId = (new InvoiceController())->makeManualInvoice($request, $user);
+            (new SubscriptionPlanController())->makeManualSubscriber($invoiceId, $user);
+        }
+
         return redirect()->route('user.index')->with('success', 'User has been updated successfully');
     }
 
