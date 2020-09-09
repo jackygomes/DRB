@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    private  $userTypes = ['visitor', 'paid', 'admin', 'provider'];
     public function index()
    {
        if(auth()->user()->type == 'admin')
@@ -88,7 +89,8 @@ class UserController extends Controller
    {
         $user = User::find($id);
         $plans = SubscriptionPlan::get();
-        return view('back-end.user.edit', compact('user', 'plans'));
+        $userTypes = $this->userTypes;
+        return view('back-end.user.edit', compact('user', 'plans', 'userTypes'));
    }
 
    public function update(Request $request, $id)

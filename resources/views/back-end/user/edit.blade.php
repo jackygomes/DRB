@@ -55,10 +55,10 @@
 
                                     <div class="col-md-6">
                                         <select class="custom-select" name="type" id="role">
-                                                <option value="admin">Admin</option>
-                                                <option value="paid">Paid</option>
-                                                <option value="visitor">Visitor</option>
-                                                <option value="provider">Provider</option>
+
+                                            @foreach($userTypes as $userType)
+                                                <option value="{{$userType}}" {{($userType == $user->type) ? 'selected' : ''}}>{{$userType}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
