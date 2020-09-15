@@ -527,7 +527,7 @@ input[type="search"]::placeholder {
 }
 
 .custom-news-header-top {
-    margin-top: 100px;
+    margin-top: 115px;
 }
 
 .custom-news-nav-header-top {
@@ -1146,5 +1146,23 @@ if it's not present, don't show loader */
 @media (max-width: 767px){
     .approve-btn-section{
         margin-top:15px;
+    }
+}
+
+/*add section*/
+
+.financial_top_add{
+    height: 130px;
+    border: 1px solid black;
+}
+
+.financial_side_add{
+    height: 345px;
+    border: 1px solid black;
+}
+@media (max-width: 767px){
+    .financial_side_add{
+        height: 120px;
+        margin-bottom:15px;
     }
 }

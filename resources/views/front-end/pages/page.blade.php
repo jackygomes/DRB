@@ -18,6 +18,14 @@
         @endif
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            <div class="financial_top_add mb-3">
+                <p>Add</p>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 @endsection

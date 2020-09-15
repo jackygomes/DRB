@@ -1,9 +1,21 @@
 @extends('front-end.main-layout')
 @section('content')
 
+    <section>
+        <div class="container-fluid custom-news-header-top">
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <div class="financial_top_add mb-3">
+                        <p>Add</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="news" id="app">
         <div class="container-fluid">
-            <div class="row custom-news-header-top">
+            <div class="row">
                 <div class="col-md-12 top-news-bar">
                     <button type="button" id="sidebarCollapse"
                             class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide">
@@ -15,7 +27,7 @@
                     <div class="wrapper">
                         <!-- Sidebar  -->
                         <nav id="sidebar"
-                             class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide" style="width: 235px;">
+                             class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide" style="width: 235px; margin-top: 241px;">
 
                             <ul class="list-unstyled components">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
@@ -31,7 +43,7 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col-12 col-md-7 mt-4">
+                <div class="col-12 col-md-8 mt-3">
 
 
                     <!-- ///////////////////////////////////////////////// -->
@@ -170,25 +182,31 @@
                     </ul>
                 </div>
                 <!-- ////////////////////////////////////////////////// -->
-                <div class="col-12 col-md-3 mt-4">
-                    <h5>Most Recent</h5>
-                    <div class="table-responsive most-recent-border mb-3">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">Topic</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($mostrecents as $recent)
-                                <tr>
-                                    <td class="more">{!! nl2br($recent->body) !!}</td>
-                                    <td>{{ date('F Y', strtotime($recent->date)) }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                {{--<div class="col-12 col-md-2 mt-3">--}}
+                    {{--<h5>Most Recent</h5>--}}
+                    {{--<div class="table-responsive most-recent-border mb-3">--}}
+                        {{--<table class="table table-hover">--}}
+                            {{--<thead>--}}
+                            {{--<tr>--}}
+                                {{--<th scope="col">Topic</th>--}}
+                                {{--<th scope="col">Date</th>--}}
+                            {{--</tr>--}}
+                            {{--</thead>--}}
+                            {{--<tbody>--}}
+                            {{--@foreach ($mostrecents as $recent)--}}
+                                {{--<tr>--}}
+                                    {{--<td class="more">{!! nl2br($recent->body) !!}</td>--}}
+                                    {{--<td>{{ date('F Y', strtotime($recent->date)) }}</td>--}}
+                                {{--</tr>--}}
+                            {{--@endforeach--}}
+                            {{--</tbody>--}}
+                        {{--</table>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+                <div class="col-12 col-md-2 mt-3">
+                    <div class="financial_side_add mb-3">
+                        <p>Add</p>
                     </div>
                 </div>
             </div>
