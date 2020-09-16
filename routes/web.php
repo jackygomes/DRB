@@ -202,7 +202,7 @@ Route::get('/news/{category}', 'NewsController@newsByCategoty')->name('news.byca
 
 Route::get('/visualize', 'VisualizeController@index')->name('visualize.index');
 
-Route::get('/data-matrix', 'VisualizeController@dataMatrix')->name('visualize.data-matrix');
+//Route::get('/data-matrix', 'VisualizeController@dataMatrix')->name('visualize.data-matrix');
 Route::post('/subscribe-plan', 'SubscriptionPlanController@subscribePlan')->name('subscribe.plan');
 
 Route::get('/terms-conditions', function () {
