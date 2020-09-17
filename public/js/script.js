@@ -163,3 +163,20 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+$(document).on('click', '.dropdown-menu', function (e) {
+    e.stopPropagation();
+});
+
+if ($(window).width() < 992) {
+    $('.dropdown-item').click(function(e){
+        if($(this).attr('href') === '#')
+            e.preventDefault();
+        //hide oppened ul at first
+        $('.submenu').hide();
+
+        if($(this).next('.submenu').length){
+            $(this).next('.submenu').toggle();
+        }
+    });
+}

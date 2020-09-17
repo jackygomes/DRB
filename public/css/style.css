@@ -500,7 +500,7 @@ a.article:hover {
 @media (min-width: 992px) {
     .search-custom-margin {
         position: fixed;
-        margin-left: 17%;
+        margin-left: 18%;
         width: 500px;
     }
 }
@@ -1075,9 +1075,10 @@ if it's not present, don't show loader */
 @media only screen and (min-width: 992px) {
     .signin-buttons-positioning{
         transition: 0.5s;
-        position: absolute;
-        width: 204px;
+        /*position: absolute;*/
+        /*width: 204px;*/
         right: 38px;
+        position: fixed;
     }
 
     .shopping-cart{
@@ -1087,15 +1088,18 @@ if it's not present, don't show loader */
 
 @media only screen and (min-width: 1280px) {
     .signin-buttons-positioning{
-        position: absolute;
+        /*position: absolute;*/
+        /*width: 204px;*/
+        /*right: -45px;*/
+
+        position: fixed;
         width: 204px;
-        right: -45px;
     }
 }
 
 @media only screen and (min-width: 1440px) {
     .signin-buttons-positioning{
-        right: -100px;
+        /*right: -100px;*/
     }
 }
 
@@ -1153,16 +1157,60 @@ if it's not present, don't show loader */
 
 .financial_top_add{
     height: 130px;
-    border: 1px solid black;
+    border: 1px solid #ffc107;
 }
 
 .financial_side_add{
     height: 345px;
-    border: 1px solid black;
+    border: 1px solid #ffc107;
 }
 @media (max-width: 767px){
     .financial_side_add{
         height: 120px;
         margin-bottom:15px;
+    }
+}
+
+
+/*bootstrap multilevel menu on hover effect*/
+@media (min-width: 992px){
+    .dropdown-menu .dropdown-toggle:after{
+        border-top: .3em solid transparent;
+        border-right: 0;
+        border-bottom: .3em solid transparent;
+        border-left: .3em solid;
+    }
+    .dropdown-menu .dropdown-menu{
+        margin-left:0; margin-right: 0;
+    }
+    .dropdown-menu li{
+        position: relative;
+    }
+    .nav-item .submenu{
+        display: none;
+        position: absolute;
+        left:100%; top:-7px;
+    }
+    .nav-item .submenu-left{
+        right:100%; left:auto;
+    }
+    .dropdown-menu > li:hover{ background-color: #f1f1f1 }
+    .dropdown-menu > li:hover > .submenu{
+        display: block;
+    }
+
+    .submenu{
+        position: absolute; left:100%; top:-7px;
+    }
+    li.nav-item.nav-custom-margin-top{
+        margin-left:8px !important;
+        margin-right: 8px !important;
+    }
+}
+
+@media (max-width: 991px){
+    .submenu{
+        position: absolute !important;
+        left: 15px !important;
     }
 }

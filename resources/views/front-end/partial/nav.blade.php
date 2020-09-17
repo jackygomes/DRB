@@ -31,13 +31,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item nav-custom-margin-top">
-                    <a class="nav-link font-weight-bold text-white" href="{{route('finance-info-all')}}">
-                        <small class="font-weight-bold nav-item-custom-size text-uppercase">Financial Statement</small>
-                    </a>
-                </li>
-
+            <ul class="navbar-nav ml-auto mr-auto">
                 <li class="nav-item nav-custom-margin-top">
                     <a class="nav-link font-weight-bold text-white" href="/news/Top%20Stories" >
                         <small class="font-weight-bold nav-item-custom-size">NEWS</small>
@@ -68,13 +62,37 @@
                         <a class="nav-link dropdown-toggle font-weight-bold text-white" href="{{ $menu->page ? route('page', $menu->page->slug) : "#" }}"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            @foreach($sub_menus as $menu)
-                                <a class="dropdown-item" href="{{ $menu->page ? route('page', $menu->page->slug) : "#" }}">
-                                    <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item font-weight-bold" style="background: transparent;" href="{{route('finance-info-all')}}">
+                                    <small class="font-weight-bold nav-item-custom-size text-uppercase">Financial Statement</small>
                                 </a>
+                            </li>
+
+                            @foreach($sub_menus as $menu)
+                                <li>
+                                    <a class="dropdown-item" href="{{ $menu->page ? route('page', $menu->page->slug) : "#" }}">
+                                        <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                                    </a>
+
+                                    @php
+                                        $sub_submenus = App\Menu::where('parent_menu_id', $menu->id)->orderBy('created_at', 'DESC')->get();
+                                    @endphp
+                                    @if(count($sub_submenus)>0)
+                                        <ul class="submenu dropdown-menu">
+
+                                                @foreach($sub_submenus as $menu)
+                                                    <li><a class="dropdown-item" href="{{ $menu->page ? route('page', $menu->page->slug) : "#" }}">
+                                                            <small class="font-weight-bold nav-item-custom-size">{{$menu->title}}</small>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+
+                                        </ul>
+                                    @endif
+                                </li>
                             @endforeach
-                        </div>
+                        </ul>
                     </li>
                     @else
                         @if($menu->title == "RESEARCHEX")
