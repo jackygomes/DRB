@@ -16,6 +16,10 @@
                 <a href="{{route('purchased.item')}}">Purchased List</a>
             </li>
 
+            <li class="{{ request()->url() == route('news.for.you') ? 'sidebar-active' : '' }}">
+                <a href="{{route('news.for.you')}}">News For You</a>
+            </li>
+
             @if(Auth::user()->type == 'paid')
                 <li class="{{ request()->url() == route('user.index') ? 'sidebar-active' : '' }}">
                     <a href="{{route('user.index')}}">Users</a>
@@ -64,6 +68,9 @@
             </li>
             <li class="{{ request()->url() == route('news.portal') ? 'sidebar-active' : '' }}">
                 <a href="{{route('news.portal')}}">News</a>
+            </li>
+            <li class="{{ request()->url() == route('newspapers') ? 'sidebar-active' : '' }}">
+                <a href="{{route('newspapers')}}">Newspaper</a>
             </li>
             {{-- <li class="{{ request()->url() == route('surveyquestion.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('surveyquestion.index')}}">Survey Question</a>

@@ -123,6 +123,11 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         Route::get('/offline-payments/details/{invoice_id}', 'OfflinePaymentController@invoiceDetails')->name('offline.payments.details');
         Route::get('/offline-payments/approve/{invoice_id}', 'OfflinePaymentController@approvePayment')->name('offline.payments.approve');
         Route::get('/offline-payments/delete/{invoice_id}', 'OfflinePaymentController@deletePayment')->name('offline.payments.delete');
+
+        //newspaper section
+        Route::get('newspapers', 'NewspaperController@index')->name('newspapers');
+        Route::post('newspapers/create', 'NewspaperController@create')->name('newspapers.create');
+        Route::get('newspapers/edit/{id}', 'NewspaperController@edit')->name('newspapers.edit');
     });
 
     //Page
@@ -168,6 +173,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //download
     Route::post('download', 'DownloadController@store')->name('download.store');
+
+
+    //for you filter
+    Route::get('news-for-you', 'NewsForYouController@index')->name('news.for.you');
+    Route::post('news-for-you', 'NewsForYouController@store')->name('news.for.you.post');
 });
 
 

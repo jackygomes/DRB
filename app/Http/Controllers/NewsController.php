@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\MostRecent;
+use App\NewsForYou;
 use Illuminate\Http\Request;
 use App\News;
 use Auth;
@@ -152,9 +153,16 @@ class NewsController extends Controller
 
     public function newsByCategoty($category)
     {
-        $category = Category::where('name', $category)->first();
+        //change default category to filtered one
+        if(auth()->user()){
+            if($category == 'Top Stories' && $filter = NewsForYou::where('user_id', auth()->user()->id)->first()) {
+                $category = Category::where('id', $filter->category_id)->first();
+        }
+        }else
+            $category = Category::where('name', $category)->first();
+
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
-        //$allnews = News::where('is_published', 1)->where('category_id', $category->id)->latest()->paginate(50);
+//        $newsSources = News::where('is_published', 1)->first();
         $mostrecents = MostRecent::where('is_published', 1)->orderBy('created_at', 'DESC')->get();
         $category_id = $category->id;
         return view('front-end.news.continuous-index-category', compact('mostrecents','categories','category', 'category_id'));

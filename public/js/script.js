@@ -164,6 +164,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
+//nested dopdown menu
 $(document).on('click', '.dropdown-menu', function (e) {
     e.stopPropagation();
 });
