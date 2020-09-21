@@ -33,6 +33,13 @@
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
                                     <a class="news-sidenav-hover" href="{{route('news.index')}}">All News</a>
                                 </li>
+
+                                @if(auth()->user())
+                                    <li class="{{ request()->url() == route('filtered.news') ? 'news-sidenav-active' : '' }}">
+                                        <a class="news-sidenav-hover" href="{{route('filtered.news')}}">For You</a>
+                                    </li>
+                                @endif
+
                                 @foreach ($categories as $category)
                                     <li class="{{ request()->url() == route('news.bycategoty', $category->name) ? 'news-sidenav-active' : '' }}">
                                         <a class="news-sidenav-hover"
@@ -308,7 +315,7 @@
                             return;
                         }
                         let url = '/api/news/last_id/' + this.last_id + '/' + {{ $category_id }} ;
-                        console.log(url);
+                        //console.log(url);
                         fetch(url, {
                             method: 'Get', // *GET, POST, PUT, DELETE, etc.
                             mode: 'cors', // no-cors, cors, *same-origin

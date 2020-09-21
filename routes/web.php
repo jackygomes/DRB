@@ -182,6 +182,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('news-for-you', 'NewsForYouController@store')->name('news.for.you.post');
 });
 
+//filtered news
+Route::get('filtered-news', 'NewsForYouController@getFilteredNews')->name('filtered.news');
+
 
 Route::get('/', 'PublicPagesController@landing')->name('home');
 Route::view('/sub', 'sub-layout')->name('sub');

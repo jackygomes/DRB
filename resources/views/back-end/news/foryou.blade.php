@@ -20,8 +20,9 @@
                     <label for="sel1">Newspaper :</label>
                     <select class="form-control" id="sel1" name="newspaper">
                         <option value="">Select</option>
-                        <option value="1">The Daily Star</option>
-                        <option value="2">The New Age</option>
+                        @foreach($newspapers as $newspaper)
+                            <option value="{{$newspaper->id}}" {{ ($filter->newspaper_id == $newspaper->id) ? 'selected' : ''}}>{{$newspaper->name}}</option>
+                        @endforeach
                     </select>
                 </div>
 

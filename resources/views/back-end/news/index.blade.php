@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
             <h6>Where to show in Home page</h6>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="showing_area" id="exampleRadios6" value="top5" >
@@ -58,7 +58,18 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
+            <div class="form-group ">
+                <label>Select Category:<span class="text-danger">*</span> </label>
+                <select class="form-control dropdown-custom" name="newspaper_id" require>
+                    @foreach($newspapers as $newspaper)
+                        <option value="{{$newspaper->id}}"  {{ (old("category_id") == $newspaper->id ? "selected":"") }}>{{$newspaper->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
             <div class="form-group ">
                 <label>Select Category:<span class="text-danger">*</span> </label>
                 <select class="form-control dropdown-custom" name="category_id" require>

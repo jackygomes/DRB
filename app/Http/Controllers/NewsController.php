@@ -30,8 +30,9 @@ class NewsController extends Controller
     public function newsPortal()
     {
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
+        $newspapers = Newspaper::get();
         $allnews = News::orderBy('id', 'DESC')->get();
-        return view('back-end.news.index', compact('allnews','categories'));
+        return view('back-end.news.index', compact('allnews','categories', 'newspapers'));
     }
 
     public function newsStore (Request $request)
@@ -78,7 +79,7 @@ class NewsController extends Controller
             'body' => $request->get('body'),
             'showing_area' => $request->get('showing_area'),
             'category_id' => $request->get('category_id'),
-            'newspaper_id' => $request->newspaper_id,
+            'newspaper_id' => $request->get('newspaper_id'),
             'is_published' => $is_published
         ]);
         $news->save();
@@ -158,14 +159,7 @@ class NewsController extends Controller
 
     public function newsByCategoty($category)
     {
-        //change default category to filtered one
-        if(auth()->user()){
-            if($category == 'Top Stories' && $filter = NewsForYou::where('user_id', auth()->user()->id)->first()) {
-                $category = Category::where('id', $filter->category_id)->first();
-        }
-        }else
-            $category = Category::where('name', $category)->first();
-
+        $category = Category::where('name', $category)->first();
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
 //        $newsSources = News::where('is_published', 1)->first();
         $mostrecents = MostRecent::where('is_published', 1)->orderBy('created_at', 'DESC')->get();
