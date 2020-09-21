@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\MostRecent;
 use App\NewsForYou;
+use App\Newspaper;
 use Illuminate\Http\Request;
 use App\News;
 use Auth;
@@ -45,6 +46,7 @@ class NewsController extends Controller
             'source' => 'required|max:255',
             'body' => 'required|max:200',
             'category_id' => 'required',
+            'newspaper_id' => 'required'
         ]);
 
         if($request->file('image')){
@@ -76,6 +78,7 @@ class NewsController extends Controller
             'body' => $request->get('body'),
             'showing_area' => $request->get('showing_area'),
             'category_id' => $request->get('category_id'),
+            'newspaper_id' => $request->newspaper_id,
             'is_published' => $is_published
         ]);
         $news->save();
@@ -87,7 +90,8 @@ class NewsController extends Controller
     {
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
         $news = News::find($id);
-        return view('back-end.news.edit', compact('news','categories'));
+        $newspapers = Newspaper::get();
+        return view('back-end.news.edit', compact('news','categories', 'newspapers'));
     }
 
     public function newsUpdate(Request $request, $id)
@@ -133,6 +137,7 @@ class NewsController extends Controller
         $news->body = $request->get('body');
         $news->category_id = $request->get('category_id');
         $news->showing_area = $request->get('showing_area');
+        $news->newspaper_id = $request->newspaper_id;
         $news->is_published = $is_published;
         $news->save();
         return redirect()->route('news.portal')->with('success', 'News has been updated successfully');

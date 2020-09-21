@@ -126,8 +126,10 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
 
         //newspaper section
         Route::get('newspapers', 'NewspaperController@index')->name('newspapers');
-        Route::post('newspapers/create', 'NewspaperController@create')->name('newspapers.create');
+        Route::get('newspapers/create', 'NewspaperController@create')->name('newspapers.create');
+        Route::post('newspapers/store', 'NewspaperController@store')->name('newspapers.store');
         Route::get('newspapers/edit/{id}', 'NewspaperController@edit')->name('newspapers.edit');
+        Route::post('newspapers/update/{id}', 'NewspaperController@update')->name('newspapers.update');
     });
 
     //Page

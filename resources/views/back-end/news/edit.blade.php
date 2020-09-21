@@ -16,7 +16,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label>Image</label>
-                <input class="form-control" name="image"  type="file" >
+                <input class="file-control" name="image"  type="file" >
             </div>
         </div>
 
@@ -38,12 +38,12 @@
 
         <div class="col-md-12">
             <div class="form-group">
-                <label>Name of Source</label>
+                <label>Body</label>
                 <textarea class="form-control" rows="5" name="body" placeholder="Enter name of source of the news">{{ $news->body }}</textarea>
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
             <h6>Where to show</h6>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="showing_area" id="exampleRadios6" value="top5" {{$news->showing_area == 'top5' ?'checked':''}}>
@@ -69,7 +69,18 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
+            <div class="form-group ">
+                <label>Select Newspaper:<span class="text-danger">*</span> </label>
+                <select class="form-control dropdown-custom" name="newspaper_id" required>
+                    @foreach($newspapers as $newspaper)
+                        <option value="{{$newspaper->id}}"  {{ (($newspaper->id == $news->newspaper_id) ? "selected":"") }}>{{$newspaper->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
             <div class="form-group ">
                 <label>Select Category:<span class="text-danger">*</span> </label>
                 <select class="form-control dropdown-custom" name="category_id" require>
