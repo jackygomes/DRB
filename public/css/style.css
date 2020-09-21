@@ -561,7 +561,7 @@ input[type="search"]::placeholder {
     background-color: rgb(16, 28, 83);
     color: white !important;
     border-radius: 0px 10px 10px 0px;
-    /*width: 85%;*/
+    width: 210px;
 }
 
 .news-sidenav-active:hover {
