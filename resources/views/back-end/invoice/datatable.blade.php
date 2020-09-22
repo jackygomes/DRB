@@ -33,7 +33,7 @@
                     <tr>
                         <td>{{++$key}}</td>
                         <td>{{ $invoice->subscriptionplan->name }}</td>
-                        <td>{{ $invoice->user->full_name }}</td>
+                        <td>{{ isset($invoice->user->full_name) ? $invoice->user->full_name : '' }}</td>
                         <td>{{ $invoice->price }}</td>
                         <td>{{ \Carbon\Carbon::parse($invoice->created_at)->format('d M Y')}}</td>
                         <td>{{ \Carbon\Carbon::parse($invoice->expire_date)->format('d M Y') }}</td>
