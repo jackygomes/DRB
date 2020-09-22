@@ -1214,3 +1214,44 @@ if it's not present, don't show loader */
         left: 15px !important;
     }
 }
+/*top news bar design*/
+.news-top-slider{
+    list-style: none;
+    padding-right: 45px;
+    height:50px;
+}
+
+.news-top-slider .owl-item{
+    width: fit-content;
+}
+
+.news-top-slider li{
+    display: inline-block;
+    background: #101c53de;
+    border-radius: 16px;
+    margin-top:6px;
+}
+
+.news-top-slider li a{
+    display: block;
+    padding: 3px 11px;
+    color: #fff;
+}
+
+@media (max-width: 991px){
+    .news-top-slider{
+        margin-top:140px;
+    }
+}
+
+@media (max-width: 500px){
+    .news-top-slider li{
+        margin-top:16px;
+    }
+}
+
+@media (max-width: 400px){
+    .news-top-slider li{
+        margin-top:10px;
+    }
+}

@@ -1,10 +1,12 @@
 @extends('front-end.main-layout')
 @section('content')
 
+    @include('front-end.news.newspaper-slide')
+
     <section>
-        <div class="container-fluid custom-news-header-top">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-10 offset-1">
+                <div class="col-8 offset-2">
                     <div class="financial_top_add mb-3">
                         <p>Add</p>
                     </div>

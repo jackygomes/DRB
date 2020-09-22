@@ -35,7 +35,7 @@
                     <h4 class="card-text main-text-color"><small>No news available</small></h4>
                 </div>
             @else
-                <div class="owl-carousel mt-5 px-5">
+                <div id="home-owl-carousel" class="owl-carousel mt-5 px-5">
                     @foreach ($top5s as $news)
                     <div>
                         <a href="{{$news->source}}" target="_blank">

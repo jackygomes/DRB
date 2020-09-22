@@ -164,6 +164,15 @@ class NewsController extends Controller
 //        $newsSources = News::where('is_published', 1)->first();
         $mostrecents = MostRecent::where('is_published', 1)->orderBy('created_at', 'DESC')->get();
         $category_id = $category->id;
-        return view('front-end.news.continuous-index-category', compact('mostrecents','categories','category', 'category_id'));
+        $newspapers = Newspaper::get();
+        return view('front-end.news.continuous-index-category', compact('mostrecents','categories','category', 'category_id', 'newspapers'));
+    }
+
+    public function newsByNewspaper($id)
+    {
+        $newspaper = Newspaper::where('id', $id)->first();
+        $newspapers = Newspaper::get();
+        $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
+        return view('front-end.news.newspaper', compact('categories', 'newspaper', 'newspapers'));
     }
 }

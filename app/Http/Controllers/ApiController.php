@@ -70,6 +70,28 @@ class ApiController extends Controller
         }
     }
 
+    public function getNewsByNewspaper($last_id, $newspaper_id)
+    {
+        if($last_id != 0){
+            $allnews = News::where('id', '<', $last_id)->where('newspaper_id', $newspaper_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+        }else{
+            $allnews = News::where('newspaper_id', $newspaper_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+        }
+
+        if($allnews->count() >0){
+            return response()->json([
+                'success' => true,
+                'items' => $allnews,
+                'last_id' => $allnews->last()->id,
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'items' => [],
+            ]);
+        }
+    }
+
 
     public function getNewsByFilter($last_id, $category_id, $newspaper_id)
     {

@@ -99,7 +99,7 @@
     });
   });
 
-  $('.owl-carousel').owlCarousel({
+  $('#home-owl-carousel').owlCarousel({
     loop:true,
     center:false,
     margin:20,
@@ -124,6 +124,48 @@
         }
     }
   });
+
+    $('#news-topbar-owl-carousel').owlCarousel({
+        loop:true,
+        center:true,
+        margin:15,
+        navSpeed: 500,
+        autoWidth:true,
+        autoplay:true,
+        dots: false,
+        responsiveClass:true,
+        navText: [
+            "<i class='fa fa-chevron-left text-warning'></i>",
+            "<i class='fa fa-chevron-right text-warning'></i>"
+        ],
+        responsive:{
+            0:{
+                items:3,
+                nav:true
+            },
+            300:{
+                items:5,
+                nav:true
+            },
+            768:{
+                items: 8,
+                nav:true
+            },
+            1280:{
+                items: 10,
+                nav:true
+            },
+            1440:{
+                items: 13,
+                nav:true
+            },
+            1920:{
+                items: 16,
+                nav:true
+            }
+        }
+    });
+
 
   $(document).ready(function() {
     $('#sidebarCollapse').click(function() {
