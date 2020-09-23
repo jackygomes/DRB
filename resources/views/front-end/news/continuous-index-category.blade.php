@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="ml-auto pr-2">
+                                    <div class="ml-auto responsive-share-btns">
                                         <div class="addthis_inline_share_toolbox news-share-buttons" :data-url="'{{ env('APP_URL') }}/single-news/' + item.id" :data-title="item.heading" :data-description="item.body" :data-media="'{{ env('S3_URL') }}' + item.image"></div>
                                     </div>
                                 </div>

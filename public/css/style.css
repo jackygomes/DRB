@@ -1255,3 +1255,15 @@ if it's not present, don't show loader */
         margin-top:10px;
     }
 }
+
+/*responsive news share buttons section*/
+
+.responsive-share-btns{
+    margin-right:50px;
+}
+
+@media (max-width: 1280px){
+    .responsive-share-btns{
+        margin-right:20px;
+    }
+}
