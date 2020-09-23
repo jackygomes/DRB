@@ -35,7 +35,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145375324-8"></script>
 
     {{--Google Ads--}}
-    <script data-ad-client="ca-pub-7889950300474908" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    {{--<script data-ad-client="ca-pub-7889950300474908" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>--}}
+
+    {{--Google Ads Staging--}}
+    <script data-ad-client="ca-pub-7889950300474908" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js%22%3E</script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
