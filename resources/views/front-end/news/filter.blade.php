@@ -51,6 +51,21 @@
 
 
                 <div class="col-md-10">
+                    <div class="row">
+                        @if(count($errors) > 0 )
+                            <div class="alert alert-danger alert-dismissible fade show col-md-4 offset-3" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <ul class="p-0 m-0" style="list-style: none;">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+
                     <div class="col-md-6 offset-2 col-12 p-4 mt-3" style="box-shadow: 0 0 4px #c5c5c5;">
                         <p class="text-center">Get Your Favorite News</p>
                         <hr>
