@@ -82,6 +82,16 @@
 
         <div class="col-md-2">
             <div class="form-group ">
+                <label>Select Language:<span class="text-danger">*</span> </label>
+                <select class="form-control dropdown-custom" name="language" require>
+                    <option value="english" {{($news->language == 'english') ? 'selected' : ''}}>English</option>
+                    <option value="bangla" {{($news->language == 'bangla') ? 'selected' : ''}}>Bangla</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group ">
                 <label>Select Category:<span class="text-danger">*</span> </label>
                 <select class="form-control dropdown-custom" name="category_id" require>
                 @foreach($categories as $category)

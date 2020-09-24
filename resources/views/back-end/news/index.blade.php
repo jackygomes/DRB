@@ -60,11 +60,21 @@
 
         <div class="col-md-2">
             <div class="form-group ">
-                <label>Select Category:<span class="text-danger">*</span> </label>
+                <label>Select Newspaper:<span class="text-danger">*</span> </label>
                 <select class="form-control dropdown-custom" name="newspaper_id" require>
                     @foreach($newspapers as $newspaper)
                         <option value="{{$newspaper->id}}"  {{ (old("category_id") == $newspaper->id ? "selected":"") }}>{{$newspaper->name}}</option>
                     @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group ">
+                <label>Select Language:<span class="text-danger">*</span> </label>
+                <select class="form-control dropdown-custom" name="language" require>
+                    <option value="english">English</option>
+                    <option value="bangla">Bangla</option>
                 </select>
             </div>
         </div>

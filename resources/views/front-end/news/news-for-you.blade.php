@@ -1,6 +1,5 @@
 @extends('front-end.main-layout')
 @section('content')
-
     <section>
         <div class="container-fluid custom-news-header-top">
             <div class="row">
@@ -71,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="ml-auto pr-2">
+                                    <div class="ml-auto pr-2 responsive-share-btns">
                                         <div class="addthis_inline_share_toolbox news-share-buttons" :data-url="'{{ env('APP_URL') }}/single-news/' + item.id" :data-title="item.heading" :data-description="item.body" :data-media="'{{ env('S3_URL') }}' + item.image"></div>
                                     </div>
                                 </div>
@@ -184,10 +183,9 @@
                         console.log('no call');
                         return;
                     }
-                    let url = '/api/news-for-you/last_id/' + this.last_id + '/' + {{ ($filter->category_id != null) ? $filter->category_id : 0 }} + '/' + {{ ($filter->newspaper_id != null) ? $filter->newspaper_id : 0 }} ;
-                    console.log(url);
+                    let url = '/api/news-for-you/last_id/' + this.last_id;
                     fetch(url, {
-                        method: 'Get', // *GET, POST, PUT, DELETE, etc.
+                        method: 'Post', // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, cors, *same-origin
                         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
                         credentials: 'same-origin', // include, *same-origin, omit
@@ -198,6 +196,11 @@
                         },
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
+                        body: JSON.stringify({
+                            'categories' : {{$filter->categories}},
+                            'newspapers' : {{$filter->newspapers}},
+                            'language' : '{{$filter->language}}'
+                        })
 
                     })
                         .then(function (response) {
@@ -215,11 +218,11 @@
                 },
 
                 initial_call() {
-                    let url = '/api/news-for-you/last_id/' + this.last_id + '/' + {{ ($filter->category_id != null) ? $filter->category_id : 0 }} + '/' + {{ ($filter->newspaper_id != null) ? $filter->newspaper_id : 0 }}  ;
+                    let url = '/api/news-for-you/last_id/' + this.last_id;
 
                     console.log(url);
                     fetch(url, {
-                        method: 'Get', // *GET, POST, PUT, DELETE, etc.
+                        method: 'Post', // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, cors, *same-origin
                         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
                         credentials: 'same-origin', // include, *same-origin, omit
@@ -230,11 +233,16 @@
                         },
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
+                        body: JSON.stringify({
+                            'categories' : {{$filter->categories}},
+                            'newspapers' : {{$filter->newspapers}},
+                            'language' : '{{$filter->language}}'
+                        })
 
                     })
                         .then(res => res.json())
                         .then(data => {
-//                                console.log(data)
+                                console.log(data)
                             this.initial = data.items;
                             this.last_id = data.last_id;
                         });

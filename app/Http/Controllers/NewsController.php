@@ -47,7 +47,8 @@ class NewsController extends Controller
             'source' => 'required|max:255',
             'body' => 'required|max:200',
             'category_id' => 'required',
-            'newspaper_id' => 'required'
+            'newspaper_id' => 'required',
+            'language' => 'required',
         ]);
 
         if($request->file('image')){
@@ -80,7 +81,8 @@ class NewsController extends Controller
             'showing_area' => $request->get('showing_area'),
             'category_id' => $request->get('category_id'),
             'newspaper_id' => $request->get('newspaper_id'),
-            'is_published' => $is_published
+            'is_published' => $is_published,
+            'language' => $request->get('language'),
         ]);
         $news->save();
         return redirect()->back()->with('success', 'News has been created successfully');
@@ -107,6 +109,7 @@ class NewsController extends Controller
             'source' => 'required|max:255',
             'body' => 'required|max:200',
             'category_id' => 'required',
+            'language' => 'required',
         ]);
 
         if($request->file('image')){
@@ -140,6 +143,7 @@ class NewsController extends Controller
         $news->showing_area = $request->get('showing_area');
         $news->newspaper_id = $request->newspaper_id;
         $news->is_published = $is_published;
+        $news->language = $request->get('language');
         $news->save();
         return redirect()->route('news.portal')->with('success', 'News has been updated successfully');
     }
