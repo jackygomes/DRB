@@ -191,7 +191,23 @@ class SubscriptionPlanController extends Controller
 
     public function success(Request $request)
     {
-        if($request->status == 'VALID' && $request->tran_id){
+        $store_id = env('SSL_STORE_ID', false);
+        $store_pass =  env('SSL_STORE_PASS', false);
+
+        $requested_url = ("https://securepay.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$request->val_id."&store_id=".$store_id."&store_passwd=".$store_pass."&v=1&format=json");
+
+        $handle = curl_init();
+        curl_setopt($handle, CURLOPT_URL, $requested_url);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false); # IF YOU RUN FROM LOCAL PC
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false); # IF YOU RUN FROM LOCAL PC
+
+        $result = curl_exec($handle);
+
+        $code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+
+        if($code == 200 && !( curl_errno($handle)))
+        {
             $invoice = Invoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
             $invoice->isApproved = 1;
             $invoice->save();
