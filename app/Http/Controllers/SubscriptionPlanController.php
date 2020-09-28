@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Auth;
+use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Storage;
 
 class SubscriptionPlanController extends Controller
@@ -148,8 +149,11 @@ class SubscriptionPlanController extends Controller
         }
 
         $user = Auth::user();
-        $store_id = env('SSL_STORE_ID', false);
-        $store_pass =  env('SSL_STORE_PASS', false);
+        //$store_id = env('SSL_STORE_ID', false);
+        //$store_pass =  env('SSL_STORE_PASS', false);
+
+        $store_id = env('TEST_SSL_STORE_ID', false);
+        $store_pass =  env('TEST_SSL_STORE_PASSWORD', false);
 
         $requireSslData = [
             'store_id' => $store_id,
@@ -176,7 +180,7 @@ class SubscriptionPlanController extends Controller
 
         try{
             $client = new Client(['verify' => false]);
-            $response = $client->request('POST', 'https://securepay.sslcommerz.com/gwprocess/v4/api.php', [
+            $response = $client->request('POST', 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php', [     //securepay
                 'form_params' => $requireSslData
             ]);
 
@@ -191,10 +195,13 @@ class SubscriptionPlanController extends Controller
 
     public function success(Request $request)
     {
-        $store_id = env('SSL_STORE_ID', false);
-        $store_pass =  env('SSL_STORE_PASS', false);
+        //$store_id = env('SSL_STORE_ID', false);
+        //$store_pass =  env('SSL_STORE_PASS', false);
 
-        $requested_url = ("https://securepay.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$request->val_id."&store_id=".$store_id."&store_passwd=".$store_pass."&v=1&format=json");
+        $store_id = env('TEST_SSL_STORE_ID', false);
+        $store_pass =  env('TEST_SSL_STORE_PASSWORD', false);
+
+        $requested_url = ("https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$request->val_id."&store_id=".$store_id."&store_passwd=".$store_pass."&v=1&format=json");
 
         $handle = curl_init();
         curl_setopt($handle, CURLOPT_URL, $requested_url);
@@ -209,6 +216,7 @@ class SubscriptionPlanController extends Controller
         if($code == 200 && !( curl_errno($handle)))
         {
             $invoice = Invoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
+            Log::info('invoice : ' . json_encode($invoice));
             $invoice->isApproved = 1;
             $invoice->save();
 
