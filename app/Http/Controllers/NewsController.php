@@ -30,8 +30,8 @@ class NewsController extends Controller
     public function newsPortal()
     {
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
-        $newspapers = Newspaper::get();
-        $allnews = News::orderBy('id', 'DESC')->get();
+        $newspapers = Newspaper::paginate();
+        $allnews = News::orderBy('id', 'DESC')->paginate(10);
         return view('back-end.news.index', compact('allnews','categories', 'newspapers'));
     }
 

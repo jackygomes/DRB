@@ -6,10 +6,10 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered"  width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>Sl.</th>
+                    <th>ID</th>
                     <th>Heading</th>
                     <th>Image</th>
                     <th>Name of Source</th>
@@ -19,22 +19,10 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tfoot>
-                <tr>
-                    <th>Sl.</th>
-                    <th>Heading</th>
-                    <th>Image</th>
-                    <th>Name of Source</th>
-                    <th>Source</th>
-                    <th>Publish</th>
-                    <th>Category</th>
-                    <th>Action</th>
-                </tr>
-                </tfoot>
                 <tbody>
                     @foreach($allnews as $news)
                         <tr>
-                            <td>{{$i++}}</td>
+                            <td>{{$news->id}}</td>
                             <td>{{$news->heading}}</td>
                             <td>
                                 @if($news->image)
@@ -72,6 +60,7 @@
                 </tbody>
             </table>
         </div>
+        <div class="float-right">{{$allnews->links()}}</div>
     </div>
     {{-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> --}}
 </div>

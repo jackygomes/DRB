@@ -1,4 +1,4 @@
-<section class="footer-main py-5">
+<section class="footer-main py-5" style="margin-top: 200px;">
     <div class="container h-100">
         <div class="row align-items-center h-100">
             <div class="col-md-2">

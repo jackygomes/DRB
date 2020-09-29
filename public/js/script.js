@@ -174,7 +174,7 @@
   }); 
 
   $(window).scroll(function() {
-    if($(window).scrollTop() + $(window).height() > $(document).height() - 700)
+    if($('.footer-main').offset().top - $(window).scrollTop() <= 765)
      {
         $('.news-sidenav-scroll-hide').hide(10);
      }

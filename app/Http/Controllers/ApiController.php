@@ -115,7 +115,7 @@ class ApiController extends Controller
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
             } else
                 $allnews = News::orWhereIn('category_id', $request->categories)
-                    ->owWhereIn('newspaper_id', $request->newspapers)
+                    ->orWhereIn('newspaper_id', $request->newspapers)
                     ->where('language', $request->language)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
 
