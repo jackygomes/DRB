@@ -242,7 +242,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                                console.log(data)
+//                            console.log(data)
                             this.initial = data.items;
                             this.last_id = data.last_id;
                         });

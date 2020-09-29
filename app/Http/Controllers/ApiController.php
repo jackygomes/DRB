@@ -104,9 +104,12 @@ class ApiController extends Controller
             } else {
 
                 $allnews = News::where('id', '<', $last_id)
-                    ->orWhereIn('category_id', $request->categories)
-                    ->where('language', $request->language)
-                    ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+                    ->where(function ($query) use ($request){
+                        $query->whereIn('category_id', $request->categories)
+                            ->orWhereIn('newspaper_id', $request->newspapers);
+                    })
+                        ->where('language', $request->language)
+                        ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
             }
         } else {
             if ($request->language == 'both') {
@@ -114,8 +117,11 @@ class ApiController extends Controller
                     ->orWhereIn('newspaper_id', $request->newspapers)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
             } else
-                $allnews = News::orWhereIn('category_id', $request->categories)
-                    ->orWhereIn('newspaper_id', $request->newspapers)
+
+                $allnews = News::where(function ($query) use ($request){
+                        $query->whereIn('category_id', $request->categories)
+                            ->orWhereIn('newspaper_id', $request->newspapers);
+                    })
                     ->where('language', $request->language)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
 
