@@ -146,9 +146,9 @@ class ApiController extends Controller
     public function getNewsByLastId($last_id)
     {
         if ($last_id != 0) {
-            $allnews = News::where('id', '<', $last_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+            $allnews = News::where('id', '<', $last_id)->with("comments")->orderBy('created_at', 'DESC')->take(2)->get();
         } else {
-            $allnews = News::with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+            $allnews = News::with("comments")->orderBy('created_at', 'DESC')->take(6)->get();
         }
 
         if ($allnews->count() > 0) {
