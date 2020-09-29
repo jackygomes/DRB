@@ -16,9 +16,7 @@ class AddLanguageToNewsForYous extends Migration
         Schema::table('news_for_yous', function (Blueprint $table) {
             $table->string('newspaper_id')->change()->nullable();
             $table->string('category_id')->change()->nullable();
-            $table->string('language')->after('newspaper_id')->nullable();
-            $table->renameColumn('newspaper_id', 'newspapers');
-            $table->renameColumn('category_id', 'categories');
+            $table->string('language')->nullable();
         });
     }
 
