@@ -98,9 +98,11 @@ class ApiController extends Controller
         if ($last_id != 0) {
             if ($request->language == 'both') {
                 $allnews = News::where('id', '<', $last_id)
-                    ->orWhereIn('category_id', $request->categories)
-                    ->orWhereIn('newspaper_id', $request->newspapers)
-                    ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+                    ->where(function ($query) use ($request){
+                        $query->whereIn('category_id', $request->categories)
+                            ->orWhereIn('newspaper_id', $request->newspapers);
+                    })
+                    ->with("comments")->orderBy('created_at', 'DESC')->take(2)->get();
             } else {
 
                 $allnews = News::where('id', '<', $last_id)
@@ -109,13 +111,13 @@ class ApiController extends Controller
                             ->orWhereIn('newspaper_id', $request->newspapers);
                     })
                         ->where('language', $request->language)
-                        ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+                        ->with("comments")->orderBy('created_at', 'DESC')->take(2)->get();
             }
         } else {
             if ($request->language == 'both') {
-                $allnews = News::orWhereIn('category_id', $request->categories)
+                $allnews = News::whereIn('category_id', $request->categories)
                     ->orWhereIn('newspaper_id', $request->newspapers)
-                    ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+                    ->with("comments")->orderBy('created_at', 'DESC')->take(5)->get();
             } else
 
                 $allnews = News::where(function ($query) use ($request){
@@ -123,7 +125,7 @@ class ApiController extends Controller
                             ->orWhereIn('newspaper_id', $request->newspapers);
                     })
                     ->where('language', $request->language)
-                    ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+                    ->with("comments")->orderBy('created_at', 'DESC')->take(5)->get();
 
         }
 
