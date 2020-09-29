@@ -51,9 +51,9 @@ class ApiController extends Controller
     public function getNewsByCategory($last_id, $category_id)
     {
         if ($last_id != 0) {
-            $allnews = News::where('id', '<', $last_id)->where('category_id', $category_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+            $allnews = News::where('id', '<', $last_id)->where('category_id', $category_id)->with("comments")->orderBy('created_at', 'DESC')->take(2)->get();
         } else {
-            $allnews = News::where('category_id', $category_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+            $allnews = News::where('category_id', $category_id)->with("comments")->orderBy('created_at', 'DESC')->take(6)->get();
         }
 
         if ($allnews->count() > 0) {
@@ -73,9 +73,9 @@ class ApiController extends Controller
     public function getNewsByNewspaper($last_id, $newspaper_id)
     {
         if ($last_id != 0) {
-            $allnews = News::where('id', '<', $last_id)->where('newspaper_id', $newspaper_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+            $allnews = News::where('id', '<', $last_id)->where('newspaper_id', $newspaper_id)->with("comments")->orderBy('created_at', 'DESC')->take(2)->get();
         } else {
-            $allnews = News::where('newspaper_id', $newspaper_id)->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
+            $allnews = News::where('newspaper_id', $newspaper_id)->with("comments")->orderBy('created_at', 'DESC')->take(6)->get();
         }
 
         if ($allnews->count() > 0) {
