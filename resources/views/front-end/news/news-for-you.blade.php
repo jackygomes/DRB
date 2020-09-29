@@ -197,8 +197,8 @@
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
                         body: JSON.stringify({
-                            'categories' : {{$filter->categories}},
-                            'newspapers' : {{$filter->newspapers}},
+                            'categories' : {{$filter->category_id}},
+                            'newspapers' : {{$filter->newspaper_id}},
                             'language' : '{{$filter->language}}'
                         })
 
@@ -234,8 +234,8 @@
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
                         body: JSON.stringify({
-                            'categories' : {{$filter->categories}},
-                            'newspapers' : {{$filter->newspapers}},
+                            'categories' : {{$filter->category_id}},
+                            'newspapers' : {{$filter->newspaper_id}},
                             'language' : '{{$filter->language}}'
                         })
 

@@ -27,16 +27,16 @@ class NewsForYouController extends Controller
         ]);
 
         if($filter = NewsForYou::where('user_id', auth()->user()->id)->first()){
-            $filter->newspapers = $request->newspapers ? json_encode($request->newspapers) : null;
-            $filter->categories = $request->categories ? json_encode($request->categories) : null;
+            $filter->newspaper_id = $request->newspapers ? json_encode($request->newspapers) : null;
+            $filter->category_id = $request->categories ? json_encode($request->categories) : null;
             $filter->language = $request->language;
             $filter->update();
 
         }else{
             $filter = new NewsForYou();
             $filter->user_id = auth()->user()->id;
-            $filter->newspapers = $request->newspapers ? json_encode($request->newspapers) : null;
-            $filter->categories = $request->categories ? json_encode($request->categories) : null;
+            $filter->newspaper_id = $request->newspapers ? json_encode($request->newspapers) : null;
+            $filter->category_id = $request->categories ? json_encode($request->categories) : null;
             $filter->language = $request->language;
             $filter->save();
         }
@@ -54,8 +54,8 @@ class NewsForYouController extends Controller
             return view('front-end.news.filter', compact('categories', 'newspapers', 'filter'));
         }
 
-        $filter->categories = (str_replace('"',"",$filter->categories));
-        $filter->newspapers = (str_replace('"',"",$filter->newspapers));
+        $filter->category_id = (str_replace('"',"",$filter->category_id));
+        $filter->newspaper_id = (str_replace('"',"",$filter->newspaper_id));
 
         return view('front-end.news.news-for-you', compact('categories', 'filter'));
     }

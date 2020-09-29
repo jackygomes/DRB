@@ -83,8 +83,8 @@
                                                         type="checkbox"
                                                         value="{{$newspaper->id}}"
                                                         name="newspapers[]"
-                                                @if($filter && $filter->newspapers)
-                                                    {{(in_array($newspaper->id, json_decode($filter->newspapers))) ? 'checked' : ''}}
+                                                @if($filter && $filter->newspaper_id)
+                                                    {{(in_array($newspaper->id, json_decode($filter->newspaper_id))) ? 'checked' : ''}}
                                                         @endif
                                                 >
                                                 <label class="form-check-label">{{$newspaper->name}}</label>
@@ -103,8 +103,8 @@
                                                         type="checkbox"
                                                         value="{{$category->id}}"
                                                         name="categories[]"
-                                                @if($filter && $filter->categories)
-                                                    {{(in_array($category->id, json_decode($filter->categories))) ? 'checked' : ''}}
+                                                @if($filter && $filter->category_id)
+                                                    {{(in_array($category->id, json_decode($filter->category_id))) ? 'checked' : ''}}
                                                         @endif
                                                 >
                                                 <label class="form-check-label">{{$category->name}}</label>

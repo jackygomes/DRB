@@ -98,26 +98,24 @@ class ApiController extends Controller
         if ($last_id != 0) {
             if ($request->language == 'both') {
                 $allnews = News::where('id', '<', $last_id)
-                    ->whereIn('category_id', $request->categories)
-                    ->whereIn('newspaper_id', $request->newspapers)
+                    ->orWhereIn('category_id', $request->categories)
+                    ->orWhereIn('newspaper_id', $request->newspapers)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
             } else {
 
                 $allnews = News::where('id', '<', $last_id)
-                    ->whereIn('category_id', $request->categories)
+                    ->orWhereIn('category_id', $request->categories)
                     ->where('language', $request->language)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
             }
         } else {
-            ;
-
             if ($request->language == 'both') {
-                $allnews = News::whereIn('category_id', $request->categories)
-                    ->whereIn('newspaper_id', $request->newspapers)
+                $allnews = News::orWhereIn('category_id', $request->categories)
+                    ->orWhereIn('newspaper_id', $request->newspapers)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
             } else
-                $allnews = News::whereIn('category_id', $request->categories)
-                    ->whereIn('newspaper_id', $request->newspapers)
+                $allnews = News::orWhereIn('category_id', $request->categories)
+                    ->owWhereIn('newspaper_id', $request->newspapers)
                     ->where('language', $request->language)
                     ->with("comments")->orderBy('created_at', 'DESC')->take(10)->get();
 
