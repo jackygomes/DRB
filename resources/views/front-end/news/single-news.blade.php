@@ -26,19 +26,18 @@
 <section class="news">
     <div class="container" id="app">
         <div class="row custom-header-top">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <a href="{{route('news.index')}}" class="btn btn-outline-warning mb-3">All News</a>
                 <div class="bg-light shadow-sm border-bottom border-warning mb-5">
                     <div class="row" id="{{$news->id}}">
-                        <div class="col-md-12">
+                        <div class="col-md-5">
                             @if($news->image)
                                 <a href="{{$news->source}}" target="_blank">
                                     <img src="{{ env('S3_URL') }}{{$news->image}}" class="mr-3 img-fluid news-index-img" alt="...">
                                 </a>
                             @endif
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-7">
                             <a href="{{$news->source}}" target="_blank"><small class="pt-3 pt-md-0 news-comment-time-text text-secondary">{{ Str::limit ($news->source, 50) }}</small></a>
                             <a href="{{$news->source}}" target="_blank"><h6 class="pt-md-0">{{ $news->heading }}</h6></a>
                             {{-- <a href="{{$news->source}}" target="_blank"><p class="text-justify word-break">{{ implode(' ', array_slice(explode(' ', strip_tags($news->body) ), 0, 20))}}</p></a> --}}
@@ -46,7 +45,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div  class="col-md-3">
+                        <div  class="col-md-3 mt-2">
                             <button type="button" class="btn btn-light btn-sm mb-3 border border-secondary" @click='isshowcomment({{$news->id}})'><i class="far fa-comment-alt"></i> Comment</button>
                         </div>
                     </div>    
@@ -117,7 +116,40 @@
                         </ul>
                     </div>     
                 </div>
-                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="main-text-color">Latest News</h4>
+                @foreach($latestNews as $news)
+                    <div class="shadow-sm mb-3 p-4">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <a href="{{$news->source}}" target="_blank"><h5>{{$news->heading}}</h5></a>
+                                <a href="{{$news->source}}" target="_blank">
+                                    <p class="text-justify word-break">
+                                        {{$news->body}} |
+                                        <span class="text-secondary small">
+                                            {{$news->human_readable_time}}
+                                        </span>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{{$news->source}}" target="_blank">
+                                    <img src="https://data-resources-bd.s3-ap-southeast-1.amazonaws.com/{{$news->image}}"
+                                         class="mb-3 img-fluid news-index-img" alt="...">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ml-auto responsive-share-btns">
+                                <div class="addthis_inline_share_toolbox news-share-buttons" data-url="'{{ env('APP_URL') }}/single-news/' + {{$news->id}}" data-title="{{$news->heading}}" data-description="{{$news->body}}" data-media="'{{ env('S3_URL') }}' + {{$news->image}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
