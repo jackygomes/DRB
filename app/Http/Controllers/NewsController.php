@@ -25,8 +25,9 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         $latestNews = News::orderBy('id', 'desc')->get()->take(30);
+        $categories = Category::get();
 //        return $latestNews[0];
-        return view('front-end.news.single-news', compact('news', 'latestNews'));
+        return view('front-end.news.single-news', compact('news', 'latestNews', 'categories'));
     }
 
     public function newsPortal()

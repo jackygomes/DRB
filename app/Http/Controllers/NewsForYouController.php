@@ -45,8 +45,14 @@ class NewsForYouController extends Controller
 
     public function getFilteredNews()
     {
-        $filter = NewsForYou::where('user_id', auth()->user()->id)->first();
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
+
+        if(!auth()->user()){
+            return view('front-end.news.news-for-you-login', compact('categories'));
+        }
+
+        $filter = NewsForYou::where('user_id', auth()->user()->id)->first();
+
         $newspapers = Newspaper::get();
 
         //if no filter

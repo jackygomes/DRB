@@ -3,49 +3,35 @@
     <div class="card-header">
     <div class="card-body">
         <div class="table-responsive">
-        <table class="table table-bordered finance-table finance-table-font-size" id="dataTable" width="100%" cellspacing="0" data-display-length='25'>
+        <table class="table table-bordered finance-table finance-table-font-size" id="" width="100%" cellspacing="0" data-display-length='25'>
             <thead>
             <tr>
-                <th class="th-bg-color">Company</th>
-                <th>Ticker</th>
-                <th>Year</th>
-                <th>Q1 PDF</th>
-                <th>Q1 Excel</th>
-                <th>Q2 PDF</th>
-                <th>Q2 Excel</th>
-                <th>Q3 PDF</th>
-                <th>Q3 Excel</th>
-                {{-- <th>Q4 PDF</th>
-                <th>Q4 Excel</th> --}}
-                <th>Annual Excel</th>
-                <th>Annual PDF 1</th>
-                <th>Annual PDF 2</th>
-                <th>Annual PDF 3</th>
-                <th>Annual PDF 4</th>
-                <th>Annual PDF 5</th>
+                <tr>
+                    <th rowspan="2" class="th-bg-color" style="padding-bottom: 30px;">Company</th>
+                    <th rowspan="2" class="th-bg-color" style="padding-bottom: 30px;">Ticker</th>
+                    <th rowspan="2" class="th-bg-color" style="padding-bottom: 30px;">Year</th>
+
+                    <th colspan="2">Q1</th>
+                    <th colspan="2">Q2</th>
+                    <th colspan="2">Q3</th>
+                    {{--<th colspan="2">Q4</th>--}}
+                    <th colspan="2">Annual</th>
+                </tr>
+
+                <tr>
+                    <th>Pdf</th>
+                    <th>Excel</th>
+                    <th>Pdf</th>
+                    <th>Excel</th>
+                    <th>Pdf</th>
+                    <th>Excel</th>
+                    {{--<th>Pdf</th>--}}
+                    {{--<th>Excel</th>--}}
+                    <th>Pdf</th>
+                    <th>Excel</th>
+                </tr>
             </tr>
             </thead>
-            <tfoot>
-            <tr>
-                <th>Company</th>
-                <th>Ticker</th>
-                <th>Year</th>
-                <th>Q1 PDF</th>
-                <th>Q1 Excel</th>
-                <th>Q2 PDF</th>
-                <th>Q2 Excel</th>
-                <th>Q3 PDF</th>
-                <th>Q3 Excel</th>
-                {{-- <th>Q4 PDF</th>
-                <th>Q4 Excel</th> --}}
-                <th>Annual Excel</th>
-                <th>Annual PDF 1</th>
-                <th>Annual PDF 2</th>
-                <th>Annual PDF 3</th>
-                <th>Annual PDF 4</th>
-                <th>Annual PDF 5</th>
-            </tr>
-            </tfoot>
             <tbody>
             @php
                 $i = 1;
@@ -93,54 +79,53 @@
                             <td><a href="/login" class="btn btn-warning">Login</a></td>   
                         @endif 
 
-                        {{-- @if(auth()->user())
-                        @include('front-end.partial.q4__pdf_url', compact('item'))
-                        @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif 
+                        {{--@if(auth()->user())--}}
+                        {{--@include('front-end.partial.q4__pdf_url', compact('item'))--}}
+                        {{--@else--}}
+                            {{--<td><a href="/login" class="btn btn-warning">Login</a></td>--}}
+                        {{--@endif--}}
+
+                        {{--@if(auth()->user())--}}
+                        {{--@include('front-end.partial.q4_excel_url', compact('item'))--}}
+                        {{--@else--}}
+                            {{--<td><a href="/login" class="btn btn-warning">Login</a></td>--}}
+                        {{--@endif--}}
 
                         @if(auth()->user())
-                        @include('front-end.partial.q4_excel_url', compact('item'))
+                        @include('front-end.partial.annual_pdf_1_url', compact('item'))
                         @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif  --}}
-                        
-                    
+                        <td><a href="/login" class="btn btn-warning">Login</a></td>
+                        @endif
+
                         @if(auth()->user())
                             @include('front-end.partial.annual_excel_url', compact('item'))
                         @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif  
+                            <td><a href="/login" class="btn btn-warning">Login</a></td>
+                        @endif
 
-                        @if(auth()->user())
-                            @include('front-end.partial.annual_pdf_1_url', compact('item'))
-                        @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif 
+                        {{--@if(auth()->user())--}}
+                            {{--@include('front-end.partial.annual_pdf_2_url', compact('item'))--}}
+                        {{--@else--}}
+                            {{--<td><a href="/login" class="btn btn-warning">Login</a></td>--}}
+                        {{--@endif--}}
 
-                        @if(auth()->user())
-                            @include('front-end.partial.annual_pdf_2_url', compact('item'))
-                        @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif 
+                        {{--@if(auth()->user())--}}
+                            {{--@include('front-end.partial.annual_pdf_3_url', compact('item'))--}}
+                        {{--@else--}}
+                            {{--<td><a href="/login" class="btn btn-warning">Login</a></td>--}}
+                        {{--@endif--}}
 
-                        @if(auth()->user())
-                            @include('front-end.partial.annual_pdf_3_url', compact('item'))
-                        @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif 
+                        {{--@if(auth()->user())--}}
+                            {{--@include('front-end.partial.annual_pdf_4_url', compact('item'))--}}
+                        {{--@else--}}
+                            {{--<td><a href="/login" class="btn btn-warning">Login</a></td>--}}
+                        {{--@endif--}}
 
-                        @if(auth()->user())
-                            @include('front-end.partial.annual_pdf_4_url', compact('item'))
-                        @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif 
-
-                        @if(auth()->user())
-                        @include('front-end.partial.annual_pdf_5_url', compact('item'))     
-                        @else
-                            <td><a href="/login" class="btn btn-warning">Login</a></td>   
-                        @endif 
+                        {{--@if(auth()->user())--}}
+                        {{--@include('front-end.partial.annual_pdf_5_url', compact('item'))--}}
+                        {{--@else--}}
+                            {{--<td><a href="/login" class="btn btn-warning">Login</a></td>--}}
+                        {{--@endif--}}
                     </tr>
                 @endif    
             @endforeach

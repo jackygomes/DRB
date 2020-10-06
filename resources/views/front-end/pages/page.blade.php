@@ -3,7 +3,17 @@
 <!-- Navigation -->
 
 <section class="financial-statement">
-    <div class="container h-100">
+    <div class="container">
+        <div class="row h-100">
+            <div class="col-12">
+                <div class="financial_top_add mb-3">
+                    <p>Add</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         @if($page)
             <h3>{{$page->title}} </h3>
             <p>{{$page->description}} </p>

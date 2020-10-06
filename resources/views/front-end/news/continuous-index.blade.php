@@ -18,7 +18,7 @@
                         <nav id="sidebar"
                              class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide">
 
-                            <ul class="list-unstyled components">
+                            <ul class="list-unstyled components" style="margin-top: 150px;">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
                                     <a href="{{route('news.index')}}">All News</a>
                                 </li>

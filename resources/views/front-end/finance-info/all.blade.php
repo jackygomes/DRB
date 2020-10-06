@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Company</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="company" v-model="chosen_company" @change="companyOnChange">
+                        <select class="form-control" id="exampleFormControlSelect2" name="company" v-model="chosen_company" @change="companyOnChange">
                             <option value=''>Choose company...</option>
                             <option v-for="company in companies" :value="company.id" >@{{company.name}}</option>
                         </select>
@@ -101,6 +101,8 @@
                     @include('front-end.finance-info.datatable')
 
                 @endif
+
+                    {{$finance_infos->links()}}
 
             </div>
         </div>

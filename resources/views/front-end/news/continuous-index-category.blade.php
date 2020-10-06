@@ -36,11 +36,9 @@
                                     <a class="news-sidenav-hover" href="{{route('news.index')}}">All News</a>
                                 </li>
 
-                                @if(auth()->user())
-                                    <li class="{{ request()->url() == route('filtered.news') ? 'news-sidenav-active' : '' }}">
-                                        <a class="news-sidenav-hover" href="{{route('filtered.news')}}">For You</a>
-                                    </li>
-                                @endif
+                                <li class="{{ request()->url() == route('filtered.news') ? 'news-sidenav-active' : '' }}">
+                                    <a class="news-sidenav-hover" href="{{route('filtered.news')}}">For You</a>
+                                </li>
 
                                 @foreach ($categories as $category)
                                     <li class="{{ request()->url() == route('news.bycategoty', $category->name) ? 'news-sidenav-active' : '' }}">

@@ -16,5 +16,5 @@
        
     @endif
 @else
-    <td>No Excel</td>
+    <td>-</td>
 @endif

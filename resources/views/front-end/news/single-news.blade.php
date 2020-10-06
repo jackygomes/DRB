@@ -26,6 +26,33 @@
 <section class="news">
     <div class="container" id="app">
         <div class="row custom-header-top">
+
+            <div class="col-12 col-md-2">
+                <div class="wrapper">
+                    <!-- Sidebar  -->
+                    <nav id="sidebar"
+                         class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide" style="width: 235px; margin-top: 241px;">
+
+                        <ul class="list-unstyled components">
+                            <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
+                                <a class="news-sidenav-hover" href="{{route('news.index')}}">All News</a>
+                            </li>
+
+                            <li class="{{ request()->url() == route('filtered.news') ? 'news-sidenav-active' : '' }}">
+                                <a class="news-sidenav-hover" href="{{route('filtered.news')}}">For You</a>
+                            </li>
+
+                            @foreach ($categories as $category)
+                                <li class="{{ request()->url() == route('news.bycategoty', $category->name) ? 'news-sidenav-active' : '' }}">
+                                    <a class="news-sidenav-hover"
+                                       href="{{route('news.bycategoty', $category->name)}}">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
             <div class="col-md-12">
                 <a href="{{route('news.index')}}" class="btn btn-outline-warning mb-3">All News</a>
                 <div class="bg-light shadow-sm border-bottom border-warning mb-5">

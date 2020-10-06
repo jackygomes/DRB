@@ -964,9 +964,21 @@ if it's not present, don't show loader */
     }
 }
 
-.finance-table th:first-child, .finance-table td:first-child {
+.finance-table th:first-child, .finance-table td:first-child{
     position: sticky !important;
-    left: 0px;
+    left: 0;
+    background-color: #F7F7F7;
+}
+
+.finance-table th:nth-child(2), .finance-table td:nth-child(2){
+    position: sticky !important;
+    left: 144px;
+    background-color: #F7F7F7;
+}
+
+.finance-table th:nth-child(3), .finance-table td:nth-child(3){
+    position: sticky !important;
+    left: 260px;
     background-color: #F7F7F7;
 }
 

@@ -16,5 +16,5 @@
        
     @endif
 @else
-    <td>No PDF</td>
+    <td>-</td>
 @endif
