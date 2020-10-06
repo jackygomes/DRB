@@ -73,11 +73,15 @@
                         <form class="form-horizontal" action="{{route('news.for.you.post')}}" method="post">
                             {{csrf_field()}}
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="sel1">Newspapers :</label>
+                                        <p for="sel1">Newspapers :</p>
                                         @foreach($newspapers as $newspaper)
-                                            <div class="form-check">
+                                            <div class="form-check d-inline-block filter_item_design
+                                                        @if($filter && $filter->newspaper_id)
+                                                            {{(in_array($newspaper->id, json_decode($filter->newspaper_id))) ? 'filter_item_design_background' : ''}}
+                                                            @endif
+                                                ">
                                                 <input
                                                         class="form-check-input position-static"
                                                         type="checkbox"
@@ -87,17 +91,22 @@
                                                     {{(in_array($newspaper->id, json_decode($filter->newspaper_id))) ? 'checked' : ''}}
                                                         @endif
                                                 >
-                                                <label class="form-check-label">{{$newspaper->name}}</label>
+                                                <label class="form-check-label d-inline">{{$newspaper->name}}</label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="sel2">Categories :</label>
+                                        <p for="sel2">Categories :</p>
                                         @foreach($categories as $category)
-                                            <div class="form-check">
+                                            <div class="form-check d-inline-block filter_item_design
+                                                @if($filter && $filter->category_id)
+                                                    {{(in_array($category->id, json_decode($filter->category_id))) ? 'filter_item_design_background' : ''}}
+                                                 @endif
+
+                                            ">
                                                 <input
                                                         class="form-check-input position-static"
                                                         type="checkbox"
@@ -107,20 +116,28 @@
                                                     {{(in_array($category->id, json_decode($filter->category_id))) ? 'checked' : ''}}
                                                         @endif
                                                 >
-                                                <label class="form-check-label">{{$category->name}}</label>
+                                                <label class="form-check-label d-inline">{{$category->name}}</label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group ">
-                                        <label>Select Language:<span class="text-danger">*</span> </label>
-                                        <select class="form-control dropdown-custom" name="language" require>
-                                            <option value="english" {{($filter && $filter->language == 'english') ? 'selected' : ''}}>English</option>
-                                            <option value="bangla" {{($filter &&$filter->language == 'bangla') ? 'selected' : ''}}>Bangla</option>
-                                            <option value="both" {{($filter && $filter->language == 'both') ? 'selected' : ''}}>Both</option>
-                                        </select>
+                                        <p>Language:</p>
+                                        <div class="form-check form-check-inline filter_item_design {{($filter && $filter->language == 'english') ? 'filter_item_design_background' : ''}}" style="padding-left: 10px">
+                                            <input {{($filter && $filter->language == 'english') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio1" value="english">
+                                            <label class="form-check-label" for="inlineRadio1">English</label>
+                                        </div>
+                                        <div class="form-check form-check-inline filter_item_design {{($filter &&$filter->language == 'bangla') ? 'filter_item_design_background' : ''}} " style="padding-left: 10px">
+                                            <input {{($filter &&$filter->language == 'bangla') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio2" value="bangla">
+                                            <label class="form-check-label" for="inlineRadio2">Bangla</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline filter_item_design {{($filter && $filter->language == 'both') ? 'selected' : ''}}" style="padding-left: 10px">
+                                            <input {{($filter && $filter->language == 'both') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio2" value="both">
+                                            <label class="form-check-label" for="inlineRadio2">Both</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -138,4 +155,16 @@
         </div>
     </section>
 
+@endsection
+
+@section('scripts')
+    <script>
+
+        $(document).ready(function(){
+            $("input").click(function (event) {
+               $(event.target).closest('div').addClass('filter_item_design_background')
+            })
+        })
+
+    </script>
 @endsection

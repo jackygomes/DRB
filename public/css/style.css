@@ -982,6 +982,18 @@ if it's not present, don't show loader */
     background-color: #F7F7F7;
 }
 
+.filter_item_design{
+    border-radius: 5px;
+    padding: 0 10px 0px 28px;
+    margin-top: 3px;
+    background: #eaeaea;
+}
+
+.filter_item_design_background{
+    background: #2f4190;
+    color: #fff;
+}
+
 .th-bg-color {
     background-color: #F7F7F7 !important;
     z-index: 1;
