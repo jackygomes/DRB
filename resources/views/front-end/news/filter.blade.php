@@ -5,8 +5,19 @@
         <div class="container-fluid custom-news-header-top">
             <div class="row">
                 <div class="col-8 offset-2">
+                    {{--add section--}}
                     <div class="financial_top_add mb-3">
-                        <p>Add</p>
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Horizontal unit -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-7889950300474908"
+                             data-ad-slot="9066843834"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 </div>
             </div>
