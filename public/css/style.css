@@ -985,13 +985,66 @@ if it's not present, don't show loader */
 .filter_item_design{
     border-radius: 5px;
     padding: 0 10px 0px 28px;
-    margin-top: 3px;
+    margin-top: 4px;
     background: #eaeaea;
 }
 
 .filter_item_design_background{
     background: #2f4190;
     color: #fff;
+}
+
+.filter_item_design input[type='checkbox']{
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 11px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance:none;
+    background-color: #fff;
+    border: 1px solid #555555;
+    outline: none;
+}
+
+.filter_item_design input[type='checkbox']:checked{
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 11px;
+    /*margin: 5px;*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance:none;
+    background-color: #ffc107;
+}
+
+.filter_item_design input[type='radio']:after {
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    top: -4px;
+    left: 0;
+    position: relative;
+    background-color: #fff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid #555555;
+}
+
+.filter_item_design input[type='radio']:checked:after {
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    top: -4px;
+    left: 0;
+    position: relative;
+    background-color: #ffc107;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid #555555;
 }
 
 .th-bg-color {
