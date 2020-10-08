@@ -6,73 +6,69 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
             <tr>
-                <th>Company</th>
-                <th>Ticker</th>
-                <th>Year</th>
+                <th rowspan="2" style="padding-bottom: 32px;">Company</th>
+                <th rowspan="2" style="padding-bottom: 32px;">Ticker</th>
+                <th rowspan="2" style="padding-bottom: 32px;">Year</th>
                 @if ($frequency == 'quarterly' and $q1 == null and $q2 == null and $q3 == null and $q4 == null)
-                    <th>Q1 PDF</th>
-                    <th>Q1 Excel</th>
-                    <th>Q2 PDF</th>
-                    <th>Q2 Excel</th>
-                    <th>Q3 PDF</th>
-                    <th>Q3 Excel</th>
+                    <th colspan="2">Q1</th>
+                    <th colspan="2">Q2</th>
+                    <th colspan="2">Q3</th>
                     {{-- <th>Q4 PDF</th>
                     <th>Q4 Excel</th> --}}
-                @else    
+                @else
                     @isset($q1)
-                        <th>Q1 PDF</th>
-                        <th>Q1 Excel</th>
+                            <th colspan="2">Q1</th>
                     @endisset
                     @isset($q2)
-                        <th>Q2 PDF</th>
-                        <th>Q2 Excel</th>
+                            <th colspan="2">Q2</th>
                     @endisset
                     @isset($q3)
-                        <th>Q3 PDF</th>
-                        <th>Q3 Excel</th>
+                            <th colspan="2">Q3</th>
                     @endisset
                     {{-- @isset($q4)
-                        <th>Q4 PDF</th>
-                        <th>Q4 Excel</th>
-                    @endisset --}}
-                @endif    
+                        {{--<th colspan="2">Q4</th>--}}
+                    {{--@endisset --}}
+                @endif
+
+            </tr>
+            <tr>
+                @if ($frequency == 'quarterly' and $q1 == null and $q2 == null and $q3 == null and $q4 == null)
+                    <th>Pdf</th>
+                    <th>Excel</th>
+
+                    <th>Pdf</th>
+                    <th>Excel</th>
+
+                    <th>Pdf</th>
+                    <th>Excel</th>
+                    {{-- <th>Q4 PDF</th>
+                    <th>Q4 Excel</th> --}}
+                @else
+
+                    @isset($q1)
+                        <th>Pdf</th>
+                        <th>Excel</th>
+                    @endisset
+
+                    @isset($q2)
+                        <th>Pdf</th>
+                        <th>Excel</th>
+                    @endisset
+                    @isset($q3)
+                        <th>Pdf</th>
+                        <th>Excel</th>
+                    @endisset
+
+                        @isset($q4)
+                            {{--<th>Pdf</th>--}}
+                            {{--<th>Excel</th>--}}
+                        @endisset
+                @endif
+
 
             </tr>
             </thead>
-            <tfoot>
-            <tr>
-                <th>Company</th>
-                <th>Ticker</th>
-                <th>Year</th>
-                @if ($frequency == 'quarterly' and $q1 == null and $q2 == null and $q3 == null and $q4 == null)
-                    <th>Q1 PDF</th>
-                    <th>Q1 Excel</th>
-                    <th>Q2 PDF</th>
-                    <th>Q2 Excel</th>
-                    <th>Q3 PDF</th>
-                    <th>Q3 Excel</th>
-                    {{-- <th>Q4 PDF</th>
-                    <th>Q4 Excel</th> --}}
-                @else    
-                    @isset($q1)
-                        <th>Q1 PDF</th>
-                        <th>Q1 Excel</th>
-                    @endisset
-                    @isset($q2)
-                        <th>Q2 PDF</th>
-                        <th>Q2 Excel</th>
-                    @endisset
-                    @isset($q3)
-                        <th>Q3 PDF</th>
-                        <th>Q3 Excel</th>
-                    @endisset
-                    {{-- @isset($q4)
-                        <th>Q4 PDF</th>
-                        <th>Q4 Excel</th>
-                    @endisset --}}
-                @endif
-            </tr>
-            </tfoot>
+
             <tbody>
             @php
                 $i = 1;
