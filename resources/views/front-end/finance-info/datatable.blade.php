@@ -3,9 +3,8 @@
     <div class="card-header">
     <div class="card-body">
         <div class="table-responsive">
-        <table class="table table-bordered finance-table finance-table-font-size" id="" width="100%" cellspacing="0" data-display-length='25'>
+        <table class="table table-bordered finance-table finance-table-font-size" id="financeDataTable" width="100%" cellspacing="0" data-display-length='25'>
             <thead>
-            <tr>
                 <tr>
                     <th rowspan="2" class="th-bg-color" style="padding-bottom: 30px;">Company</th>
                     <th rowspan="2" class="th-bg-color" style="padding-bottom: 30px;">Ticker</th>
@@ -30,7 +29,6 @@
                     <th>Pdf</th>
                     <th>Excel</th>
                 </tr>
-            </tr>
             </thead>
             <tbody>
             @php
@@ -40,9 +38,9 @@
             @foreach ($finance_infos as $item)
                 @if($item->company!=null)
                     <tr>
-                        <td>{{$item->company->name}}</td>
-                        <td>{{$item->company->ticker}}</td>
-                        <td>{{$item->year}}</td>
+                        <td class="th-bg-color">{{$item->company->name}}</td>
+                        <td class="th-bg-color">{{$item->company->ticker}}</td>
+                        <td class="th-bg-color">{{$item->year}}</td>
                         @if(auth()->user())
                         @include('front-end.partial.q1__pdf_url', compact('item'))
                         @else

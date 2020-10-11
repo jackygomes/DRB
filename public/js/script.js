@@ -49,6 +49,20 @@
     
   });
 
+$(document).ready(function () {
+    $('#financeDataTable').dataTable(
+        {
+            scrollY:        "60vh",
+            scrollX:        true,
+            scrollCollapse: true,
+            fixedColumns:{
+                leftColumns: 3,
+                heightMatch: 'auto'
+            }
+        }
+    )
+})
+
   // Sidebar Collapse
   $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {

@@ -16,11 +16,14 @@
                     <div class="wrapper">
                         <!-- Sidebar  -->
                         <nav id="sidebar"
-                             class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide">
+                             class="bg-transparent text-dark news-sidenav-scroll-hide" style="margin-top: -30px;">
 
                             <ul class="list-unstyled components" style="margin-top: 150px;">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
                                     <a href="{{route('news.index')}}">All News</a>
+                                </li>
+                                <li class="{{ request()->url() == route('filtered.news') ? 'news-sidenav-active' : '' }}">
+                                    <a class="news-sidenav-hover" href="{{route('filtered.news')}}">For You</a>
                                 </li>
                                 @foreach ($categories as $category)
                                     <li class="{{ request()->url() == route('news.bycategoty', $category->name) ? 'news-sidenav-active' : '' }}">

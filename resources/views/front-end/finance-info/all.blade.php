@@ -124,9 +124,9 @@
 
                 @endif
 
-                @if(!$frequency)
-                    {{$finance_infos->links()}}
-                @endif
+                {{--@if(!$frequency)--}}
+                    {{--{{$finance_infos->links()}}--}}
+                {{--@endif--}}
 
             </div>
         </div>

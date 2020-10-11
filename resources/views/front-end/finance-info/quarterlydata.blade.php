@@ -3,7 +3,7 @@
     <div class="card-header">
     <div class="card-body">
         <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered" id="financeDataTable" width="100%" cellspacing="0">
             <thead>
             <tr>
                 <th rowspan="2" style="padding-bottom: 32px;">Company</th>
@@ -75,9 +75,9 @@
             @endphp
             @foreach ($finance_infos as $item)
                 <tr>
-                    <td>{{$item->company->name}}</td>
-                    <td>{{$item->company->ticker}}</td>
-                    <td>{{$item->year}}</td>
+                    <td class="th-bg-color">{{$item->company->name}}</td>
+                    <td class="th-bg-color">{{$item->company->ticker}}</td>
+                    <td class="th-bg-color">{{$item->year}}</td>
                     @if ($frequency == 'quarterly' and $q1 == null and $q2 == null and $q3 == null and $q4 == null)
                         @if(auth()->user())
                             @include('front-end.partial.q1__pdf_url', compact('item'))

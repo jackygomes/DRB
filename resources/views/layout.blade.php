@@ -21,6 +21,7 @@
 
     <!-- Data Tables CSS -->
     <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css">
 
     <!-- Custom styles -->
     <link href="/css/style.css" rel="stylesheet">
@@ -86,6 +87,7 @@
     <script src="/vendor/chart.js/Chart.min.js"></script>
     <script src="/vendor/datatables/jquery.dataTables.js"></script>
     <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
 
     <!-- Custom scripts -->
     <script src="/js/script.js"></script>
