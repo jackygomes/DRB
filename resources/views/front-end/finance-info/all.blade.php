@@ -2,7 +2,7 @@
 @section('content')
 <!-- Navigation -->
 
-<section class="financial-statement" id="mainApp">
+<section class="financial-statement">
     <div class="container h-100">
         {{--add section--}}
         <div class="financial_top_add mb-3">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-10" id="mainApp">
                 <h3>Financial Statements </h3>
                 <p>We have curated data from different companies for you. </p>
                 <form action="{{route('financefilter')}}" method="GET">
@@ -93,7 +93,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Filter</button>
-                </form></br>
+                </form><br>
             </div>
 
             {{--add section--}}

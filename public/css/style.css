@@ -991,9 +991,11 @@ if it's not present, don't show loader */
     /*background-color: #F7F7F7;*/
 /*}*/
 
-.DTFC_LeftBodyWrapper{
-    top: -14px !important;
+table.dataTable{
+    margin-top: 0!important;
+    margin-bottom: 0 !important;
 }
+
 
 .filter_item_design{
     border-radius: 5px;
