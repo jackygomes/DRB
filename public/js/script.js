@@ -50,17 +50,29 @@
   });
 
 $(document).ready(function () {
-    $('#financeDataTable').dataTable(
-        {
-            scrollY:        "60vh",
-            scrollX:        true,
-            scrollCollapse: true,
-            fixedColumns:{
-                leftColumns: 3,
-                heightMatch: 'auto'
+    if(window.innerWidth >= 768){
+        $('#financeDataTable').dataTable(
+            {
+                scrollY:        "60vh",
+                scrollX:        true,
+                scrollCollapse: true,
+                fixedColumns:{
+                    leftColumns: 3,
+                    heightMatch: 'auto'
+                }
             }
-        }
-    )
+        )
+
+    }else{
+        $('#financeDataTable').dataTable(
+            {
+                scrollY:        "60vh",
+                scrollX:        true,
+                scrollCollapse: true,
+            }
+        )
+    }
+
 })
 
   // Sidebar Collapse

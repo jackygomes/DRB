@@ -210,7 +210,7 @@ class SubscriptionPlanController extends Controller
         if($code == 200 && !( curl_errno($handle)))
         {
             $invoice = Invoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
-            Log::info('invoice : ' . json_encode($invoice));
+//            Log::info('invoice : ' . json_encode($invoice));
             $invoice->isApproved = 1;
             $invoice->save();
 
