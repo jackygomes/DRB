@@ -166,9 +166,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('subscriptionplan/success', 'SubscriptionPlanController@success')->name('subscriptionplan.success');
-    Route::post('subscriptionplan/fail', 'SubscriptionPlanController@fail')->name('subscriptionplan.fail');
-
     //invoice
     Route::get('/invoice-user', 'InvoiceController@invoiceUser')->name('invoice.user');
     Route::get('/invoice/getuser', 'InvoiceController@getUser')->name('invoice.getuser');
@@ -274,7 +271,6 @@ Route::group(['prefix' => 'cart'], function() {
 //Checkout
 //Route::post('/checkout', 'CheckOutController@checkoutPage')->name('checkout');
 Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
-Route::any('/payment-complete', 'CheckOutController@paymentComplete')->name('payment.complete');
 
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('/pricing', 'PricingController@index')->name('pricing');

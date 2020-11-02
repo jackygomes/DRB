@@ -180,7 +180,7 @@ class CheckOutController extends Controller
         }
 
         //if price is less than 10 (for ssl minimum amount purposes) make it successful by default
-        if($orderData['amount'] <= 10) {
+        if($orderData['amount'] < 10) {
 
             $order = Order::where('transaction_id', $orderData['transaction_id'])->first();
             $order->status = 'complete';
@@ -203,19 +203,15 @@ class CheckOutController extends Controller
     {
 
         $post_data = array();
-        if(env('APP_ENV') == 'local') {
-            $post_data['store_id'] = env('TEST_SSL_STORE_ID');
-            $post_data['store_passwd'] = env('TEST_SSL_STORE_PASSWORD');
-        } elseif(env('APP_ENV') == 'production') {
-            $post_data['store_id'] = env('LIVE_SSL_STORE_ID');
-            $post_data['store_passwd'] = env('LIVE_SSL_STORE_PASSWORD');
-        }
+
+        $post_data['store_id'] = env('SSL_STORE_ID');
+        $post_data['store_passwd'] = env('SSL_STORE_PASS');
         $post_data['total_amount'] = $paymentData['cart']->total;
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = "DRB_" . uniqid();
-        $post_data['success_url'] = route('payment.complete');
-        $post_data['fail_url'] = route('payment.complete');
-        $post_data['cancel_url'] = route('payment.complete');
+        $post_data['success_url'] = route('drb.payment.success');
+        $post_data['fail_url'] = route('drb.payment.fail');
+        $post_data['cancel_url'] = route('home');
 
         $post_data['emi_option'] = "0";
 
@@ -233,6 +229,7 @@ class CheckOutController extends Controller
         $post_data['product_name'] = implode(', ', json_decode($paymentData['productNames']));
         $post_data['product_category'] = implode(', ', json_decode($paymentData['productCategories']));
         $post_data['product_profile'] = "general";
+        $post_data['value_a'] = config('drb.paymentType.research');
 
         return $post_data;
     }
@@ -241,23 +238,14 @@ class CheckOutController extends Controller
      * @param $paymentData
      */
     private function makePayment($paymentData) {
-
-//        dd($paymentData);
-        # REQUEST SEND TO SSLCOMMERZ
-        if(env('APP_ENV') == 'local') {
-            $direct_api_url = env('TEST_SSL_TRANSACTION_API');
-        } elseif(env('APP_ENV') == 'production') {
-            $direct_api_url = env('LIVE_SSL_TRANSACTION_API');
-        }
-
         $handle = curl_init();
-        curl_setopt($handle, CURLOPT_URL, $direct_api_url );
+        curl_setopt($handle, CURLOPT_URL, config('drb.sslPaymentUrls.requestUrl') );
         curl_setopt($handle, CURLOPT_TIMEOUT, 30);
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($handle, CURLOPT_POST, 1 );
         curl_setopt($handle, CURLOPT_POSTFIELDS, $paymentData);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, TRUE); # KEEP IT FALSE IF YOU RUN FROM LOCAL PC
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false); # KEEP IT FALSE IF YOU RUN FROM LOCAL PC
 
 
         $content = curl_exec($handle );
@@ -282,33 +270,6 @@ class CheckOutController extends Controller
             exit;
         } else {
             echo "JSON Data parsing error!";
-        }
-
-    }
-
-    public function paymentComplete(Request $request) {
-
-//        return view('front-end.payment-status.success');
-        try{
-            $status = '';
-            if($request->status == "VALID") {
-                $status = 'success';
-                $order = Order::where('transaction_id', $request->tran_id)->first();
-                $order->status = 'complete';
-                $order->payment = 'paid';
-
-                $order->save();
-
-                return view('front-end.payment-status.success', compact('status'));
-            } else{
-                $status = 'failed';
-                return view('front-end.payment-status.success', compact('status'));
-            }
-        } catch(\Exception $e) {
-            return response()->json([
-                'status'    => 'error',
-                'message'   => $e->getMessage(),
-            ], 420);
         }
 
     }

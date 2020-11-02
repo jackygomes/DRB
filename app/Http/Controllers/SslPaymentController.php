@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
+use App\Order;
 use App\TutorialInvoice;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ class SslPaymentController extends Controller
      */
     public function makePaymentOnSuccess(Request $request){
         //tutorial payment
-        if($this->verifyPayment($request->val_id)){
+        if($request->status == 'VALID' && $this->verifyPayment($request->val_id)){
 
             if($request->value_a == config('drb.paymentType.tutorial')){
                 $invoice = TutorialInvoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
@@ -75,6 +76,16 @@ class SslPaymentController extends Controller
                 }
 
                 return view('back-end.subscription-plan.success');
+
+            }elseif ($request->value_a == config('drb.paymentType.research')){
+
+                $order = Order::where('transaction_id', $request->tran_id)->first();
+                $order->status = 'complete';
+                $order->payment = 'paid';
+                $order->save();
+                $status = 'success';
+
+                return view('front-end.payment-status.success', compact('status'));
             }
 
         }
