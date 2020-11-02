@@ -7,14 +7,19 @@
  */
 
 return [
-  'paymentType' => [
-    'tutorial'      => 'tutorial',
-    'research'      => 'research',
-    'subscription'  => 'subscription',
-  ],
+    'paymentType' => [
+        'tutorial' => 'tutorial',
+        'research' => 'research',
+        'subscription' => 'subscription',
+    ],
 
     'sslPaymentUrls' => [
-        'requestUrl' => 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php',
-        'validationUrl' => 'https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php'
-    ]
+        'requestUrl' => (env('APP_ENV') == 'production') ? 'https://securepay.sslcommerz.com/gwprocess/v4/api.php' : 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php',
+        'validationUrl' => env('APP_ENV') == 'production' ? 'https://securepay.sslcommerz.com/validator/api/validationserverAPI.php' : 'https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php'
+    ],
+
+    'sslCredentials' => [
+        'storeID' => env('SSL_STORE_ID'),
+        'storePass' => env('SSL_STORE_PASS'),
+    ],
 ];

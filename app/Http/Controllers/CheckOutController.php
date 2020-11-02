@@ -204,8 +204,8 @@ class CheckOutController extends Controller
 
         $post_data = array();
 
-        $post_data['store_id'] = env('SSL_STORE_ID');
-        $post_data['store_passwd'] = env('SSL_STORE_PASS');
+        $post_data['store_id'] = config('drb.sslCredentials.storeID');
+        $post_data['store_passwd'] = config('drb.sslCredentials.storePass');
         $post_data['total_amount'] = $paymentData['cart']->total;
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = "DRB_" . uniqid();

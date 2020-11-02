@@ -7,14 +7,15 @@ use App\Order;
 use App\TutorialInvoice;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SslPaymentController extends Controller
 {
     public function makePaymentRequest($amount, $productType, $transactionId){
 
         $requireSslData = [
-            'store_id' => env('SSL_STORE_ID'),
-            'store_passwd' => env('SSL_STORE_PASS'),
+            'store_id' => config('drb.sslCredentials.storeID'),
+            'store_passwd' => config('drb.sslCredentials.storePass'),
             'total_amount' => $amount,
             'currency' => 'BDT',
             'tran_id' => $transactionId,
