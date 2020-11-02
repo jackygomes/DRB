@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\TutorialInvoice;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -59,6 +60,20 @@ class SslPaymentController extends Controller
                 $invoice = TutorialInvoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
                 $invoice->is_paid = 1;
                 $invoice->update();
+                return view('back-end.subscription-plan.success');
+
+            }elseif ($request->value_a == config('drb.paymentType.subscription')){
+                $invoice = Invoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
+                $invoice->isApproved = 1;
+                $invoice->save();
+
+                //upgraded user to paid user
+                $user = auth()->user();
+                if($user->type != 'paid' && $user->type != 'admin'){
+                    $user->type = 'paid';
+                    $user->save();
+                }
+
                 return view('back-end.subscription-plan.success');
             }
 

@@ -89,11 +89,11 @@ class SubscriptionPlanController extends Controller
         return new Carbon;
     }
 
-    public function subscribePlan(Request $request)
+    public function subscribePlan(Request $request, SslPaymentController $sslPayment)
     {
 
         $invoice = Invoice::all();
-        $tran_id = time().bin2hex(random_bytes(6));
+        $tran_id = strtoupper(time().bin2hex(random_bytes(6)));
         $uniqueid =  '#'.'DRB'.date("Y").(count($invoice)+1);
 
         $invoice = new Invoice;
@@ -148,86 +148,12 @@ class SubscriptionPlanController extends Controller
             return view('back-end.subscription-plan.success', compact('offlineSuccessMsg'));
         }
 
-        $user = Auth::user();
-        $store_id = env('SSL_STORE_ID', false);
-        $store_pass =  env('SSL_STORE_PASS', false);
-
-        $requireSslData = [
-            'store_id' => $store_id,
-            'store_passwd' => $store_pass,
-            'total_amount' => $request->price,
-            'currency' => 'BDT',
-            'tran_id' => $tran_id,
-            'success_url' => route('subscriptionplan.success'),
-            'fail_url' => route('subscriptionplan.fail'),
-            'cancel_url' => route('home'),
-            'cus_name' => $user->full_name,
-            'cus_email' => $user->email,
-            'cus_add1' => 'Dhaka',
-            'cus_city' => 'Dhaka',
-            'cus_postcode' => '1215',
-            'cus_country' => 'Bangladesh',
-            'cus_phone' => $user->contact_number,
-            'shipping_method' => 'NO',
-            'num_of_item' => 1,
-            'product_name' => 'Package',
-            'product_category' => 'package',
-            'product_profile' => 'non-physical-goods',
-        ];
-
-        try{
-            $client = new Client(['verify' => false]);
-            $response = $client->request('POST', 'https://securepay.sslcommerz.com/gwprocess/v4/api.php', [     //securepay
-                'form_params' => $requireSslData
-            ]);
-
-        }catch(\Exception $e){
-            return $e->getMessage();
-        }
-
-
-
-        return redirect(json_decode($response->getBody())->GatewayPageURL);
+        //payment
+        $redirectUrl = $sslPayment->makePaymentRequest($request->price, config('drb.paymentType.subscription'), $tran_id);
+        return redirect($redirectUrl);
     }
 
-    public function success(Request $request)
-    {
-        $store_id = env('SSL_STORE_ID', false);
-        $store_pass =  env('SSL_STORE_PASS', false);
-
-        $requested_url = ("https://securepay.sslcommerz.com/validator/api/validationserverAPI.php?val_id=".$request->val_id."&store_id=".$store_id."&store_passwd=".$store_pass."&v=1&format=json");
-
-        $handle = curl_init();
-        curl_setopt($handle, CURLOPT_URL, $requested_url);
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false); # IF YOU RUN FROM LOCAL PC
-        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false); # IF YOU RUN FROM LOCAL PC
-
-        $result = curl_exec($handle);
-
-        $code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
-        if($code == 200 && !( curl_errno($handle)))
-        {
-            $invoice = Invoice::where('user_id', auth()->user()->id)->where('transaction_id', $request->tran_id)->first();
-//            Log::info('invoice : ' . json_encode($invoice));
-            $invoice->isApproved = 1;
-            $invoice->save();
-
-            //upgraded user to paid user
-            $user = auth()->user();
-            if($user->type != 'paid' && $user->type != 'admin'){
-                $user->type = 'paid';
-                $user->save();
-            }
-
-            return view('back-end.subscription-plan.success');
-
-        }else{
-            return view('back-end.subscription-plan.fail');
-        }
-    }
-
+    //not in used for now
     public function fail()
     {
         $invoice = Invoice::where('user_id', auth()->user()->id)->latest()->first();
