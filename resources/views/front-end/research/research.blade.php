@@ -104,11 +104,6 @@
                                 <li class="{{ Request::get('provider') == '' ? 'news-sidenav-active' : '' }}">
                                     <a class="{{ Request::get('provider') == '' ? 'news-sidenav-hover' : '' }} provider" data-name="" href="#">All Provider</a>
                                 </li>
-                                @foreach($providerNames as $providerName)
-                                <li class="{{ Request::get('provider') == $providerName ? 'news-sidenav-active' : '' }}">
-                                    <a class="{{ Request::get('provider') == $providerName ? 'news-sidenav-hover' : '' }} provider" data-name="{{$providerName}}" href="#">{{$providerName}}</a>
-                                </li>
-                                @endforeach
                             </ul>
                         </nav>
                     </div>

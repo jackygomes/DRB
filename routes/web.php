@@ -130,6 +130,17 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         Route::post('newspapers/store', 'NewspaperController@store')->name('newspapers.store');
         Route::get('newspapers/edit/{id}', 'NewspaperController@edit')->name('newspapers.edit');
         Route::post('newspapers/update/{id}', 'NewspaperController@update')->name('newspapers.update');
+
+        //tutorial routes
+        Route::group(['prefix' => 'tutorial'], function(){
+            Route::get('/','TutorialController@adminIndex')->name('tutorial.index');
+            Route::get('/create','TutorialController@create')->name('tutorial.create');
+            Route::get('/update-status/{id}', 'TutorialController@updateStatus')->name('tutorial.update.status');
+            Route::get('/details/{id}', 'TutorialController@tutorialDetails')->name('tutorial.details');
+            Route::post('/create','TutorialController@storeTutorial')->name('tutorials.create.post');
+            Route::get('/create/category','TutorialController@categoryView')->name('tutorials.create.category');
+            Route::post('/create/category','TutorialController@addCategory')->name('tutorials.create.category.post');
+        });
     });
 
     //Page
@@ -180,6 +191,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //for you filter
     Route::get('news-for-you', 'NewsForYouController@index')->name('news.for.you');
     Route::post('news-for-you', 'NewsForYouController@store')->name('news.for.you.post');
+
+    Route::group(['prefix' => 'tutorials'], function (){
+        Route::get('/payment/{tutorial_id}','TutorialController@makePayment')->name('tutorials.payment');
+    });
+
+    //drb payment routes
+    Route::post('drb-payment-success', 'SslPaymentController@makePaymentOnSuccess')->name('drb.payment.success');
+    Route::post('drb-payment-fail', 'SslPaymentController@handleFailedPayment')->name('drb.payment.fail');
+});
+
+//tutorial
+Route::group(['prefix' => 'tutorials'], function (){
+    Route::get('/view/{category_id?}','TutorialController@index')->name('tutorials.view.index');
+    Route::get('/{id}/details','TutorialController@showDetails')->name('tutorials.details');
 });
 
 //filtered news

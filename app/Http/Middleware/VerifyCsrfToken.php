@@ -21,6 +21,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'subscriptionplan/success',
         'subscriptionplan/fail',
-        'payment-complete'
+        'payment-complete',
+        'drb-payment-success',
+        'drb-payment-fail',
     ];
 }

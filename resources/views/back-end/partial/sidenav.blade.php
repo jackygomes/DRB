@@ -99,6 +99,12 @@
             <li class="{{ request()->url() == route('offline.payments') ? 'sidebar-active' : '' }}">
                 <a href="{{route('offline.payments')}}">Offline Payments</a>
             </li>
+            <li class="{{ request()->url() == route('tutorial.index') ? 'sidebar-active' : '' }}">
+                <a href="{{route('tutorial.index')}}">Tutorials</a>
+            </li>
+            <li class="{{ request()->url() == route('tutorials.create.category') ? 'sidebar-active' : '' }}">
+                <a href="{{route('tutorials.create.category')}}">Tutorial Category</a>
+            </li>
             {{-- <li >
                 <a href="#">About</a>
             </li>

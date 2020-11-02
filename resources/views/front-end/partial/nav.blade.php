@@ -126,6 +126,12 @@
                     @endif
                 @endforeach
 
+                <li class="nav-item nav-custom-margin-top">
+                    <a class="nav-link font-weight-bold text-white" href="{{ route('tutorials.view.index') }}" >
+                        <small class="font-weight-bold nav-item-custom-size">TUTORIAL</small>
+                    </a>
+                </li>
+
 
 
                 <li class="signin-buttons form-inline my-2 my-lg-0">

@@ -94,4 +94,17 @@ class User extends Authenticatable implements MustVerifyEmail
            return false;
        }
     }
+
+    /**
+     * @param $tutorialId
+     * @return bool
+     */
+    public static function hasRegisteredOnThisTutorial($tutorialId)
+    {
+        $invoice = TutorialInvoice::where('user_id', auth()->user()->id)->where('tutorial_id', $tutorialId)->first();
+        if($invoice)
+            return true;
+        else
+            return false;
+    }
 }
