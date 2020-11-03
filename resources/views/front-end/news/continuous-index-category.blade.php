@@ -251,6 +251,7 @@
                 data() {
                     return {
                         last_id: 0,
+                        canMakeCall : true,
                         threshold: 300,
                         count: 0,
                         content: [],
@@ -322,13 +323,7 @@
                         //console.log(window.scrollY);
                         if (window.scrollY > this.threshold) {
                             this.call();
-                            if (this.latest_call != []) {
-                                this.initial = this.initial.concat(this.latest_call);
-                                this.loadDynamicContent();
-                                this.threshold = this.threshold + 300;
-                            }
                         }
-                        ;
                     },
                     call() {
                         //console.log("calling");
@@ -337,39 +332,49 @@
                             return;
                         }
                         let url = '/api/news/by-category/last_id/' + this.last_id + '/' + {{ $category_id }} ;
-                        console.log(url);
-                        fetch(url, {
-                            method: 'Get', // *GET, POST, PUT, DELETE, etc.
-                            mode: 'cors', // no-cors, cors, *same-origin
-                            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                            credentials: 'same-origin', // include, *same-origin, omit
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer ' + localStorage.access_token,
-                                // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            redirect: 'follow', // manual, *follow, error
-                            referrer: 'no-referrer', // no-referrer, *client
+                        //console.log(url);
+                        if(this.canMakeCall){
+                            this.canMakeCall = false
+                            fetch(url, {
+                                method: 'Get', // *GET, POST, PUT, DELETE, etc.
+                                mode: 'cors', // no-cors, cors, *same-origin
+                                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                                credentials: 'same-origin', // include, *same-origin, omit
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer ' + localStorage.access_token,
+                                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                redirect: 'follow', // manual, *follow, error
+                                referrer: 'no-referrer', // no-referrer, *client
 
-                        })
-                            .then(function (response) {
-                                return response.json();
                             })
-                            .then(response => {
-                                if (response.success == true) {
-                                    this.latest_call = response.items;
-                                    this.last_id = response.last_id;
-                                } else {
-                                    this.latest_call = [];
-                                    this.last_id = "none";
-                                }
-                            });
+                                .then(function (response) {
+                                    return response.json();
+                                })
+                                .then(response => {
+                                    if (response.success == true) {
+                                        //console.log(response.items)
+                                        this.latest_call = response.items;
+                                        this.last_id = response.last_id;
+                                        if (this.latest_call != []) {
+                                            this.initial = this.initial.concat(this.latest_call);
+                                            this.threshold = this.threshold + 300;
+
+                                        }
+                                        this.canMakeCall = true;
+                                    } else {
+                                        this.latest_call = [];
+                                        this.last_id = "none";
+                                    }
+                                });
+                        }
                     },
 
                     initial_call() {
                         let url = '/api/news/by-category/last_id/' + this.last_id + '/' + {{ $category_id }} ;
 
-                        console.log(url);
+                        //console.log(url);
                         fetch(url, {
                             method: 'Get', // *GET, POST, PUT, DELETE, etc.
                             mode: 'cors', // no-cors, cors, *same-origin
@@ -386,7 +391,7 @@
                         })
                             .then(res => res.json())
                             .then(data => {
-//                                console.log(data.items)
+                                //console.log(data.items)
                                 this.initial = data.items;
                                 this.last_id = data.last_id;
                             });
