@@ -140,7 +140,9 @@ class TutorialController extends Controller
 
     public function categoryView()
     {
-        return view('back-end.tutorial.category-view');
+        $categories = TutorialCategory::get();
+        $dateOrganizer = new DateOrganizer();
+        return view('back-end.tutorial.category-view', compact('categories', 'dateOrganizer'));
     }
 
     /**
