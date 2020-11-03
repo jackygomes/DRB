@@ -24,14 +24,14 @@
     </div>
 </section> --}}
 <section class="news">
-    <div class="container" id="app">
+    <div class="container-fluid" id="app">
         <div class="row custom-header-top">
 
             <div class="col-12 col-md-2">
                 <div class="wrapper">
                     <!-- Sidebar  -->
                     <nav id="sidebar"
-                         class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide" style="width: 235px; margin-top: 241px;">
+                         class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide" style="width: 220px;">
 
                         <ul class="list-unstyled components">
                             <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <a href="{{route('news.index')}}" class="btn btn-outline-warning mb-3">All News</a>
                 <div class="bg-light shadow-sm border-bottom border-warning mb-5">
                     <div class="row" id="{{$news->id}}">
@@ -147,7 +147,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8 offset-2">
                 <h4 class="main-text-color">Latest News</h4>
                 @foreach($latestNews as $news)
                     <div class="shadow-sm mb-3 p-4">
@@ -172,7 +172,7 @@
                         </div>
                         <div class="row">
                             <div class="ml-auto responsive-share-btns">
-                                <div class="addthis_inline_share_toolbox news-share-buttons" data-url="'{{ env('APP_URL') }}/single-news/' + {{$news->id}}" data-title="{{$news->heading}}" data-description="{{$news->body}}" data-media="'{{ env('S3_URL') }}' + {{$news->image}}"></div>
+                                <div class="addthis_inline_share_toolbox news-share-buttons" data-url="{{env('APP_URL')}}/single-news/{{$news->id}}" data-title="{{$news->heading}}" data-description="{{$news->body}}" data-media="{{ env('S3_URL') }}{{$news->image}}"></div>
                             </div>
                         </div>
                     </div>

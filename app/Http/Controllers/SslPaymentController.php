@@ -14,8 +14,8 @@ class SslPaymentController extends Controller
     public function makePaymentRequest($amount, $productType, $transactionId){
 
         $requireSslData = [
-            'store_id' => config('drb.sslCredentials.storeID'),
-            'store_passwd' => config('drb.sslCredentials.storePass'),
+            'store_id' => env('SSL_STORE_ID'),
+            'store_passwd' => env('SSL_STORE_PASS'),
             'total_amount' => $amount,
             'currency' => 'BDT',
             'tran_id' => $transactionId,
