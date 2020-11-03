@@ -235,7 +235,7 @@
                 },
 
                 handleScroll(event) {
-                    console.log(window.scrollY);
+//                    console.log(window.scrollY);
                     if (window.scrollY > this.threshold) {
                         this.call();
                         if (this.latest_call != []) {

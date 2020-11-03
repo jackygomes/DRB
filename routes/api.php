@@ -23,7 +23,7 @@ Route::get('fetch/dse', 'ApiController@fetchDSE');
 Route::get('news/{time}', 'ApiController@getAllNews');
 Route::get('news/from/{from}/to/{to}', 'ApiController@getCustomRangeNews');
 Route::get('news/last_id/{last_id}', 'ApiController@getNewsByLastId');
-Route::get('news/last_id/{last_id}/{category_id}', 'ApiController@getNewsByCategory');
+Route::get('news/by-category/last_id/{last_id}/{category_id}', 'ApiController@getNewsByCategory');
 Route::get('news/newspaper/last_id/{last_id}/{newspaper_id}', 'ApiController@getNewsByNewspaper');
 Route::post('news-for-you/last_id/{last_id}', 'ApiController@getNewsByFilter');
 

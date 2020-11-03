@@ -336,8 +336,8 @@
                             console.log('no call');
                             return;
                         }
-                        let url = '/api/news/last_id/' + this.last_id + '/' + {{ $category_id }} ;
-                        //console.log(url);
+                        let url = '/api/news/by-category/last_id/' + this.last_id + '/' + {{ $category_id }} ;
+                        console.log(url);
                         fetch(url, {
                             method: 'Get', // *GET, POST, PUT, DELETE, etc.
                             mode: 'cors', // no-cors, cors, *same-origin
@@ -367,9 +367,9 @@
                     },
 
                     initial_call() {
-                        let url = '/api/news/last_id/' + this.last_id + '/' + {{ $category_id }} ;
+                        let url = '/api/news/by-category/last_id/' + this.last_id + '/' + {{ $category_id }} ;
 
-                        //console.log(url);
+                        console.log(url);
                         fetch(url, {
                             method: 'Get', // *GET, POST, PUT, DELETE, etc.
                             mode: 'cors', // no-cors, cors, *same-origin
@@ -386,7 +386,7 @@
                         })
                             .then(res => res.json())
                             .then(data => {
-//                                console.log(data)
+//                                console.log(data.items)
                                 this.initial = data.items;
                                 this.last_id = data.last_id;
                             });
