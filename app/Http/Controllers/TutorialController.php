@@ -23,7 +23,8 @@ class TutorialController extends Controller
             $tutorials = Tutorial::where('status', 1)->paginate(50);
 
         $tutorialCategories = TutorialCategory::get();
-        return view('front-end.tutorial.index', compact('tutorials', 'tutorialCategories'));
+        $dateOrganizer = new DateOrganizer();
+        return view('front-end.tutorial.index', compact('tutorials', 'tutorialCategories', 'dateOrganizer'));
     }
 
     /**

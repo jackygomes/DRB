@@ -132,7 +132,7 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
         Route::post('newspapers/update/{id}', 'NewspaperController@update')->name('newspapers.update');
 
         //tutorial routes
-        Route::group(['prefix' => 'tutorial'], function(){
+        Route::group(['prefix' => 'trainings'], function(){
             Route::get('/','TutorialController@adminIndex')->name('tutorial.index');
             Route::get('/create','TutorialController@create')->name('tutorial.create');
             Route::get('/update-status/{id}', 'TutorialController@updateStatus')->name('tutorial.update.status');
@@ -199,7 +199,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 //tutorial
-Route::group(['prefix' => 'tutorials'], function (){
+Route::group(['prefix' => 'trainings'], function (){
     Route::get('/view/{category_id?}','TutorialController@index')->name('tutorials.view.index');
     Route::get('/{id}/details','TutorialController@showDetails')->name('tutorials.details');
 });
