@@ -33,6 +33,14 @@
                         <div class="mb-3">
                             <div class="row">
 
+                                @if(Session::has('success'))
+                                <div class="col-md-4 offset-4">
+                                    <div class="alert alert-success" role="alert">
+                                        {{Session::get('success')}}
+                                    </div>
+                                </div>
+                                @endif
+
                                 {{--left section--}}
                                 <div class="col-md-5">
                                     <div class="single-news-border">

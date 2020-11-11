@@ -158,6 +158,8 @@
                                         @else
                                             <a href="{{URL::to('/login')}}" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1"> Login</a>
                                         @endif
+
+                                            <a href="{{route('tutorials.add.to.calendar', $tutorial->id)}}" class="btn btn-warning btn-sm my-2 my-sm-0 mx-1">Add To Calendar</a>
                                     </div>
 
                                     <div class="col-md-12 col-6 research-price-section">

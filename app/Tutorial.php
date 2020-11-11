@@ -11,6 +11,7 @@ class Tutorial extends Model
         'name'          ,
         'tutorial_image',
         'date'          ,
+        'end_date'      ,
         'trainers'      ,
         'description'   ,
         'attendees'     ,

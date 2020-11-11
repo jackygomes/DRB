@@ -22,4 +22,9 @@ return [
         'storeID' => env('SSL_STORE_ID'),
         'storePass' => env('SSL_STORE_PASS'),
     ],
+
+    'googleCalendar' => [
+        'clientId' => '420129696907-m22u3e7jbiss9h4t4ovdli2scqtdj1np.apps.googleusercontent.com',
+        'clientSecret' => 'Uhf2L6-TB6Rmozj5KIV0bQWY',
+    ],
 ];

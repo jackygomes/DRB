@@ -7,7 +7,11 @@ use App\Service\DateOrganizer;
 use App\Tutorial;
 use App\TutorialCategory;
 use App\TutorialInvoice;
+use Google\Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
 use Illuminate\Http\Request;
+use Matrix\Exception;
 
 class TutorialController extends Controller
 {
@@ -17,9 +21,9 @@ class TutorialController extends Controller
      */
     public function index($categoryId = false)
     {
-        if($categoryId){
+        if ($categoryId) {
             $tutorials = Tutorial::where('tutorial_category_id', $categoryId)->where('status', 1)->paginate(50);
-        }else
+        } else
             $tutorials = Tutorial::where('status', 1)->paginate(50);
 
         $tutorialCategories = TutorialCategory::get();
@@ -50,23 +54,24 @@ class TutorialController extends Controller
      * @param TutorialFormValidation $request
      * @return $this
      */
-    public function storeTutorial(TutorialFormValidation $request){
-        $input = (object) $request->validated();
+    public function storeTutorial(TutorialFormValidation $request)
+    {
+        $input = (object)$request->validated();
 
-        $imageName = time(). '.' . $input->tutorial_image->extension();
+        $imageName = time() . '.' . $input->tutorial_image->extension();
         $input->tutorial_image->move(storage_path('app/public/tutorial'), $imageName);
 
         Tutorial::create([
             'tutorial_category_id' => $input->tutorial_category_id,
-            'name'              => $input->name,
-            'tutorial_image'    => $imageName,
-            'date'              => $input->date,
-            'trainers'          => json_encode($input->trainers),
-            'description'       => $input->description,
-            'attendees'         => $input->attendees,
-            'curriculum'        => $input->curriculum,
-            'requirement'       => $input->requirement,
-            'price'             => $input->price,
+            'name' => $input->name,
+            'tutorial_image' => $imageName,
+            'date' => $input->date,
+            'trainers' => json_encode($input->trainers),
+            'description' => $input->description,
+            'attendees' => $input->attendees,
+            'curriculum' => $input->curriculum,
+            'requirement' => $input->requirement,
+            'price' => $input->price,
         ]);
 
         return redirect()->route('tutorial.create')->with('success', 'Tutorial Creation Successful');
@@ -118,23 +123,23 @@ class TutorialController extends Controller
      */
     public function makePayment($tutorialId, SslPaymentController $sslPayment)
     {
-        try{
+        try {
             $tutorial = Tutorial::findOrFail($tutorialId);
 
             $transactionId = strtoupper(bin2hex(random_bytes(10)));
 
             $invoice = TutorialInvoice::create([
-                'user_id'           => auth()->user()->id,
-                'tutorial_id'       => $tutorial->id,
-                'amount'            => $tutorial->price,
-                'is_paid'           => 0,
-                'transaction_id'    => $transactionId,
+                'user_id' => auth()->user()->id,
+                'tutorial_id' => $tutorial->id,
+                'amount' => $tutorial->price,
+                'is_paid' => 0,
+                'transaction_id' => $transactionId,
             ]);
 
             $paymentRoute = $sslPayment->makePaymentRequest($invoice->amount, config('drb.paymentType.tutorial'), $transactionId);
             return redirect($paymentRoute);
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Cant Proceed Payment. Something Went Wrong');
         }
     }
@@ -153,7 +158,7 @@ class TutorialController extends Controller
     public function addCategory(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required'
+            'name' => 'required'
         ]);
 
         TutorialCategory::create([
@@ -162,5 +167,67 @@ class TutorialController extends Controller
 
         return redirect()->back()->with('success', 'Added New Category');
     }
+
+    public function addToCalendar($id = false)
+    {
+        $http = new \GuzzleHttp\Client([
+            'verify' => false,
+        ]);
+
+        $client = new Client();
+        $client->setHttpClient($http);
+        $client->setApplicationName('Training Event');
+        $client->setScopes(Google_Service_Calendar::CALENDAR_EVENTS);
+        $client->setClientId(config('drb.googleCalendar.clientId'));
+        $client->setClientSecret(config('drb.googleCalendar.clientSecret'));
+        $client->setAccessType('offline');
+        $client->setPrompt('select_account consent');
+        $client->setRedirectUri('https://5d10707899df.ngrok.io/trainings/add-to-calendar'); //route('tutorials.add.to.calendar')
+
+        if (!isset($_GET['code'])) {
+            $client->setState(base64_encode(json_encode(['tutorial_id' => $id])));
+            $auth_url = $client->createAuthUrl();
+            header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+            exit();
+
+        } elseif (isset($_GET['code'])) {
+            $tokenInfo = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $client->setAccessToken($tokenInfo);
+
+            //calender code
+            if(isset($_GET['state'])){
+                $tutorialId =  json_decode(base64_decode($_GET['state']))->tutorial_id;
+                $tutorial = Tutorial::where('id', $tutorialId)->first();
+
+                try{
+                    //event setup
+                    $event = new Google_Service_Calendar_Event();
+                    $event->setSummary($tutorial->name);
+
+                    $start = new \Google_Service_Calendar_EventDateTime();
+                    $start->setDateTime($tutorial->date . ':00+06:00');
+                    $start->setTimeZone('Asia/Dhaka');
+                    $event->setStart($start);
+
+                    $end = new \Google_Service_Calendar_EventDateTime();
+                    $end->setDateTime($tutorial->end_date . ':00+06:00');
+                    $end->setTimeZone('Asia/Dhaka');
+                    $event->setEnd($end);
+
+                    $calendarService = new Google_Service_Calendar($client);
+                    $calendarId = 'primary';
+
+                    $result = $calendarService->events->insert($calendarId, $event);
+                    //dd($result->htmlLink);
+
+                    return redirect()->route('tutorials.details', $tutorial->id)->with('success', 'Added Training Event To Calendar');
+                }catch (Exception $e){
+                    echo $e->getMessage();
+                }
+            }
+        }
+
+    }
+
 
 }
