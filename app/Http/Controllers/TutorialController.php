@@ -182,7 +182,8 @@ class TutorialController extends Controller
         $client->setClientSecret(config('drb.googleCalendar.clientSecret'));
         $client->setAccessType('offline');
         $client->setPrompt('select_account consent');
-        $client->setRedirectUri('https://5d10707899df.ngrok.io/trainings/add-to-calendar'); //route('tutorials.add.to.calendar')
+        $client->setRedirectUri(route('tutorials.add.to.calendar'));
+        //$client->setRedirectUri('https://5d10707899df.ngrok.io/trainings/add-to-calendar'); //route('tutorials.add.to.calendar')
 
         if (!isset($_GET['code'])) {
             $client->setState(base64_encode(json_encode(['tutorial_id' => $id])));
