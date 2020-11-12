@@ -79,7 +79,9 @@
 
                                     <div class="trainers mt-4">
                                         <h5>Trainers</h5>
-                                        <p style="">{{implode(', ', json_decode($tutorial->trainers))}}</p>
+                                        @foreach(json_decode($tutorial->trainers) as $trainer)
+                                            <p>{{$trainer->name}}, {{$trainer->desg}}, {{$trainer->org}}</p>
+                                        @endforeach
                                     </div>
 
                                     <div class="curriculum mt-4">

@@ -66,6 +66,7 @@ class TutorialController extends Controller
             'name' => $input->name,
             'tutorial_image' => $imageName,
             'date' => $input->date,
+            'end_date' => $input->end_date,
             'trainers' => json_encode($input->trainers),
             'description' => $input->description,
             'attendees' => $input->attendees,
@@ -168,6 +169,10 @@ class TutorialController extends Controller
         return redirect()->back()->with('success', 'Added New Category');
     }
 
+    /**
+     * @param bool $id
+     * @return $this
+     */
     public function addToCalendar($id = false)
     {
         $http = new \GuzzleHttp\Client([

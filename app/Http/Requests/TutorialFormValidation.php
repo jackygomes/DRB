@@ -28,6 +28,7 @@ class TutorialFormValidation extends FormRequest
             'name'              => 'required',
             'tutorial_image'    => 'required',
             'date'              => 'required',
+            'end_date'          => 'required',
             'trainers'          => 'required',
             'description'       => 'required',
             'attendees'         => 'required',

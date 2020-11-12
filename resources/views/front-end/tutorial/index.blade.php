@@ -125,7 +125,11 @@
                                         <h5>{{$tutorial->name}}</h5>
                                     </a>
                                     <p class="text-secondary ">Time: <span style="color: #222222; font-weight: 500;">{{$dateOrganizer->makePrettyDate($tutorial->date)}}</span></p>
-                                    <p class="text-secondary ">Trainer: {{implode(', ', json_decode($tutorial->trainers))}}</p>
+                                    <p class="text-secondary ">Trainer:
+                                        @foreach(json_decode($tutorial->trainers) as $trainers)
+                                            {{$trainers->name}},
+                                        @endforeach
+                                    </p>
 
                                     @if($tutorial->description)
                                         <div class="description">
