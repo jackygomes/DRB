@@ -6,7 +6,7 @@
             <ul class="list-unstyled components pt-0">
 
                 <li class="{{ collect(request()->segments())->last() == 'view' ? 'news-sidenav-active' : '' }} mb-1">
-                    <a class="{{ Request::get('provider') == '' ? 'news-sidenav-hover' : '' }} provider" data-name="" href="{{route('tutorials.view.index')}}">All Provider</a>
+                    <a class="{{ Request::get('provider') == '' ? 'news-sidenav-hover' : '' }} provider" data-name="" href="{{route('tutorials.view.index')}}">All Training</a>
                 </li>
 
                 @foreach($tutorialCategories as $tutorialCategory)

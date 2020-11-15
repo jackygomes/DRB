@@ -102,9 +102,6 @@
             <li class="{{ request()->url() == route('tutorial.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('tutorial.index')}}">Trainings</a>
             </li>
-            <li class="{{ request()->url() == route('tutorials.create.category') ? 'sidebar-active' : '' }}">
-                <a href="{{route('tutorials.create.category')}}">Training Category</a>
-            </li>
             {{-- <li >
                 <a href="#">About</a>
             </li>

@@ -11,10 +11,10 @@
     <div class="row">
         <div class="col-md-12">
             <a href="{{route('tutorial.create')}}" class="btn btn-outline-primary mb-4">
-            <span class="fa-clickable" data-toggle="modal" data-target="#academics">
-                <i class="fas fa-pen"></i> Add Tutorial
-            </span>
+                <i class="fas fa-pen"></i> Add Training
             </a>
+
+            <a href="{{route('tutorials.create.category')}}" class="btn btn-outline-primary mb-4"> Training Category </a>
         </div>
     </div>
 
