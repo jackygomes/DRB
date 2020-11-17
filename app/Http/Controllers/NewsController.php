@@ -6,6 +6,7 @@ use App\Category;
 use App\MostRecent;
 use App\NewsForYou;
 use App\Newspaper;
+use App\Service\CategoryTrackerService;
 use Illuminate\Http\Request;
 use App\News;
 use Auth;
@@ -164,9 +165,14 @@ class NewsController extends Controller
         return view('front-end.news.index', compact('allnews'));
     }
 
-    public function newsByCategoty($category)
+    public function newsByCategoty($category, CategoryTrackerService $categoryTrackerService)
     {
         $category = Category::where('name', $category)->first();
+
+        if(auth()->user()){
+            $categoryTrackerService->trackVisitedCategory($category->id);
+        }
+
         $categories = Category::where('is_published', 1)->orderBy('order', 'asc')->get();
 //        $newsSources = News::where('is_published', 1)->first();
         $mostrecents = MostRecent::where('is_published', 1)->orderBy('created_at', 'DESC')->get();
