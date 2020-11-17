@@ -73,30 +73,28 @@
 
     <!-- JQuery and Bootstrap -->
     @if(\Request::path() != 'visualize/data-matrix')
-        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     @endif
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- JQuery Easing -->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
     <!-- Owl -->
-    <script src="/vendor/owl/owl.carousel.min.js"></script>
+    <script src="{{asset('vendor/owl/owl.carousel.min.js')}}"></script>
 
     <!-- Plugin JavaScripts -->
-    <script src="/vendor/chart.js/Chart.min.js"></script>
-    <script src="/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
+    <script src="{{asset('vendor/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
 
     <!-- Custom scripts -->
-    <script src="/js/script.js"></script>
+    <script src="{{asset('js/script.js')}}"></script>
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dce8059e10469a8"></script> --}}
-    <script type="text/javascript" src="/js/addthis_widget.js#pubid=ra-5dce8059e10469a8" >
-
-    </script>
+    <script type="text/javascript" src="{{asset('js/addthis_widget.js#pubid=ra-5dce8059e10469a8')}}" ></script>
 
     <script>
     $(window).scroll(function() {

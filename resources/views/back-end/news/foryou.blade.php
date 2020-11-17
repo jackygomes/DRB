@@ -19,6 +19,25 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="form-group ">
+                            <p class="mb-0">Languages:</p>
+                            <div class="form-check form-check-inline filter_item_design {{($filter && $filter->language == 'english') ? 'filter_item_design_background' : ''}}" style="padding-left: 10px">
+                                <input {{($filter && $filter->language == 'english') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio1" value="english">
+                                <label class="form-check-label" for="inlineRadio1">English</label>
+                            </div>
+                            <div class="form-check form-check-inline filter_item_design {{($filter &&$filter->language == 'bangla') ? 'filter_item_design_background' : ''}} " style="padding-left: 10px">
+                                <input {{($filter &&$filter->language == 'bangla') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio2" value="bangla">
+                                <label class="form-check-label" for="inlineRadio2">Bangla</label>
+                            </div>
+
+                            <div class="form-check form-check-inline filter_item_design {{($filter && $filter->language == 'both') ? 'filter_item_design_background' : ''}}" style="padding-left: 10px">
+                                <input {{($filter && $filter->language == 'both') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio2" value="both">
+                                <label class="form-check-label" for="inlineRadio2">Both</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
                         <div class="form-group">
                             <p class="mb-0">Newspapers :</p>
                             @foreach($newspapers as $newspaper)
@@ -67,24 +86,6 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="form-group ">
-                            <p class="mb-0">Languages:</p>
-                            <div class="form-check form-check-inline filter_item_design {{($filter && $filter->language == 'english') ? 'filter_item_design_background' : ''}}" style="padding-left: 10px">
-                                <input {{($filter && $filter->language == 'english') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio1" value="english">
-                                <label class="form-check-label" for="inlineRadio1">English</label>
-                            </div>
-                            <div class="form-check form-check-inline filter_item_design {{($filter &&$filter->language == 'bangla') ? 'filter_item_design_background' : ''}} " style="padding-left: 10px">
-                                <input {{($filter &&$filter->language == 'bangla') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio2" value="bangla">
-                                <label class="form-check-label" for="inlineRadio2">Bangla</label>
-                            </div>
-
-                            <div class="form-check form-check-inline filter_item_design {{($filter && $filter->language == 'both') ? 'filter_item_design_background' : ''}}" style="padding-left: 10px">
-                                <input {{($filter && $filter->language == 'both') ? 'checked' : ''}} class="form-check-input" type="radio" name="language" id="inlineRadio2" value="both">
-                                <label class="form-check-label" for="inlineRadio2">Both</label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
