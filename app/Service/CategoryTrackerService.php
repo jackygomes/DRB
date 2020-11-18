@@ -15,21 +15,21 @@ class CategoryTrackerService
 {
     public function trackVisitedCategory($categoryId){
 
-        if( $visitedCategories = CategoryTracker::where('user_id', auth()->user()->id)->first()){
+        if( $visitedCategoriesData = CategoryTracker::where('user_id', auth()->user()->id)->first()){
 
-            $categories = json_decode($visitedCategories->category_visited);
+            $visitedCategories = json_decode($visitedCategoriesData->category_visited);
 
             $flag = true;
 
-            foreach ($categories as $key => $category){
-                if(array_key_exists($categoryId, (array) $category)){
+            //update existing
+            foreach ($visitedCategories as $key => $category){
 
-                    $arrayKey = array_key_first((array) $categories[$key]);
+                if($category->category_id == $categoryId){
 
-                    $categories[$key]->$arrayKey = $categories[$key]->$arrayKey + 1;
+                    $visitedCategories[$key]->counter += 1;
 
-                    $visitedCategories->update([
-                        'category_visited' => json_encode($categories)
+                    $visitedCategoriesData->update([
+                        'category_visited' => json_encode($visitedCategories)
                     ]);
 
                     $flag = false;
@@ -37,18 +37,28 @@ class CategoryTrackerService
                 }
             }
 
-
+            //add category in existing tracking data
             if($flag){
-                array_push($categories, (object) [$categoryId => 1]);
-                $visitedCategories->update([
-                    'category_visited' => json_encode($categories)
+                array_push($visitedCategories, [
+                    'category_id' => $categoryId,
+                    'counter' => 1
+                ]);
+
+                $visitedCategoriesData->update([
+                    'category_visited' => json_encode($visitedCategories)
                 ]);
             }
 
         }else{
+            //create new tracking
             CategoryTracker::create([
                 'user_id' => auth()->user()->id,
-                'category_visited' => json_encode([[$categoryId => 1]], true)
+                'category_visited' => json_encode([
+                    [
+                        'category_id' => $categoryId,
+                        'counter' => 1
+                    ]
+                ], true)
             ]);
         }
     }

@@ -225,6 +225,7 @@
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
                         body: JSON.stringify({
+                            'user_id' : {{auth()->user()->id}},
                             'categories' : {{$filter->category_id}},
                             'newspapers' : {{$filter->newspaper_id}},
                             'language' : '{{$filter->language}}'
@@ -262,6 +263,7 @@
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
                         body: JSON.stringify({
+                            'user_id' : {{auth()->user()->id}},
                             'categories' : {{$filter->category_id}},
                             'newspapers' : {{$filter->newspaper_id}},
                             'language' : '{{$filter->language}}'
@@ -270,7 +272,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-//                            console.log(data)
+                            console.log(data)
                             this.initial = data.items;
                             this.last_id = data.last_id;
                         });
