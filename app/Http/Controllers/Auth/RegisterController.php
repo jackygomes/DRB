@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -80,6 +81,7 @@ class RegisterController extends Controller
             'institution' => $data['institution'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_verified_at' => Carbon::now()
         ]);
     }
 }
