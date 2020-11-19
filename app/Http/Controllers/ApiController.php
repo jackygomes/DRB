@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoryTracker;
+use App\Service\CategoryTrackerService;
 use Illuminate\Http\Request;
 use App\Company;
 use App\News;
@@ -93,8 +95,15 @@ class ApiController extends Controller
     }
 
 
-    public function getNewsByFilter(Request $request, $last_id)
+    public function getNewsByFilter(Request $request, $last_id, CategoryTrackerService $categoryTrackerService)
     {
+        $trackedCategories = CategoryTracker::where('user_id', $request->user_id)->first();
+
+        if($trackedCategories){
+            $trackedCategoriesArray = json_decode($trackedCategories->category_visited);
+            $request->categories = $categoryTrackerService->getCategoriesWithTracking($trackedCategoriesArray, $request->categories);
+        }
+
         if ($last_id != 0) {
             if ($request->language == 'both') {
                 $allnews = News::where('id', '<', $last_id)
@@ -134,6 +143,7 @@ class ApiController extends Controller
                 'success' => true,
                 'items' => $allnews,
                 'last_id' => $allnews->last()->id,
+                'tracked' => $request->categories
             ]);
         } else {
             return response()->json([

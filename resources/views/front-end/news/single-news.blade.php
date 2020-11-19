@@ -5,6 +5,10 @@
     <meta property="og:image" content="{{ env('S3_URL') }}{{$news->image}}" />
 @endsection
 @section('content')
+
+    {{--facebook sharing tag--}}
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=2035405903456228&autoLogAppEvents=1" nonce="V3HyAA3j"></script>
 <!-- Navigation -->
 
 {{-- <section class="news">
@@ -72,8 +76,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div  class="col-md-3 mt-2">
-                            <button type="button" class="btn btn-light btn-sm mb-3 border border-secondary" @click='isshowcomment({{$news->id}})'><i class="far fa-comment-alt"></i> Comment</button>
+                        <div  class="col-md-6 mt-2">
+                            <button type="button" class="btn btn-light btn-sm mb-2 mr-2 border border-secondary" @click='isshowcomment({{$news->id}})'><i class="far fa-comment-alt"></i> Comment</button>
+
+                            <span>
+                                <div class="fb-share-button" data-href="{{route('news.single', $news->id)}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{route('news.single', $news->id)}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                            </span>
                         </div>
                     </div>    
                     <div>
@@ -153,7 +161,7 @@
                     <div class="shadow-sm mb-3 p-4">
                         <div class="row">
                             <div class="col-md-9">
-                                <a href="{{$news->source}}" target="_blank"><h5>{{$news->heading}}</h5></a>
+                                <a href="{{route('news.single', $news->id)}}" target="_blank"><h5>{{$news->heading}}</h5></a>
                                 <a href="{{$news->source}}" target="_blank">
                                     <p class="text-justify word-break">
                                         {{$news->body}} |

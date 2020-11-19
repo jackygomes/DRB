@@ -72,7 +72,7 @@
                             <div class="shadow-sm mb-3 single-news-border">
                                 <div class="row" v-bind:id="item.id">
                                     <div class="col-md-9">
-                                        <a :href="item.source" target="_blank"><h5>@{{item.heading}}</h5></a>
+                                        <a :href="'/single-news/' + item.id" target="_blank"><h5>@{{item.heading}}</h5></a>
                                         <a :href="item.source" target="_blank"><p class="text-justify word-break">
                                                 @{{item.body}} | <span class="text-secondary small">@{{item.human_readable_time}}</span>
                                             </p></a>
@@ -155,7 +155,7 @@
             },
             methods: {
                 loadDynamicContent: function () {
-                    addthis.layers.refresh();
+//                    addthis.layers.refresh();
                 },
                 getUrl: function (item) {
                     let url = this.url;
@@ -225,6 +225,7 @@
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
                         body: JSON.stringify({
+                            'user_id' : {{auth()->user()->id}},
                             'categories' : {{$filter->category_id}},
                             'newspapers' : {{$filter->newspaper_id}},
                             'language' : '{{$filter->language}}'
@@ -238,6 +239,7 @@
                             if (response.success == true) {
                                 this.latest_call = response.items;
                                 this.last_id = response.last_id;
+                                addthis.layers.refresh();
                             } else {
                                 this.latest_call = [];
                                 this.last_id = "none";
@@ -248,7 +250,7 @@
                 initial_call() {
                     let url = '/api/news-for-you/last_id/' + this.last_id;
 
-                    console.log(url);
+//                    console.log(url);
                     fetch(url, {
                         method: 'Post', // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, cors, *same-origin
@@ -262,6 +264,7 @@
                         redirect: 'follow', // manual, *follow, error
                         referrer: 'no-referrer', // no-referrer, *client
                         body: JSON.stringify({
+                            'user_id' : {{auth()->user()->id}},
                             'categories' : {{$filter->category_id}},
                             'newspapers' : {{$filter->newspaper_id}},
                             'language' : '{{$filter->language}}'
@@ -273,6 +276,7 @@
 //                            console.log(data)
                             this.initial = data.items;
                             this.last_id = data.last_id;
+                            addthis.layers.refresh();
                         });
                 }
             },
