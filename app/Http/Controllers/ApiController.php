@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CategoryTracker;
+use App\Service\CategoryTrackerService;
 use Illuminate\Http\Request;
 use App\Company;
 use App\News;
@@ -94,38 +95,14 @@ class ApiController extends Controller
     }
 
 
-    public function getNewsByFilter(Request $request, $last_id)
+    public function getNewsByFilter(Request $request, $last_id, CategoryTrackerService $categoryTrackerService)
     {
-//        $trackedCategories = CategoryTracker::where('user_id', $request->user_id)->first();
-//        $trackedCategoriesArray = json_decode($trackedCategories->category_visited);
-//
-//        $countersArray = [];
-//
-//        foreach ($trackedCategoriesArray as $category){
-//            $countersArray[] = $category->counter;
-//            rsort($countersArray);
-//        }
-//
-//        $i = 0;
-//        $categoriesToBeAdded = [];
-//        foreach ($trackedCategoriesArray as $category){
-//            if($category->counter == $countersArray[$i]){
-//                $categoriesToBeAdded[] = $category->category_id;
-//                $i++;
-//
-//                if($i == 3)
-//                    break;
-//            }
-//        }
+        $trackedCategories = CategoryTracker::where('user_id', $request->user_id)->first();
 
-
-
-//        return response()->json([
-//            'success' => false,
-//            'items' => [],
-//            'categories' => $request->categories,
-//            'tracked' => $categoriesToBeAdded
-//        ]);
+        if($trackedCategories){
+            $trackedCategoriesArray = json_decode($trackedCategories->category_visited);
+            $request->categories = $categoryTrackerService->getCategoriesWithTracking($trackedCategoriesArray, $request->categories);
+        }
 
         if ($last_id != 0) {
             if ($request->language == 'both') {
@@ -166,6 +143,7 @@ class ApiController extends Controller
                 'success' => true,
                 'items' => $allnews,
                 'last_id' => $allnews->last()->id,
+                'tracked' => $request->categories
             ]);
         } else {
             return response()->json([

@@ -63,4 +63,35 @@ class CategoryTrackerService
         }
     }
 
+    public function getCategoriesWithTracking($trackedCategoriesArray, $forYouCategories){
+        $countersArray = [];
+
+        //getting sorted counter array
+        foreach ($trackedCategoriesArray as $category){
+            $countersArray[] = $category->counter;
+            rsort($countersArray);
+        }
+
+        //getting top 3 counter key (category)
+        $categoriesToBeAdded = [];
+        foreach ($countersArray as $key => $counter) {
+            foreach ($trackedCategoriesArray as $category) {
+                if ($category->counter == $counter) {
+                    $categoriesToBeAdded[] = $category->category_id;
+                }
+            }
+
+            if ($key == 2)
+                break;
+        }
+
+        foreach ($categoriesToBeAdded as $newCategory){
+            if(!in_array($newCategory, $forYouCategories)){
+                array_push($forYouCategories, $newCategory);
+            }
+        }
+
+        return $forYouCategories;
+    }
+
 }
