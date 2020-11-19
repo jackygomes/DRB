@@ -281,7 +281,7 @@
                 },
                 methods: {
                     loadDynamicContent: function () {
-                        addthis.layers.refresh();
+                        //addthis.layers.refresh();
                     },
                     getUrl: function (item) {
                         let url = this.url;
@@ -363,6 +363,7 @@
 
                                         }
                                         this.canMakeCall = true;
+                                        addthis.layers.refresh();
                                     } else {
                                         this.latest_call = [];
                                         this.last_id = "none";
@@ -394,6 +395,7 @@
                                 //console.log(data.items)
                                 this.initial = data.items;
                                 this.last_id = data.last_id;
+                                addthis.layers.refresh();
                             });
                     }
                 },

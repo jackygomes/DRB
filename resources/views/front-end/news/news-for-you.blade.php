@@ -155,7 +155,7 @@
             },
             methods: {
                 loadDynamicContent: function () {
-                    addthis.layers.refresh();
+//                    addthis.layers.refresh();
                 },
                 getUrl: function (item) {
                     let url = this.url;
@@ -239,6 +239,7 @@
                             if (response.success == true) {
                                 this.latest_call = response.items;
                                 this.last_id = response.last_id;
+                                addthis.layers.refresh();
                             } else {
                                 this.latest_call = [];
                                 this.last_id = "none";
@@ -275,6 +276,7 @@
 //                            console.log(data)
                             this.initial = data.items;
                             this.last_id = data.last_id;
+                            addthis.layers.refresh();
                         });
                 }
             },

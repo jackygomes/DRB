@@ -207,7 +207,7 @@
             methods: {
 
                 loadDynamicContent: function () {
-                    addthis.layers.refresh();
+                    //addthis.layers.refresh();
                 },
 
                 getUrl: function (item) {
@@ -248,7 +248,7 @@
                     ;
                 },
                 call() {
-                    console.log("calling");
+                    //console.log("calling");
                     if (this.last_id == "none") {
                         console.log('no call');
                         return;
@@ -274,6 +274,7 @@
                             if (response.success == true) {
                                 this.latest_call = response.items;
                                 this.last_id = response.last_id;
+                                addthis.layers.refresh();
                             } else {
                                 this.latest_call = [];
                                 this.last_id = "none";
@@ -301,6 +302,7 @@
                         .then(response => {
                             this.initial = response.items;
                             this.last_id = response.last_id;
+                            addthis.layers.refresh();
                         });
                 }
             },
