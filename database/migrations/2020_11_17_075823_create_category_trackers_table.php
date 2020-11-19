@@ -16,7 +16,7 @@ class CreateCategoryTrackersTable extends Migration
         Schema::create('category_trackers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->string('category_visited');
+            $table->text('category_visited');
             $table->timestamps();
         });
     }
