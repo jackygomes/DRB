@@ -45,7 +45,7 @@
                             <div class="shadow-sm mb-3 single-news-border">
                                 <div class="row" v-bind:id="item.id">
                                     <div class="col-md-9">
-                                        <a :href="item.source" target="_blank"><h5>@{{item.heading}}</h5></a>
+                                        <a :href="'/single-news/' + item.id" target="_blank"><h5>@{{item.heading}}</h5></a>
                                         <a :href="item.source" target="_blank"><p class="text-justify word-break">
                                                 @{{item.body}} | <span class="text-secondary small">@{{item.human_readable_time}}</span>
                                             </p></a>
