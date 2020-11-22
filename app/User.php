@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 //implements MustVerifyEmail
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use SoftDeletes;
     use Notifiable;
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'full_name', 'email', 'password','contact_number','profession','institution', 'type', 'email_verified_at', 'thumbnail_image', 'created_by','email_verified_at'
+        'full_name', 'email', 'password','contact_number','profession','institution', 'type', 'email_verified_at', 'thumbnail_image', 'created_by'
     ];
 
     /**
