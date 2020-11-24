@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class DownloadController extends Controller
 {
-    private $visitorDownloadLimit = 3;
+    private $visitorDownloadLimit = 2;
 
     public function store(Request $request)
     {
