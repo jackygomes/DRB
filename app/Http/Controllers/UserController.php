@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     private  $userTypes = ['visitor', 'paid', 'admin', 'provider'];
+
     public function index()
    {
        if(auth()->user()->type == 'admin')
-           $users = User::orderBy('full_name')->get()->sortBy('full_name', SORT_NATURAL|SORT_FLAG_CASE);
+           $users = User::orderBy('id', 'DESC')->get();
 
        elseif(auth()->user()->type == 'paid')
            $users = User::where('created_by', auth()->user()->id)->orderBy('full_name')->get()->sortBy('full_name', SORT_NATURAL|SORT_FLAG_CASE);

@@ -158,7 +158,7 @@
             @else
                 <div class="col-md-2"></div>
                 <div class="col-md-4">
-                    <p class="main-text-color">Become a member &amp get <br> <strong>10 free downloads </strong> every month</p>
+                    <p class="main-text-color">Become a member &amp get <br> <strong>3 free downloads </strong></p>
                 </div>
                 <div class="col-md-4">
                     <a href="{{ route('register') }}" class="btn btn-dark rounded-pill py-2 w-100 main-color">Sign Up</a>
