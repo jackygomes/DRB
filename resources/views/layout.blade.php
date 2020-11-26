@@ -105,7 +105,7 @@
 
     $(document).ready(function() {
     if (sessionStorage.scrollTop != "undefined") {
-        $(window).scrollTop(sessionStorage.scrollTop);
+        $(window).scrollTop(10);
     }
     });
     </script>
