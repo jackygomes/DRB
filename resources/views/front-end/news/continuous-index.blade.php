@@ -16,7 +16,7 @@
                     <div class="wrapper">
                         <!-- Sidebar  -->
                         <nav id="sidebar"
-                             class="bg-transparent text-dark news-sidenav-scroll-hide" style="margin-top: -30px;">
+                             class="bg-transparent text-dark news-sidenav-scroll-hide" style="margin-top: -30px; width: 235px; overflow: hidden;">
 
                             <ul class="list-unstyled components" style="margin-top: 150px;">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
