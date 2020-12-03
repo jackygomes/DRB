@@ -1,6 +1,31 @@
 @extends('front-end.main-layout')
 @section('content')
 
+    @include('front-end.news.newspaper-slide')
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-8 offset-2">
+                    {{--add section--}}
+                    <div class="financial_top_add mb-3">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Horizontal unit -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-7889950300474908"
+                             data-ad-slot="9066843834"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="news" id="app">
         <div class="container-fluid">
             <div class="row custom-news-header-top">
@@ -18,7 +43,7 @@
                         <nav id="sidebar"
                              class="bg-transparent text-dark news-sidenav-scroll-hide" style="margin-top: -30px; width: 235px; overflow: hidden;">
 
-                            <ul class="list-unstyled components" style="margin-top: 150px;">
+                            <ul class="list-unstyled components" style="margin-top: 185px;">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
                                     <a href="{{route('news.index')}}">All News</a>
                                 </li>
@@ -143,25 +168,42 @@
                     </ul>
                 </div>
                 <!-- ////////////////////////////////////////////////// -->
-                <div class="col-12 col-md-3" style="margin-top: 25px;">
-                    <h5>Most Recent</h5>
-                    <div class="table-responsive most-recent-border mb-3">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">Topic</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($mostrecents as $recent)
-                                <tr>
-                                    <td class="more">{!! nl2br($recent->body) !!}</td>
-                                    <td>{{ date('F Y', strtotime($recent->date)) }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                {{--<div class="col-12 col-md-3" style="margin-top: 25px;">--}}
+                    {{--<h5>Most Recent</h5>--}}
+                    {{--<div class="table-responsive most-recent-border mb-3">--}}
+                        {{--<table class="table table-hover">--}}
+                            {{--<thead>--}}
+                            {{--<tr>--}}
+                                {{--<th scope="col">Topic</th>--}}
+                                {{--<th scope="col">Date</th>--}}
+                            {{--</tr>--}}
+                            {{--</thead>--}}
+                            {{--<tbody>--}}
+                            {{--@foreach ($mostrecents as $recent)--}}
+                                {{--<tr>--}}
+                                    {{--<td class="more">{!! nl2br($recent->body) !!}</td>--}}
+                                    {{--<td>{{ date('F Y', strtotime($recent->date)) }}</td>--}}
+                                {{--</tr>--}}
+                            {{--@endforeach--}}
+                            {{--</tbody>--}}
+                        {{--</table>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+                <div class="col-12 col-md-2 mt-3">
+                    {{--add section--}}
+                    <div class="financial_side_add mb-3">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Vertical Unit -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-7889950300474908"
+                             data-ad-slot="3467350027"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 </div>
             </div>
