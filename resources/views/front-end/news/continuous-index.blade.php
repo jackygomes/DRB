@@ -274,7 +274,11 @@
                             if (response.success == true) {
                                 this.latest_call = response.items;
                                 this.last_id = response.last_id;
-                                addthis.layers.refresh();
+                                try{
+                                    addthis.layers.refresh();
+                                }catch(err) {
+                                    console.log(err.message)
+                                }
                             } else {
                                 this.latest_call = [];
                                 this.last_id = "none";
@@ -302,7 +306,15 @@
                         .then(response => {
                             this.initial = response.items;
                             this.last_id = response.last_id;
-                            addthis.layers.refresh();
+                            try{
+                                try{
+                                    addthis.layers.refresh();
+                                }catch(err) {
+                                    console.log(err.message)
+                                }
+                            }catch(err) {
+                                console.log(err.message)
+                            }
                         });
                 }
             },
