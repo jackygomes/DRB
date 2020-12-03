@@ -28,7 +28,7 @@
 
     <section class="news" id="app">
         <div class="container-fluid">
-            <div class="row custom-news-header-top">
+            <div class="row">
                 <div class="col-md-12">
                     {{-- <h3>News</h3> --}}
                     <button type="button" id="sidebarCollapse"

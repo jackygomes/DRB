@@ -37,7 +37,7 @@
 
     {{--Google Ads--}}
     <script data-ad-client="ca-pub-7889950300474908" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    {{--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dce8059e10469a8" async="async"></script>--}}
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5dce8059e10469a8" async="async"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
