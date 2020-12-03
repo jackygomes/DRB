@@ -363,11 +363,11 @@
 
                                         }
                                         this.canMakeCall = true;
-                                        try{
-                                            addthis.layers.refresh();
-                                        }catch(err) {
-                                            console.log(err.message)
-                                        }
+//                                        try{
+//                                            addthis.layers.refresh();
+//                                        }catch(err) {
+//                                            console.log(err.message)
+//                                        }
                                     } else {
                                         this.latest_call = [];
                                         this.last_id = "none";
@@ -399,11 +399,11 @@
                                 //console.log(data.items)
                                 this.initial = data.items;
                                 this.last_id = data.last_id;
-                                try{
-                                    addthis.layers.refresh();
-                                }catch(err) {
-                                    console.log(err.message)
-                                }
+//                                try{
+//                                    addthis.layers.refresh();
+//                                }catch(err) {
+//                                    console.log(err.message)
+//                                }
                             });
                     }
                 },
