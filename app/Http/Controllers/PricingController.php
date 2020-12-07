@@ -20,12 +20,13 @@ class PricingController extends Controller
         $pendingPlan = null;
 
         if(auth()->user()) {
-            $activeInvoice = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 1)->where('expire_date', '>=', Carbon::now()->toDateString())->orderby('id', 'DESC')->first();
-            $inActiveInvoice = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 0)->where('expire_date', '>=', Carbon::now()->toDateString())->orderby('id', 'DESC')->first();
-            if($activeInvoice)
-                $activePlan = $activeInvoice->plan_id;
-            if($inActiveInvoice)
-                $pendingPlan = $inActiveInvoice->plan_id;
+
+            $invoice = Invoice::where('user_id', auth()->user()->id)->where('isApproved', 1)->orderby('id', 'DESC')->first();
+
+            if($invoice && $invoice->isApproved && $invoice->expire_date >= Carbon::now())
+                $activePlan = $invoice->plan_id;
+            if($invoice && !$invoice->isApproved && $invoice->expire_date >= Carbon::now())
+                $pendingPlan = $invoice->plan_id;
         }
         $subscriptionplans = SubscriptionPlan::where('is_visible', 1)->get();
         return view('front-end.pricing.index', compact('subscriptionplans', 'activePlan', 'pendingPlan'));
