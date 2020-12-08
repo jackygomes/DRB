@@ -39,8 +39,9 @@
                 <div class="col-12 col-md-2">
                     <div class="wrapper">
                         <!-- Sidebar  -->
+                        {{--news-sidenav-scroll-hide--}}
                         <nav id="sidebar"
-                             class="bg-transparent text-dark custom-news-nav-header-top news-sidenav-scroll-hide" style="width: 235px; margin-top: 143px;">
+                             class="bg-transparent text-dark custom-news-nav-header-top " style="width: 235px; margin-top: 143px;">
 
                             <ul class="list-unstyled components">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">

@@ -40,8 +40,9 @@
                 <div class="col-12 col-md-2">
                     <div class="wrapper">
                         <!-- Sidebar  -->
+                        {{--news-sidenav-scroll-hide --}}
                         <nav id="sidebar"
-                             class="bg-transparent text-dark news-sidenav-scroll-hide" style="margin-top: -30px; width: 235px; overflow: hidden;">
+                             class="bg-transparent text-dark " style="margin-top: -30px; width: 235px; overflow: hidden;">
 
                             <ul class="list-unstyled components" style="margin-top: 185px;">
                                 <li class="{{ request()->url() == route('news.index') ? 'news-sidenav-active' : '' }}">
