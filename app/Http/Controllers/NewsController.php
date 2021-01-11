@@ -30,7 +30,10 @@ class NewsController extends Controller
         $latestNews = News::orderBy('id', 'desc')->get()->take(30);
         $categories = Category::get();
 //        return $latestNews[0];
-        return view('front-end.news.single-news', compact('news', 'latestNews', 'categories'));
+
+        list($imageWidth, $imageHeight) = getimagesize(env('S3_URL') . $news->image);
+
+        return view('front-end.news.single-news', compact('news', 'latestNews', 'categories', 'imageWidth', 'imageHeight'));
     }
 
     public function newsPortal()

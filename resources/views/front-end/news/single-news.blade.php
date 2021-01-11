@@ -4,6 +4,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{$news->heading}}" /> 
     <meta property="og:description" content="{{$news->body}}" />
+    <meta property=" og:image:width" content="{{$imageWidth}}" />
+    <meta property=" og:image:width" content="{{$imageHeight}}" />
     <meta property="og:image" content="{{ env('S3_URL') }}{{$news->image}}" />
 @endsection
 @section('content')
@@ -89,7 +91,9 @@
                             {{--<button type="button" class="btn btn-light btn-sm mb-2 mr-2 border border-secondary" @click='isshowcomment({{$news->id}})'><i class="far fa-comment-alt"></i> Comment</button>--}}
 
                             <span>
+                                @if($imageWidth >= 200 && $imageHeight >= 200)
                                 <div class="fb-share-button" data-href="{{route('news.single', $news->id)}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{route('news.single', $news->id)}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                                @endif
                             </span>
                         </div>
                     </div>    
