@@ -1,5 +1,7 @@
 @extends('front-end.main-layout')
 @section('meta')
+    <meta property="og:url" content="{{route('news.single', $news->id)}}" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="{{$news->heading}}" /> 
     <meta property="og:description" content="{{$news->body}}" />
     <meta property="og:image" content="{{ env('S3_URL') }}{{$news->image}}" />
@@ -8,7 +10,14 @@
 
     {{--facebook sharing tag--}}
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=2035405903456228&autoLogAppEvents=1" nonce="V3HyAA3j"></script>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    {{--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=2035405903456228&autoLogAppEvents=1" nonce="V3HyAA3j"></script>--}}
 <!-- Navigation -->
 
 {{-- <section class="news">
@@ -189,6 +198,7 @@
         </div>
     </div>
 </section>
+@endsection
 
 @section('scripts')
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -217,7 +227,5 @@
             })
         </script>
 
-
-    @endsection
 
 @endsection
