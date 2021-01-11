@@ -4,8 +4,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{$news->heading}}" /> 
     <meta property="og:description" content="{{$news->body}}" />
-    <meta property=" og:image:width" content="{{$imageWidth}}" />
-    <meta property=" og:image:width" content="{{$imageHeight}}" />
+    <meta property="og:image:width" content="{{$imageWidth}}" />
+    <meta property="og:image:height" content="{{$imageHeight}}" />
     <meta property="og:image" content="{{ env('S3_URL') }}{{$news->image}}" />
 @endsection
 @section('content')
