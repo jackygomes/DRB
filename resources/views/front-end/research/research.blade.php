@@ -118,7 +118,7 @@
                     <div class="shadow-sm mb-3 single-news-border">
                         <div id="3584" class="row">
                             <div class="col-md-2">
-                                @if(isset($product->user->thumbnail_image))
+                                @if(isset($product->user) && $product->user->thumbnail_image)
                                 <img src="{{asset('storage/'.$product->user->thumbnail_image)}}" alt="..." class="img-fluid news-index-img">
                                 @else
                                 <img src="{{asset('img/DRB-logo.jpeg')}}" alt="..." class="img-fluid news-index-img">
