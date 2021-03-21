@@ -50,7 +50,7 @@
     {{--                                    </div>--}}
     {{--                                </div>--}}
                                     <div class="col-md-3">
-                                        @if(isset($item->product->user->thumbnail_image))
+                                        @if(isset($item->product->user) && $item->product->user->thumbnail_image)
                                         <img src="{{asset('storage/'.$item->product->user->thumbnail_image)}}" alt="..." class="img-fluid news-index-img">
                                         @else
                                         <img src="{{asset('img/DRB-logo.jpeg')}}" alt="..." class="img-fluid news-index-img">
@@ -59,9 +59,7 @@
                                     <div class="col-md-9">
                                         <div class="row">
                                             <div class="col-md-7">
-                                                <a href="https://www.newagebd.net/article/107855/poverty-rate-rises-to-35pc" target="_blank">
-                                                    <h5>{{$item->product->name}}</h5>
-                                                </a>
+                                                <h5>{{$item->product->name}}</h5>
                                                 <p class="text-secondary ">Unit Price: {{$item->product->price}} BDT</p>
                                                 <p class="text-secondary ">Quantity: {{$item->quantity}} </p>
                                             </div>
