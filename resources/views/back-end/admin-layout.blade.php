@@ -29,6 +29,14 @@
                 </div>
             </div>
         @endif
+
+        @if(session('success'))
+            <div class="row text-center push-down">
+                <div class="col-md-4 offset-4 alert alert-success">
+                    {{session('success')}}
+                </div>
+            </div>
+        @endif
         <div id="content-wrapper">
 
             <div class="container-fluid">

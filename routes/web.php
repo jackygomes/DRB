@@ -141,6 +141,15 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
             Route::get('/create/category','TutorialController@categoryView')->name('tutorials.create.category');
             Route::post('/create/category','TutorialController@addCategory')->name('tutorials.create.category.post');
         });
+
+        Route::group(['prefix' => 'newsletter', 'namespace' => 'Newsletter'], function(){
+            Route::get('/', 'NewsletterController@index')->name('newsletter.index');
+            Route::get('/create', 'NewsletterController@create')->name('newsletter.create');
+            Route::post('/store', 'NewsletterController@store')->name('newsletter.store');
+            Route::get('/edit/{id}', 'NewsletterController@edit')->name('newsletter.edit');
+            Route::post('/update/{id}', 'NewsletterController@update')->name('newsletter.update');
+            Route::get('/delete/{id}', 'NewsletterController@delete')->name('newsletter.delete');
+        });
     });
 
     //Page
