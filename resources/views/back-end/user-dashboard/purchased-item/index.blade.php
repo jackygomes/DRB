@@ -53,14 +53,14 @@
                             <td>{{Str::limit($product->description, 30)}}</td>
                             <td>
                                 @if(isset($product->report_excel))
-                                    <a href="/{{$product->report_excel}}" class="btn btn-warning" download>Download</a>
+                                    <a href="{{asset('/files/' . $product->report_excel)}}" class="btn btn-warning" download>Download</a>
                                 @else
                                     <p>No File</p>
                                 @endif
                             </td>
                             <td>
                                 @if(isset($product->report_pdf))
-                                    <a href="/{{$product->report_pdf}}" class="btn btn-warning" download>Download</a>
+                                    <a href="{{asset('/files/' . $product->report_pdf)}}" class="btn btn-warning" download>Download</a>
                                 @else
                                     <p>No File</p>
                                 @endif
