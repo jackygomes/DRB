@@ -36,7 +36,7 @@
                             <td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$newsletter->created_at)->format('d M y h:i A')}}</td>
                             <td>
                                 <a href="{{ route('newsletter.edit', $newsletter->id)}}" class="btn btn-outline-primary">Edit</a>
-                                <a onclick="return confirm('Are you sure, you want to delete this news?')" href="{{ route('newsletter.delete', $newsletter->id)}}" class="btn btn-danger">Delete</a>
+                                <a onclick="return confirm('Are you sure, you want to delete this news?')" href="{{ route('newsletter.delete', $newsletter->id)}}" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach

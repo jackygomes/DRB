@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Newsletter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsletterPostRequest;
 use App\Models\Newsletter;
+use App\Models\NewsletterCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -25,7 +26,8 @@ class NewsletterController extends Controller
      */
     public function create()
     {
-        return view('back-end.newsletter.create');
+        $newsletterCategories = NewsletterCategory::all();
+        return view('back-end.newsletter.create', compact('newsletterCategories'));
     }
 
     /**

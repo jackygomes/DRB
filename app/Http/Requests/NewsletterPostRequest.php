@@ -29,7 +29,7 @@ class NewsletterPostRequest extends FormRequest
             'type'              => 'required',
             'publishing_date'   => 'required',
             'newsletter_content'=> 'required',
-            'thumbnail'         => 'required',
+            'thumbnail'         => 'required|mimes:jpg,png',
         ];
     }
 }

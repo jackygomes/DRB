@@ -150,6 +150,14 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
             Route::post('/update/{id}', 'NewsletterController@update')->name('newsletter.update');
             Route::get('/delete/{id}', 'NewsletterController@delete')->name('newsletter.delete');
         });
+
+        Route::group(['prefix' => 'newsletter-category', 'namespace' => 'Newsletter'], function(){
+            Route::get('/', 'NewsletterCategoryController@index')->name('nl_category.index');
+            Route::post('/store', 'NewsletterCategoryController@store')->name('nl_category.store');
+            Route::get('/edit/{id}', 'NewsletterCategoryController@edit')->name('nl_category.edit');
+            Route::post('/update/{id}', 'NewsletterCategoryController@update')->name('nl_category.update');
+            Route::get('/delete/{id}', 'NewsletterCategoryController@delete')->name('nl_category.delete');
+        });
     });
 
     //Page

@@ -18,8 +18,10 @@
                         <label for="exampleFormControlSelect1">Category</label>
                         <select  name="category_id" class="form-control" id="exampleFormControlSelect1" required>
                             <option disabled selected>Select</option>
-                            <option value="1">Home</option>
-                            <option value="2">Medicine</option>
+
+                            @foreach($newsletterCategories as $newsletterCategory)
+                                <option value="{{$newsletterCategory->id}}">{{$newsletterCategory->category}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -44,7 +46,7 @@
 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">Thumbnail Image (Jpg, Png. Image will be resized automatically )</label>
+                        <label for="exampleFormControlFile1">Thumbnail Image (Jpg, Png. Image will be resized to 300*200 automatically )</label>
                         <input name="thumbnail" type="file" class="form-control-file" required>
                     </div>
                 </div>

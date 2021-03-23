@@ -72,6 +72,9 @@
             <li class="{{ request()->url() == route('newspapers') ? 'sidebar-active' : '' }}">
                 <a href="{{route('newspapers')}}">Newspaper</a>
             </li>
+            <li class="{{ request()->url() == route('nl_category.index') ? 'sidebar-active' : '' }}">
+                <a href="{{route('nl_category.index')}}">Newsletter Category</a>
+            </li>
             <li class="{{ request()->url() == route('newsletter.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('newsletter.index')}}">Newsletter</a>
             </li>
