@@ -38,6 +38,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item nav-custom-margin-top">
+                    <a class="nav-link font-weight-bold text-white" href="{{ route('newsletters.index') }}" >
+                        <small class="font-weight-bold nav-item-custom-size">Newsletter</small>
+                    </a>
+                </li>
+
 
                 {{-- <li class="nav-item dropdown nav-custom-margin-top">
                     <a class="nav-link font-weight-bold text-white" href="{{route('visualize.index')}}">
