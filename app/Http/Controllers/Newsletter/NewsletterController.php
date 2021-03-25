@@ -128,6 +128,6 @@ class NewsletterController extends Controller
         $newsletter = Newsletter::findOrFail($id);
         Storage::delete('public/newsletter_thumbnail/' . $newsletter->thumbnail);
         $newsletter->delete();
-        return redirect()->route('back-end.newsletter.idex')->with(['success' => 'Deleted Successfully']);
+        return redirect()->route('newsletter.index')->with(['success' => 'Deleted Successfully']);
     }
 }
