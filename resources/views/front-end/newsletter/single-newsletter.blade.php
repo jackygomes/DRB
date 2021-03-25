@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 @include('front-end.newsletter.sidebar')
-                <div class="col-md-8 offset-3 single-news-border">
+                <div class="col-12 col-md-8 offset-md-3 single-news-border">
                     <div class="row">
                         <div class="col-md-4">
                             <img src="{{asset('/storage/newsletter_thumbnail/' . $newsletter->thumbnail)}}" alt="" width="100%" style="border-radius: 5px;">
@@ -22,7 +22,7 @@
             </div>
 
             <div class="row mt-2">
-                <div class="col-md-8 offset-3 single-news-border">
+                <div class="col-12 col-md-8 offset-md-3 single-news-border">
                     {!! json_decode($newsletter->newsletter_content)->data !!}
                 </div>
             </div>
@@ -39,6 +39,15 @@
             text-transform: capitalize;
             color: #ffc107 !important;
             display: inline-block;
+        }
+        .sidebar_margin_top_index_page{
+            margin-top: 97px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .sidebar_margin_top_index_page{
+                margin-top: 175px;
+            }
         }
     </style>
 @endsection

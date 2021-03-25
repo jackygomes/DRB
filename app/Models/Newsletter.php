@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Newsletter extends Model
@@ -16,4 +17,8 @@ class Newsletter extends Model
         'thumbnail',
         'created_by',
     ];
+
+    public function category(){
+        return $this->belongsTo(NewsletterCategory::class, 'category_id', 'id');
+    }
 }

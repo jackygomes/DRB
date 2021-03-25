@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$newsletter->title}}</td>
-                            <td>{{$newsletter->category_id}}</td>
+                            <td>{{$newsletter->category->category}}</td>
                             <td>{{$newsletter->type}}</td>
                             <td>{{\Carbon\Carbon::parse($newsletter->publishing_date)->format('d M y h:i A')}}</td>
                             <td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$newsletter->created_at)->format('d M y h:i A')}}</td>

@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <button type="button" id="sidebarCollapse"
-            class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide">
+            class="btn btn-warning my-2 d-md-none news-toggle-button news-sidenav-scroll-hide sidebar_margin_top">
         <i id="news-sidenav" class="fas fa-chevron-right"></i>
         <span>Data Resource BD</span>
     </button>
@@ -10,7 +10,7 @@
         <!-- Sidebar  -->
         {{--news-sidenav-scroll-hide--}}
         <nav id="sidebar"
-             class="bg-transparent text-dark custom-news-nav-header-top " style="width: 235px; margin-top: 110px;">
+             class="bg-transparent text-dark custom-news-nav-header-top sidebar_margin_top_index_page" style="width: 235px;">
 
             <ul class="list-unstyled components">
                 <li class="{{ request()->url() == route('newsletters.index') ? 'news-sidenav-active' : '' }}">

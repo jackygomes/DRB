@@ -2,12 +2,15 @@
 @section('content')
     <section class="news" id="app">
         <div class="container-fluid">
+            <div class="row topmargin">
+                @include('front-end.newsletter.subscribe-from')
+            </div>
             <div class="row">
                 @include('front-end.newsletter.sidebar')
 
-                <div class="col-md-10 offset-2">
+                <div class="col-12 col-md-10 offset-md-2 mt-4">
                     <div id="app-two">
-                        <div class="row" style="padding: 0; margin-top: 130px;">
+                        <div class="row">
                             <div v-if="initial" v-for="item in initial" :key="item.id + Math.random()" class="col-12 col-md-6">
                                 <div class="shadow-sm mb-3 single-news-border">
                                     <div class="row" v-bind:id="item.id">
@@ -188,6 +191,26 @@
             padding: 0px 10px;
             text-transform: capitalize;
             color: #ffc107 !important;
+        }
+        .topmargin{
+            margin-top: 97px;
+        }
+
+        /*used in subscriber page*/
+        .subscribe{
+            background: #f5f5f5;
+            padding: 60px 0;
+        }
+
+        /*used in sidebar page*/
+        .sidebar_margin_top_index_page{
+            margin-top: 345px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .sidebar_margin_top_index_page{
+                margin-top: 175px;
+            }
         }
     </style>
 @endsection
