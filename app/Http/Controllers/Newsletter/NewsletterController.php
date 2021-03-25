@@ -90,7 +90,7 @@ class NewsletterController extends Controller
             'category_id'       => 'string',
             'type'              => 'string',
             'publishing_date'   => 'string',
-            'thumbnail'         => 'mimes:jpg,png',
+            'thumbnail'         => 'mimes:jpg,png,jpeg',
             'newsletter_content'=> 'string',
         ]);
 
