@@ -251,7 +251,8 @@ Route::get('/news/{category}', 'NewsController@newsByCategoty')->name('news.byca
 Route::get('/news/newspaper/{id}', 'NewsController@newsByNewspaper')->name('news.bynewspaper');
 
 Route::group(['prefix' => 'newsletters', 'namespace' => 'Newsletter'], function (){
-    Route::get('/', 'NewsletterFrontendController@index')->name('newsletters.index');
+    Route::get('/{category_id?}', 'NewsletterFrontendController@index')->name('newsletters.index');
+    Route::get('/single-newsletter/{id}', 'NewsletterFrontendController@getSingleNewsletter')->name('newsletters.single.newsletter');
     Route::get('/category/{last_newsletter_id}/{category_id?}', 'NewsletterFrontendController@getNewsletterByCategory')->name('newsletters.by.category');
 });
 

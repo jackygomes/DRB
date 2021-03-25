@@ -8,7 +8,7 @@
                 <div class="col-md-10 offset-2">
                     <div id="app-two">
                         <div class="row" style="padding: 0; margin-top: 130px;">
-                            <div v-if="initial" v-for="item in initial" :key="item.id + Math.random()" class="col-12 col-md-6 col-lg-4">
+                            <div v-if="initial" v-for="item in initial" :key="item.id + Math.random()" class="col-12 col-md-6">
                                 <div class="shadow-sm mb-3 single-news-border">
                                     <div class="row" v-bind:id="item.id">
                                         <div class="col-md-3" v-if="item.thumbnail">
@@ -16,10 +16,11 @@
                                                  class="mb-3 img-fluid news-index-img" alt="...">
                                         </div>
                                         <div class="col-md-9">
-                                            <a :href="'/single-news/' + item.id" target="_blank"><h5>@{{item.title}}</h5></a>
-                                            <a :href="item.source" target="_blank"><p class="text-justify word-break">
-                                                    @{{item.type}} | <span class="text-secondary small">@{{item.human_readable_time}}</span>
-                                                </p></a>
+                                            <div>
+                                                <p><a :href="'/newsletters/single-newsletter/' + item.id" target="_blank"><h5>@{{item.title}}</h5></a></p>
+                                                <p><h5>@{{item.readable_publishing_date}}</h5></p>
+                                                <p><a :href="item.source" target="_blank" class="type_style">@{{item.type}}</a></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -93,8 +94,7 @@
                 },
 
                 getImageUrl(name) {
-                    let url = "http://drb.localhost/storage/newsletter_thumbnail/" + name
-                    console.log(url)
+                    let url = window.location.origin + "/storage/newsletter_thumbnail/" + name
                     return url;
                 },
 
@@ -104,61 +104,55 @@
                         this.call();
                     }
                 },
-                {{--call() {--}}
-                    {{--//console.log("calling");--}}
-                    {{--if (this.last_id == "none") {--}}
-                        {{--console.log('no call');--}}
-                        {{--return;--}}
-                    {{--}--}}
-                    {{--let url = '/api/news/by-category/last_id/' + this.last_id + '/' + {{ $category_id }} ;--}}
-                    {{--//console.log(url);--}}
-                    {{--if(this.canMakeCall){--}}
-                        {{--this.canMakeCall = false--}}
-                        {{--fetch(url, {--}}
-                            {{--method: 'Get', // *GET, POST, PUT, DELETE, etc.--}}
-                            {{--mode: 'cors', // no-cors, cors, *same-origin--}}
-                            {{--cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached--}}
-                            {{--credentials: 'same-origin', // include, *same-origin, omit--}}
-                            {{--headers: {--}}
-                                {{--'Content-Type': 'application/json',--}}
-                                {{--'Authorization': 'Bearer ' + localStorage.access_token,--}}
-                                {{--// 'Content-Type': 'application/x-www-form-urlencoded',--}}
-                            {{--},--}}
-                            {{--redirect: 'follow', // manual, *follow, error--}}
-                            {{--referrer: 'no-referrer', // no-referrer, *client--}}
+                call() {
+                    //console.log("calling");
+                    if (this.last_id == "none") {
+                        console.log('no call');
+                        return;
+                    }
+                    let url = '/newsletters/category/' + this.last_id + '/' + {{ $categoryId }} ;
+                    console.log(url);
+                    if(this.canMakeCall){
+                        this.canMakeCall = false
+                        fetch(url, {
+                            method: 'Get', // *GET, POST, PUT, DELETE, etc.
+                            mode: 'cors', // no-cors, cors, *same-origin
+                            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                            credentials: 'same-origin', // include, *same-origin, omit
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + localStorage.access_token,
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            redirect: 'follow', // manual, *follow, error
+                            referrer: 'no-referrer', // no-referrer, *client
 
-                        {{--})--}}
-                            {{--.then(function (response) {--}}
-                                {{--return response.json();--}}
-                            {{--})--}}
-                            {{--.then(response => {--}}
-                                {{--if (response.success == true) {--}}
-                                    {{--//console.log(response.items)--}}
-                                    {{--this.latest_call = response.items;--}}
-                                    {{--this.last_id = response.last_id;--}}
-                                    {{--if (this.latest_call != []) {--}}
-                                        {{--this.initial = this.initial.concat(this.latest_call);--}}
-                                        {{--this.threshold = this.threshold + 300;--}}
+                        })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(response => {
+                                console.log(response)
+                                if (response.success === true) {
+                                    this.latest_call = response.items;
+                                    this.last_id = response.last_id;
+                                    if (this.latest_call != []) {
+                                        this.initial = this.initial.concat(this.latest_call);
+                                        console.log(this.initial)
+                                        this.threshold = this.threshold + 300;
 
-                                    {{--}--}}
-                                    {{--this.canMakeCall = true;--}}
-                                    {{--try{--}}
-                                        {{--addthis.layers.refresh();--}}
-                                    {{--}catch(err) {--}}
-                                        {{--console.log(err.message)--}}
-                                    {{--}--}}
-                                {{--} else {--}}
-                                    {{--this.latest_call = [];--}}
-                                    {{--this.last_id = "none";--}}
-                                {{--}--}}
-                            {{--});--}}
-                    {{--}--}}
-                {{--},--}}
+                                    }
+                                    this.canMakeCall = true;
+                                } else {
+                                    this.latest_call = [];
+                                    this.last_id = "none";
+                                }
+                            });
+                    }
+                },
 
                 initial_call() {
-                    let url = '/newsletters/category/' + this.last_id;
-
-                    console.log(url);
+                    let url = '/newsletters/category/' + this.last_id + '/' + {{ $categoryId }};
                     fetch(url, {
                         method: 'Get', // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, cors, *same-origin
@@ -177,7 +171,6 @@
                         .then(data => {
                             this.initial = data.items;
                             this.last_id = data.last_id;
-                            console.log(data)
                         });
                 }
             },
@@ -185,4 +178,16 @@
     </script>
 
 
+@endsection
+
+@section('styles')
+    <style>
+        .type_style{
+            background: #101c53;
+            border-radius: 3px;
+            padding: 0px 10px;
+            text-transform: capitalize;
+            color: #ffc107 !important;
+        }
+    </style>
 @endsection

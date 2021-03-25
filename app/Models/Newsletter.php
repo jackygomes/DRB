@@ -11,6 +11,7 @@ class Newsletter extends Model
         'category_id',
         'type',
         'publishing_date',
+        'readable_publishing_date',
         'newsletter_content',
         'thumbnail',
         'created_by',

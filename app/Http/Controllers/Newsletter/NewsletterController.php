@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsletterPostRequest;
 use App\Models\Newsletter;
 use App\Models\NewsletterCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -39,6 +40,7 @@ class NewsletterController extends Controller
         $filename = $this->storeThumbnailImage($request);
 
         $data = $request->validated();
+        $data['readable_publishing_date'] = Carbon::parse($request->publishing_date)->format('d M y');
         $data['thumbnail'] = $filename;
         $data['created_by'] = auth()->user()->id;
         $data['newsletter_content'] = json_encode([
@@ -93,6 +95,9 @@ class NewsletterController extends Controller
         ]);
 
         $data = $request->all();
+
+        $data['readable_publishing_date'] = Carbon::parse($request->publishing_date)->format('d M y');
+
         $newsletter = Newsletter::findOrFail($id);
 
         //storing thumbnail
@@ -111,7 +116,7 @@ class NewsletterController extends Controller
         }
 
         $newsletter->update($data);
-        return redirect()->route('back-end.newsletter.edit')->with(['success' => 'Updated Successfully']);
+        return redirect()->route('newsletter.edit', $newsletter->id)->with(['success' => 'Updated Successfully']);
     }
 
     /**
