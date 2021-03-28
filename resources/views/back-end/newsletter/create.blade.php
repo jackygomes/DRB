@@ -28,24 +28,12 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Type</label>
-                        <select name="type" class="form-control" id="exampleFormControlSelect1" required>
-                            <option disabled selected>Select</option>
-                            <option value="daily">Daily</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="macro">Macro</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
                         <label>Publishing Date</label>
                         <input  name="publishing_date"  type="date" class="form-control" value="{{ old('publishing_date') }}" required>
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Thumbnail Image (Jpg, Png. Image will be resized to 300*200 automatically )</label>
                         <input name="thumbnail" type="file" class="form-control-file" required>

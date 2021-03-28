@@ -37,6 +37,8 @@ class NewsletterController extends Controller
      */
     public function store(NewsletterPostRequest $request)
     {
+        $content = str_replace('<body class', '<body id',$request->newsletter_content);
+
         $filename = $this->storeThumbnailImage($request);
 
         $data = $request->validated();
@@ -44,7 +46,7 @@ class NewsletterController extends Controller
         $data['thumbnail'] = $filename;
         $data['created_by'] = auth()->user()->id;
         $data['newsletter_content'] = json_encode([
-            'data' => $request->newsletter_content
+            'data' => $content
         ]);
         Newsletter::create($data);
         return redirect()->route('newsletter.index')->with(['success' => 'Newsletter Creation Successful']);
@@ -75,7 +77,8 @@ class NewsletterController extends Controller
     public function edit($id)
     {
         $newsletter = Newsletter::findOrFail($id);
-        return view('back-end.newsletter.edit', compact('newsletter'));
+        $newsletterCategories = NewsletterCategory::all();
+        return view('back-end.newsletter.edit', compact('newsletter', 'newsletterCategories'));
     }
 
     /**
@@ -110,8 +113,9 @@ class NewsletterController extends Controller
         }
 
         if($request->has('newsletter_content')){
+            $content = str_replace('<body class', '<body id',$request->newsletter_content);
             $data['newsletter_content'] = json_encode([
-                'data' => $request->newsletter_content
+                'data' => $content
             ]);
         }
 

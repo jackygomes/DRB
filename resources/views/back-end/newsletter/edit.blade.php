@@ -18,19 +18,9 @@
                         <label for="exampleFormControlSelect1">Category</label>
                         <select  name="category_id" class="form-control" id="exampleFormControlSelect1">
                             <option disabled selected>Select</option>
-                            <option value="1">Home</option>
-                            <option value="2">Medicine</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Type</label>
-                        <select name="type" class="form-control" id="exampleFormControlSelect1">
-                            <option disabled selected>Select</option>
-                            <option value="daily" {{$newsletter->type == 'daily' ? 'selected' : ''}}>Daily</option>
-                            <option value="weekly" {{$newsletter->type == 'weekly' ? 'selected' : ''}}>Weekly</option>
+                            @foreach($newsletterCategories as $newsletterCategory)
+                                <option value="{{$newsletterCategory->id}}" {{$newsletterCategory->id == $newsletter->category->id ? 'selected' : ''}}>{{$newsletterCategory->category}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -38,7 +28,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Publishing Date</label>
-                        <input  name="publishing_date"  type="datetime-local" class="form-control" value="{{ $newsletter->publishing_date    }}">
+                        <input  name="publishing_date"  type="date" class="form-control" value="{{ $newsletter->publishing_date    }}">
                     </div>
                 </div>
 

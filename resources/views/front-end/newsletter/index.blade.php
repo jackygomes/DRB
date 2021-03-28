@@ -21,8 +21,8 @@
                                         <div class="col-md-9">
                                             <div>
                                                 <p><a :href="'/newsletters/single-newsletter/' + item.id" target="_blank"><h5>@{{item.title}}</h5></a></p>
+                                                <p><a :href="item.source" target="_blank" class="type_style">@{{item.category.type}}</a></p>
                                                 <p><h5>@{{item.readable_publishing_date}}</h5></p>
-                                                <p><a :href="item.source" target="_blank" class="type_style">@{{item.type}}</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                 return response.json();
                             })
                             .then(response => {
-                                console.log(response)
+//                                console.log(response)
                                 if (response.success === true) {
                                     this.latest_call = response.items;
                                     this.last_id = response.last_id;
@@ -172,6 +172,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
+//                            console.log(data.items)
                             this.initial = data.items;
                             this.last_id = data.last_id;
                         });

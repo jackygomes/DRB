@@ -26,7 +26,6 @@ class NewsletterPostRequest extends FormRequest
         return [
             'title'             => 'required',
             'category_id'       => 'required',
-            'type'              => 'required',
             'publishing_date'   => 'required',
             'newsletter_content'=> 'required',
             'thumbnail'         => 'required|mimes:jpg,png,jpeg',

@@ -53,6 +53,7 @@ class NewsletterFrontendController extends Controller
         if($categoryId == 0)
             $newsletters = Newsletter::take(8)->orderBy('id', 'DESC')
                 ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
+                ->with('category')
                 ->get();
 
         //filtering initial request based on category
@@ -60,6 +61,7 @@ class NewsletterFrontendController extends Controller
             $newsletters = Newsletter::take(8)->orderBy('id', 'DESC')
                 ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                 ->where('category_id', $categoryId)
+                ->with('category')
                 ->take(2)->get();
 
         return json_encode([
@@ -78,11 +80,13 @@ class NewsletterFrontendController extends Controller
         if($categoryId == 0)
             $newsletters = Newsletter::where('id', '<', $lastNewsletterId)
                 ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
+                ->with('category')
                 ->orderBy('id', 'DESC')->take(8)->get();
 
         if($categoryId != 0)
             $newsletters = Newsletter::where('id', '<', $lastNewsletterId)
                 ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
+                ->with('category')
                 ->orderBy('id', 'DESC')->where('category_id', $categoryId)->take(8)->get();
 
         return json_encode([
