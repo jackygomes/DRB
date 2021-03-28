@@ -16,6 +16,7 @@ class CreateNewsletterCategoriesTable extends Migration
         Schema::create('newsletter_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('category');
+            $table->string('type');
             $table->timestamps();
         });
     }

@@ -19,6 +19,15 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-8 text-right">
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-md-4 col-form-label">Newsletter Type:</label>
+                                        <div class="col-md-8">
+                                            <input name="type" type="text" class="form-control" value="{{$newsletterCategories->type}}">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-4 text-right">
                                     <button class="btn btn-primary d-inline" type="submit">Update</button>
                                 </div>

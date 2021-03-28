@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsletterCategory extends Model
 {
-    protected $fillable = ['category'];
+    protected $fillable = ['category', 'type'];
 
     public function newsletter(){
         return $this->hasMany(Newsletter::class, 'category_id', 'id');

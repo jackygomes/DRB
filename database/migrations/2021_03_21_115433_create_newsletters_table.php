@@ -17,7 +17,6 @@ class CreateNewslettersTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->integer('category_id');
-            $table->string('type');
             $table->string('publishing_date');
             $table->string('readable_publishing_date');
             $table->longText('newsletter_content');

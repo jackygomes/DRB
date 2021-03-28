@@ -16,8 +16,8 @@ class NewsletterCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, ['category' => 'required']);
-        NewsletterCategory::create(['category' => $request->category]);
+        $this->validate($request, ['category' => 'required', 'type' => 'required']);
+        NewsletterCategory::create(['category' => $request->category, 'type' => $request->type]);
         return redirect()->route('nl_category.index')->with(['success' => 'Created Successfully']);
     }
 
@@ -29,8 +29,12 @@ class NewsletterCategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'category' => 'string',
+            'type' => 'string'
+        ]);
         $newsletterCategory = NewsletterCategory::findOrFail($id);
-        $newsletterCategory->update(['category' => $request->category]);
+        $newsletterCategory->update($request->all());
         return back()->with(['success' => 'Category Updated Successfully']);
     }
 
