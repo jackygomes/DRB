@@ -13,8 +13,8 @@
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="header_details" style="width: 100%">
                                 <h4>{{$newsletter->title}}</h4>
-                                <h5>{{$newsletter->readable_publishing_date}}</h5>
                                 <p class="type_style">{{ucfirst($newsletter->category->type)}}</p>
+                                <h5>{{$newsletter->readable_publishing_date}}</h5>
                             </div>
                         </div>
                     </div>
@@ -46,8 +46,6 @@
             font-family: inherit;
             font-size: 1.4rem;
             padding-top: 0;
-            margin-top: 20px;
-            margin-bottom: 25px;
         }
 
         .type_style{
@@ -58,6 +56,8 @@
             color: #ffc107 !important;
             display: inline-block;
             font-size: 16px !important;
+            margin-top: 20px;
+            margin-bottom: 25px;
         }
         .sidebar_margin_top_index_page{
             margin-top: 97px;
