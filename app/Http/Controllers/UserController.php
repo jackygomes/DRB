@@ -88,6 +88,7 @@ class UserController extends Controller
 
    public function edit($id)
    {
+//       dd(auth()->user()->email_verified_at != null);
         $user = User::find($id);
         $plans = SubscriptionPlan::get();
         $userTypes = $this->userTypes;
@@ -102,6 +103,7 @@ class UserController extends Controller
             'profession' => 'required',
             'institution' => 'required',
             'type' => 'required',
+            'email_verified' => 'string',
             'email'=>'required|email|unique:users,email,'.$id ,
         ]);
 
@@ -129,6 +131,9 @@ class UserController extends Controller
         $user->type = $request->get('type');
         $user->email = $request->get('email');
         $user->thumbnail_image = isset($imageName) ? $imageName : null;
+
+        if(isset($request->email_verified) && $request->email_verified == 'on' && $user->email_verified_at == null)
+            $user->email_verified_at = Carbon::now();
 
         $user->save();
 

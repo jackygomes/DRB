@@ -115,6 +115,24 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <div class="col-md-4 text-md-right">Verified</div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input
+                                                name="email_verified"
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                id="gridCheck1"
+
+                                                @if($user->email_verified_at)
+                                                    checked
+                                                @endif
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
 
 
                             <div class="form-group row mb-0">
