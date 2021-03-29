@@ -253,7 +253,7 @@ class ResearchController extends Controller
     public function purchasedItem() {
         $userId = Auth::id();
         try {
-            $orders = Order::where('user_id','=', $userId)->get();
+            $orders = Order::where('user_id','=', $userId)->where('payment', 'paid')->get();
             $products = [];
             foreach ($orders as $order) {
                 foreach ($order->orderItems as $item){
