@@ -10,11 +10,11 @@
                             <img src="{{asset('/storage/newsletter_thumbnail/' . $newsletter->thumbnail)}}" alt="" width="100%" style="border-radius: 5px;">
                         </div>
 
-                        <div class="col-md-8 d-flex align-items-center text-right">
-                            <div style="width: 100%">
+                        <div class="col-md-8 d-flex align-items-center">
+                            <div class="header_details" style="width: 100%">
                                 <h4>{{$newsletter->title}}</h4>
                                 <h5>{{$newsletter->readable_publishing_date}}</h5>
-                                <h5 class="type_style">{{ucfirst($newsletter->type)}}</h5>
+                                <p class="type_style">{{ucfirst($newsletter->category->type)}}</p>
                             </div>
                         </div>
                     </div>
@@ -32,6 +32,24 @@
 
 @section('styles')
     <style>
+        .header_details h4{
+            padding-top: 0;
+            color: inherit;
+            padding-bottom: 0;
+            font-family: inherit;
+            font-size: 1.5rem;
+        }
+
+        .header_details h5{
+            color: inherit;
+            padding-bottom: 0;
+            font-family: inherit;
+            font-size: 1.4rem;
+            padding-top: 0;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
         .type_style{
             background: #101c53;
             border-radius: 3px;
@@ -39,9 +57,16 @@
             text-transform: capitalize;
             color: #ffc107 !important;
             display: inline-block;
+            font-size: 16px !important;
         }
         .sidebar_margin_top_index_page{
             margin-top: 97px;
+        }
+
+        .components li {
+            color: #343a40!important;
+            font-size: inherit !important;
+            font-family: inherit !important;
         }
 
         @media only screen and (max-width: 768px) {

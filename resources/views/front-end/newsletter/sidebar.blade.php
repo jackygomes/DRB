@@ -18,7 +18,8 @@
                 </li>
 
                 @foreach ($newsletterCategories as $newsletterCategory)
-                    <li class="{{ request()->url() == route('newsletters.by.category', $newsletterCategory->id) ? 'news-sidenav-active' : '' }}">
+                    {{--@dd(request()->url() == route('newsletters.by.category', $newsletterCategory->id))--}}
+                    <li class="{{ request()->url() == route('newsletters.index', $newsletterCategory->id) ? 'news-sidenav-active' : '' }}">
                         <a class="news-sidenav-hover"
                            href="{{route('newsletters.index', $newsletterCategory->id)}}">{{ $newsletterCategory->category }}</a>
                     </li>
