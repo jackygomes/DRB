@@ -14,6 +14,6 @@ use Carbon\Carbon;
 class DateOrganizer
 {
     public function makePrettyDate($date){
-        return Carbon::parse($date)->format('d M y h:i');
+        return Carbon::parse($date)->format('d M y h:i A');
     }
 }
