@@ -6,6 +6,7 @@ use App\Subscriber;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -31,15 +32,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
+        if(url()->previous() != url()->to('/login')){
+            Session::put('redirect_route_after_login', url()->previous());
+        }
+
         $this->middleware('guest')->except('logout');
     }
 
