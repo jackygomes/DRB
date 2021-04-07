@@ -76,6 +76,17 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="institution" class="col-md-4 col-form-label text-md-right">Validity</label>
+                                    <div class="col-md-6">
+                                        <select class="custom-select" name="validity">
+                                            <option value="">Select Validity</option>
+                                            <option value="yearly">1 Year</option>
+                                            <option value="monthly">1 Month</option>
+                                        </select>
+                                    </div>
+                                </div>
                             @endif
 
                             <div class="form-group row">

@@ -27,7 +27,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('back-end.user.create');
+        $plans = SubscriptionPlan::get();
+        return view('back-end.user.create', compact('plans'));
     }
 
     public function store(Request $request)
@@ -40,7 +41,11 @@ class UserController extends Controller
             'type' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
+            'email_verified' => 'string',
         ]);
+
+        if($request->type == 'paid' && $request->plan == null)
+            return redirect()->route('user.create')->with('error', 'Paid user needs a package');
 
         //user limit check for a package
         if(!$this->canCreateMoreUsers()){
@@ -74,7 +79,15 @@ class UserController extends Controller
             if(auth()->user()->type == 'paid')
                 $data['created_by'] = auth()->user()->id;
 
-            User::create($data);
+            if(isset($request->email_verified) && $request->email_verified == 'on')
+                $data['email_verified_at'] = Carbon::now();
+
+            $user = User::create($data);
+
+            if($request->type == 'paid'){
+                $invoice = (new InvoiceController())->makeManualInvoice($request, $user);
+                (new SubscriptionPlanController())->makeManualSubscriber($invoice->id, $invoice->expire_date, $user);
+            }
 
         } catch(\Exception $e) {
             return response()->json([
@@ -88,7 +101,6 @@ class UserController extends Controller
 
    public function edit($id)
    {
-//       dd(auth()->user()->email_verified_at != null);
         $user = User::find($id);
         $plans = SubscriptionPlan::get();
         $userTypes = $this->userTypes;
@@ -104,11 +116,12 @@ class UserController extends Controller
             'institution' => 'required',
             'type' => 'required',
             'email_verified' => 'string',
+            'validity' => 'string',
             'email'=>'required|email|unique:users,email,'.$id ,
         ]);
 
         if($request->type == 'paid' && $request->plan == null)
-            return redirect()->route('user.edit', $id)->with('error', 'Paid User Need A Package');
+            return redirect()->route('user.edit', $id)->with('error', 'Paid user needs a package');
 
        //user image delete & store
        $imageName = '';
@@ -138,7 +151,7 @@ class UserController extends Controller
         $user->save();
 
        if($request->type != 'paid'){
-            $trialInvoice = Invoice::where('user_id', $user->id)->where('payment_type', 'trial')->orderby('id', 'DESC')->first();
+            $trialInvoice = Invoice::where('user_id', $user->id)->where('payment_type', 'manual')->orderby('id', 'DESC')->first();
             if($trialInvoice) {
                 $trialInvoice->delete();
                 Subscriber::where('invoice_id', $trialInvoice->id)->delete();
@@ -146,8 +159,8 @@ class UserController extends Controller
        }
 
         if($request->type == 'paid'){
-            $invoiceId = (new InvoiceController())->makeManualInvoice($request, $user);
-            (new SubscriptionPlanController())->makeManualSubscriber($invoiceId, $user);
+            $invoice = (new InvoiceController())->makeManualInvoice($request, $user);
+            (new SubscriptionPlanController())->makeManualSubscriber($invoice->id, $invoice->expire_date, $user);
         }
 
         return redirect()->route('user.index')->with('success', 'User has been updated successfully');

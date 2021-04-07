@@ -163,13 +163,13 @@ class SubscriptionPlanController extends Controller
         return view('back-end.subscription-plan.fail');
     }
 
-    public function makeManualSubscriber($invoiceId, $user)
+    public function makeManualSubscriber($invoiceId, $invoiceExpirationDate, $user)
     {
         $subscriber = new Subscriber;
         $subscriber->invoice_id = $invoiceId;
         $subscriber->creator = auth()->user()->id;
         $subscriber->user_id = $user->id;
-        $subscriber->expire_date =  Carbon::now()->addMonth();
+        $subscriber->expire_date =  $invoiceExpirationDate;
         $subscriber->save();
     }
 }

@@ -80,27 +80,48 @@ class InvoiceController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param $request
+     * @param $user
+     * @return mixed
+     */
     public function makeManualInvoice($request, $user)
+    {
+        $invoiceCounter = Invoice::count();
+        $tran_id = time().bin2hex(random_bytes(6));
+        $uniqueId =  '#'.'DRB'.date("Y").($invoiceCounter + 1);
+
+        $invoice = new Invoice;
+        $invoice = $this->handleInvoiceType($invoice, $user, $request, $uniqueId, $tran_id);
+        $invoice->save();
+
+        return $invoice;
+    }
+
+    /**
+     * @param $invoice
+     * @param $user
+     * @param $request
+     * @param $uniqueId
+     * @param $tran_id
+     * @return mixed
+     */
+    public function handleInvoiceType($invoice, $user, $request, $uniqueId, $tran_id)
     {
         $plan = SubscriptionPlan::where('id', $request->plan)->first();
 
-        $invoiceCounter = Invoice::count();
-        $tran_id = time().bin2hex(random_bytes(6));
-        $uniqueid =  '#'.'DRB'.date("Y").($invoiceCounter + 1);
+        $invoice->type = $request->validity;
+        $invoice->expire_date =  $request->validity == 'yearly' ? Carbon::now()->addYear() : now()->addMonth();
 
-        $invoice = new Invoice;
         $invoice->user_id = $user->id;
         $invoice->plan_id = $request->plan;
-        $invoice->unique_id = $uniqueid;
+        $invoice->unique_id = $uniqueId;
         $invoice->price = 0;
-        $invoice->type = 'monthly';
         $invoice->user_limit = $plan->user_limit;
         $invoice->transaction_id = $tran_id;
-        $invoice->payment_type = 'trial';
-        $invoice->expire_date =  Carbon::now()->addMonth();
+        $invoice->payment_type = 'manual';
         $invoice->isApproved = 1;
-        $invoice->save();
 
-        return $invoice->id;
+        return $invoice;
     }
 }

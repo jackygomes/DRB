@@ -3,11 +3,6 @@
 @section('content')
 
     <div class="container">
-        @if($message = Session::get('success'))
-            <div class="alert alert-success">
-                {{$message}}
-            </div>
-        @endif
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -58,7 +53,7 @@
                                 <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}*</label>
 
                                 <div class="col-md-6">
-                                    <select class="custom-select" name="type" id="role">
+                                    <select class="custom-select" name="type" id="role" required>
                                             <option value="visitor">Visitor</option>
                                             <option value="paid">Paid</option>
                                             <option value="provider">Provider</option>
@@ -66,6 +61,31 @@
                                     </select>
                                 </div>
                             </div>
+
+                            @if(auth()->user()->type == 'admin')
+                                <div class="form-group row">
+                                    <label for="institution" class="col-md-4 col-form-label text-md-right">Package</label>
+                                    <div class="col-md-6">
+                                        <select class="custom-select" name="plan" id="plan">
+                                            <option value="">Select Package</option>
+                                            @foreach($plans as  $plan)
+                                                <option value="{{$plan->id}}" >{{$plan->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="institution" class="col-md-4 col-form-label text-md-right">Validity</label>
+                                    <div class="col-md-6">
+                                        <select class="custom-select" name="validity">
+                                            <option value="">Select Validity</option>
+                                            <option value="yearly">1 Year</option>
+                                            <option value="monthly">1 Month</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
@@ -91,6 +111,21 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-4 text-md-right">Verified</div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input
+                                                name="email_verified"
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                id="gridCheck1"
+                                                checked
+                                        >
+                                    </div>
                                 </div>
                             </div>
 
@@ -120,6 +155,8 @@
             </div>
         </div>
     </div>
+@endsection
+
 @section('scripts')
     <script type="application/javascript">
         $('#thumbnailImage').hide();
@@ -131,5 +168,4 @@
             }
         });
     </script>
-@endsection
 @endsection
