@@ -12,7 +12,7 @@
                         <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="full_name" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="contact_number" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
+                                <label for="contact_number" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="contact_number" type="text" class="form-control @error('contact_number') is-invalid @enderror" name="contact_number" required autocomplete="name" autofocus>
@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="profession" class="col-md-4 col-form-label text-md-right">{{ __('Profession') }}</label>
+                                <label for="profession" class="col-md-4 col-form-label text-md-right">{{ __('Profession') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="profession" type="text" class="form-control @error('profession') is-invalid @enderror" name="profession" required autocomplete="name" autofocus>
@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Institution') }}</label>
+                                <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Institution') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="institution" type="text" class="form-control @error('institution') is-invalid @enderror" name="institution" required autocomplete="name" autofocus>
