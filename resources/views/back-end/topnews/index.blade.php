@@ -30,7 +30,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Image</label>
+                            <label>Image (Upload 350 * 200 for optimal performance. 500kb max)</label>
                             <input class="form-control-file" name="image"  type="file">
                         </div>
                     </div>

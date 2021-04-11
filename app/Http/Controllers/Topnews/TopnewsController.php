@@ -26,7 +26,7 @@ class TopnewsController extends Controller
             'heading'   => 'required',
             'source'     => 'required',
             'source_name' => 'required',
-            'image'      => 'required'
+            'image'      => 'required|max:500|mimes:jpg,jpeg,png'
         ]);
 
         if($request->file('image')){
@@ -44,6 +44,12 @@ class TopnewsController extends Controller
             ]);
         }
 
+        if(Topnews::count() > 2){
+            $oldestNews = Topnews::orderBy('id', 'ASC')->first();
+            Storage::disk('s3')->delete($oldestNews->image);
+            $oldestNews->delete();
+        }
+
         return redirect()->back()->with('success', 'Topnews Is Added');
     }
 
@@ -59,6 +65,7 @@ class TopnewsController extends Controller
             'heading'   => 'string',
             'source'     => 'string',
             'source_name' => 'string',
+            'image'      => 'max:500|mimes:jpg,jpeg,png'
         ]);
 
         $topnews = Topnews::find($id);

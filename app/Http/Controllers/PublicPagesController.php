@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Topnews;
 use App\Survey;
 use Illuminate\Http\Request;
 use App\FinanceInfo;
@@ -32,7 +33,7 @@ class PublicPagesController extends Controller
         $economies = News::where('is_published', 1)->where('showing_area', 'economy')->orderBy('id', 'desc')->skip(1)->take(4)->get();
         $company = News::where('is_published', 1)->where('showing_area', 'company')->latest()->first();
         $companies = News::where('is_published', 1)->where('showing_area', 'company')->orderBy('id', 'desc')->skip(1)->take(4)->get();
-        $top5s = News::where('is_published', 1)->where('showing_area', 'top5')->latest()->take(7)->get();
+        $top5s = Topnews::latest()->take(7)->get();
         $sides = News::where('is_published', 1)->where('showing_area', 'side')->latest()->take(10)->get();
         // $allnews = News::where('is_published', 1)->where('showing_area', '<>',  'featured')->latest()->take(5)->get();
         return view('front-end.home.index', compact('subscriptionplans','surveys', 'survey_results','staticcontent','featured','world','worlds','country','countries','economy','economies','company','companies', 'top5s', 'sides'));
