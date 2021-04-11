@@ -158,6 +158,15 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
             Route::post('/update/{id}', 'NewsletterCategoryController@update')->name('nl_category.update');
             Route::get('/delete/{id}', 'NewsletterCategoryController@delete')->name('nl_category.delete');
         });
+
+        Route::group(['prefix' => 'topnews' , 'namespace' => 'topnews'], function (){
+            Route::get('/', 'TopnewsController@index')->name('topnews.index');
+            Route::get('/create', 'TopnewsController@create')->name('topnews.create');
+            Route::post('/store', 'TopnewsController@store')->name('topnews.store');
+            Route::get('/edit/{id}', 'TopnewsController@edit')->name('topnews.edit');
+            Route::post('/update/{id}', 'TopnewsController@update')->name('topnews.update');
+            Route::get('/delete/{id}', 'TopnewsController@delete')->name('topnews.delete');
+        });
     });
 
     //Page
