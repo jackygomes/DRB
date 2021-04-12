@@ -159,7 +159,7 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
             Route::get('/delete/{id}', 'NewsletterCategoryController@delete')->name('nl_category.delete');
         });
 
-        Route::group(['prefix' => 'Topnews' , 'namespace' => 'topnews'], function (){
+        Route::group(['prefix' => 'topnews' , 'namespace' => 'Topnews'], function (){
             Route::get('/', 'TopnewsController@index')->name('topnews.index');
             Route::get('/create', 'TopnewsController@create')->name('topnews.create');
             Route::post('/store', 'TopnewsController@store')->name('topnews.store');
