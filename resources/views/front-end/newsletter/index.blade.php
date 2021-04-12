@@ -11,6 +11,16 @@
                 <div class="col-12 col-md-10 offset-md-2 mt-4">
                     <div id="app-two">
                         <div class="row">
+                            <div class="col-md-4 offset-md-8">
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" v-model="publishing_date">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-warning" type="button" @click="filterByPublishingDate">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div v-if="initial" v-for="item in initial" :key="item.id + Math.random()" class="col-12 col-md-6">
                                 <div class="shadow-sm mb-3 single-news-border">
                                     <div class="row" v-bind:id="item.id">
@@ -60,6 +70,7 @@
             el: '#app-two',
             data() {
                 return {
+                    publishing_date : '',
                     last_id: 0,
                     canMakeCall : true,
                     threshold: 300,
@@ -90,6 +101,12 @@
                 window.removeEventListener('scroll', this.handleScroll);
             },
             methods: {
+                filterByPublishingDate: function () {
+                    if(this.publishing_date !== ''){
+                        this.last_id = 0
+                        this.initial_call()
+                    }
+                },
                 getUrl: function (item) {
                     let url = this.url;
                     url = url + '/single-news/' + item.id;
@@ -110,11 +127,11 @@
                 call() {
                     //console.log("calling");
                     if (this.last_id == "none") {
-                        console.log('no call');
+                        //console.log('no call');
                         return;
                     }
-                    let url = '/newsletters/category/' + this.last_id + '/' + {{ $categoryId }} ;
-                    console.log(url);
+                    let url = '/newsletters/category/' + this.last_id + '/' + {{ $categoryId }} + '/' + this.publishing_date;
+                    //console.log(this.canMakeCall);
                     if(this.canMakeCall){
                         this.canMakeCall = false
                         fetch(url, {
@@ -135,18 +152,18 @@
                                 return response.json();
                             })
                             .then(response => {
-//                                console.log(response)
+                                //console.log(response)
                                 if (response.success === true) {
                                     this.latest_call = response.items;
                                     this.last_id = response.last_id;
                                     if (this.latest_call != []) {
                                         this.initial = this.initial.concat(this.latest_call);
-                                        console.log(this.initial)
                                         this.threshold = this.threshold + 300;
-
                                     }
                                     this.canMakeCall = true;
-                                } else {
+                                }else if(response.date_search){
+                                    this.canMakeCall = true;
+                                }else {
                                     this.latest_call = [];
                                     this.last_id = "none";
                                 }
@@ -155,7 +172,8 @@
                 },
 
                 initial_call() {
-                    let url = '/newsletters/category/' + this.last_id + '/' + {{ $categoryId }};
+                    let url = '/newsletters/category/' + this.last_id + '/' + {{ $categoryId }} + '/' + this.publishing_date;
+//                    console.log(url)
                     fetch(url, {
                         method: 'Get', // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, cors, *same-origin
@@ -172,7 +190,6 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-//                            console.log(data.items)
                             this.initial = data.items;
                             this.last_id = data.last_id;
                         });
