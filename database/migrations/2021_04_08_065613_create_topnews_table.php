@@ -17,7 +17,6 @@ class CreateTopnewsTable extends Migration
             $table->bigIncrements('id');
             $table->string('heading');
             $table->text('source');
-            $table->string('source_name');
             $table->string('image');
             $table->timestamps();
         });

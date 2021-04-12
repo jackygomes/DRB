@@ -25,7 +25,6 @@ class TopnewsController extends Controller
         $this->validate($request, [
             'heading'   => 'required',
             'source'     => 'required',
-            'source_name' => 'required',
             'image'      => 'required|max:500|mimes:jpg,jpeg,png'
         ]);
 
@@ -39,12 +38,11 @@ class TopnewsController extends Controller
             Topnews::create([
                'heading'    => $request->heading,
                'source'     => $request->source,
-               'source_name' => $request->source_name,
                'image'      => $s3ImagePath,
             ]);
         }
 
-        if(Topnews::count() > 2){
+        if(Topnews::count() > 7){
             $oldestNews = Topnews::orderBy('id', 'ASC')->first();
             Storage::disk('s3')->delete($oldestNews->image);
             $oldestNews->delete();
@@ -64,7 +62,6 @@ class TopnewsController extends Controller
         $this->validate($request, [
             'heading'   => 'string',
             'source'     => 'string',
-            'source_name' => 'string',
             'image'      => 'max:500|mimes:jpg,jpeg,png'
         ]);
 

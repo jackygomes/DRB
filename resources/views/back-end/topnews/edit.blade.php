@@ -22,16 +22,13 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Name of Source</label>
-                            <input class="form-control" name="source_name" placeholder="Enter name of source of the news" value="{{ $topnews->source_name}}">
+                            <label>Image (Upload 350 * 200 for optimal performance. 500kb max)</label>
+                            <input class="form-control-file" name="image"  type="file">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Image (Upload 350 * 200 for optimal performance. 500kb max)</label>
-                            <input class="form-control-file" name="image"  type="file">
-                        </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary ml-3">Submit</button>

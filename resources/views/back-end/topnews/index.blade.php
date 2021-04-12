@@ -16,15 +16,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Source</label>
+                            <label>Source Url</label>
                             <input class="form-control"  name="source"  placeholder="Enter news source" value="{{ old('source') }}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Name of Source</label>
-                            <input class="form-control" name="source_name" placeholder="Enter name of source of the news" value="{{ old('source_name') }}">
                         </div>
                     </div>
 
@@ -33,6 +26,10 @@
                             <label>Image (Upload 350 * 200 for optimal performance. 500kb max)</label>
                             <input class="form-control-file" name="image"  type="file">
                         </div>
+                    </div>
+
+                    <div class="col-md-6">
+
                     </div>
 
                     <button type="submit" class="btn btn-primary ml-3">Submit</button>
@@ -51,7 +48,6 @@
                         <th>Sl.</th>
                         <th>Heading</th>
                         <th>Source</th>
-                        <th>Source Name</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -61,7 +57,6 @@
                         <th>Sl.</th>
                         <th>Heading</th>
                         <th>Source</th>
-                        <th>Source Name</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -72,7 +67,6 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$news->heading}}</td>
                             <td>{{$news->source}}</td>
-                            <td>{{$news->source_name}}</td>
                             <td>
                                 <a target="_blank" href="{{env('S3_URL') . $news->image}}" class="text-primary">Topnews Image</a>
                             </td>
