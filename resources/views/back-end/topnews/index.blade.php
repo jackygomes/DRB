@@ -65,8 +65,8 @@
                     @foreach($topnews as $news)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$news->heading}}</td>
-                            <td>{{$news->source}}</td>
+                            <td style="width: 25%">{{$news->heading}}</td>
+                            <td style="width: 50%">{{$news->source}}</td>
                             <td>
                                 <a target="_blank" href="{{env('S3_URL') . $news->image}}" class="text-primary">Topnews Image</a>
                             </td>
