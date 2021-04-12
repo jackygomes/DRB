@@ -14,15 +14,15 @@
                             <div v-if="initial" v-for="item in initial" :key="item.id + Math.random()" class="col-12 col-md-6">
                                 <div class="shadow-sm mb-3 single-news-border">
                                     <div class="row" v-bind:id="item.id">
-                                        <div class="col-md-3" v-if="item.thumbnail">
+                                        <div class="col-lg-4" v-if="item.thumbnail">
                                             <img v-bind:src="getImageUrl(item.thumbnail)"
-                                                 class="mb-3 img-fluid news-index-img" alt="...">
+                                                 class="img-fluid newsletter_image" alt="..."  width="100%">
                                         </div>
-                                        <div class="col-md-9">
-                                            <div>
-                                                <p><a :href="'/newsletters/single-newsletter/' + item.id" target="_blank"><h5>@{{item.title}}</h5></a></p>
+                                        <div class="col-lg-8 d-flex align-items-center">
+                                            <div class="newsletter_overview">
+                                                <p><a :href="'/newsletters/single-newsletter/' + item.id" target="_blank"><h5 class="mb-0">@{{item.title}}</h5></a></p>
                                                 <p><a :href="item.source" target="_blank" class="type_style">@{{item.category.type}}</a></p>
-                                                <p><h5>@{{item.readable_publishing_date}}</h5></p>
+                                                <p><h5 class="mb-0">@{{item.readable_publishing_date}}</h5></p>
                                             </div>
                                         </div>
                                     </div>
@@ -207,11 +207,23 @@
         .sidebar_margin_top_index_page{
             margin-top: 345px;
         }
+        .newsletter_image{max-height: 135px;}
+        .newsletter_overview p{
+            margin: 0;
+        }
 
         @media only screen and (max-width: 768px) {
             .sidebar_margin_top_index_page{
                 margin-top: 175px;
             }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .newsletter_overview{
+                margin-top:15px;
+            }
+
+            .newsletter_image{max-height: 200px;}
         }
     </style>
 @endsection

@@ -2,28 +2,29 @@
 @section('content')
     <section class="news" style="margin-top: 120px">
         <div class="container-fluid">
-            <div class="row">
-                @include('front-end.newsletter.sidebar')
-                <div class="col-12 col-md-9 offset-md-2 single-news-border">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{{asset('/storage/newsletter_thumbnail/' . $newsletter->thumbnail)}}" alt="" width="100%" style="border-radius: 5px;">
-                        </div>
-
-                        <div class="col-md-8 d-flex align-items-center">
-                            <div class="header_details" style="width: 100%">
-                                <h4>{{$newsletter->title}}</h4>
-                                <p class="type_style">{{ucfirst($newsletter->category->type)}}</p>
-                                <h5>{{$newsletter->readable_publishing_date}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            @include('front-end.newsletter.sidebar')
             <div class="row mt-2">
                 <div class="col-12 col-md-9 offset-md-2 single-news-border">
                     {!! json_decode($newsletter->newsletter_content)->data !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9 offset-md-2 subscribe">
+                <div class="col-12 col-md-6 offset-md-3 subscribe_form">
+                    <div style="color: #101c53;">
+                        <h1 class="text-center">Subscribe to DRB Newsletters</h1>
+                    </div>
+                    <form action="{{route('subscribe')}}" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <input type="email" class="form-control rounded-0" name="email" placeholder="Enter your email">
+                            <span class="input-group-btn">
+                    <button class="btn btn-warning rounded-0" type="submit">Subscribe</button>
+                </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

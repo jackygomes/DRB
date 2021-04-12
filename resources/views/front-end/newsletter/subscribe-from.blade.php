@@ -1,6 +1,6 @@
 <div class="col-md-12 subscribe">
     <div class="col-12 col-md-4 offset-md-4 subscribe_form">
-        <div style="color: #101c53;">
+        <div style="color: #101c53;" class="text-center">
             <h1>DRB Newsletters</h1>
             <h5>Your Daily Scoop oF Financial News</h5>
         </div>
