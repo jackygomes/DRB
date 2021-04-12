@@ -52,122 +52,122 @@
             @endif
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card-deck mt-5">
-                    <div class="card border-0">
-                        <h4 class="main-text-color">World</h4>
-                        @if($world)
-                        <a href="{{$world->source}}" target="_blank">
-                            @if($world->image)
-                            <img src="{{ env('S3_URL') }}{{$world->image}}" class="card-img-top rounded-0 category-news-img" alt="...">
-                            @endif
-                            <h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$world->heading}}</h6>
-                        </a>
-                        @else
-                            <p class="card-text main-text-color"><small>No news available</small></p>
-                        @endif
-                        @foreach ($worlds as $world)
-                            <a href="{{$world->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $world->heading ), 0, 20))}}</small></a>
-                        @endforeach
-                    </div>
+    {{--<div class="container">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-md-12">--}}
+                {{--<div class="card-deck mt-5">--}}
+                    {{--<div class="card border-0">--}}
+                        {{--<h4 class="main-text-color">World</h4>--}}
+                        {{--@if($world)--}}
+                        {{--<a href="{{$world->source}}" target="_blank">--}}
+                            {{--@if($world->image)--}}
+                            {{--<img src="{{ env('S3_URL') }}{{$world->image}}" class="card-img-top rounded-0 category-news-img" alt="...">--}}
+                            {{--@endif--}}
+                            {{--<h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$world->heading}}</h6>--}}
+                        {{--</a>--}}
+                        {{--@else--}}
+                            {{--<p class="card-text main-text-color"><small>No news available</small></p>--}}
+                        {{--@endif--}}
+                        {{--@foreach ($worlds as $world)--}}
+                            {{--<a href="{{$world->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $world->heading ), 0, 20))}}</small></a>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
 
-                    <div class="card border-0">
-                        <h4 class="main-text-color">Country</h4>
-                        @if($country)
-                        <a href="{{$country->source}}" target="_blank">
-                            @if($country->image)
-                            <img src="{{ env('S3_URL') }}{{$country->image}}" class="card-img-top rounded-0 category-news-img" alt="...">
-                            @endif
-                            <h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$country->heading}}</h6>
-                        </a>
-                        @else
-                            <p class="card-text main-text-color"><small>No news available</small></p>
-                        @endif
-                        @foreach ($countries as $country)
-                            <a href="{{$country->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $country->heading ), 0, 20))}}</small></a>
-                        @endforeach
-                    </div>
+                    {{--<div class="card border-0">--}}
+                        {{--<h4 class="main-text-color">Country</h4>--}}
+                        {{--@if($country)--}}
+                        {{--<a href="{{$country->source}}" target="_blank">--}}
+                            {{--@if($country->image)--}}
+                            {{--<img src="{{ env('S3_URL') }}{{$country->image}}" class="card-img-top rounded-0 category-news-img" alt="...">--}}
+                            {{--@endif--}}
+                            {{--<h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$country->heading}}</h6>--}}
+                        {{--</a>--}}
+                        {{--@else--}}
+                            {{--<p class="card-text main-text-color"><small>No news available</small></p>--}}
+                        {{--@endif--}}
+                        {{--@foreach ($countries as $country)--}}
+                            {{--<a href="{{$country->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $country->heading ), 0, 20))}}</small></a>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
 
-                    <div class="card border-0">
-                        <h4 class="main-text-color">Economy</h4>
-                        @if($economy)
-                        <a href="{{$economy->source}}" target="_blank">
+                    {{--<div class="card border-0">--}}
+                        {{--<h4 class="main-text-color">Economy</h4>--}}
+                        {{--@if($economy)--}}
+                        {{--<a href="{{$economy->source}}" target="_blank">--}}
 
-                            @if($economy->image)
-                            <img src="{{ env('S3_URL') }}{{$economy->image}}" class="card-img-top rounded-0 category-news-img" alt="...">
-                            @endif
-                            <h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$economy->heading}}</h6>
-                        </a>
-                        @else
-                            <p class="card-text main-text-color"><small>No news available</small></p>
-                        @endif
-                        @foreach ($economies as $economy)
-                            <a href="{{$economy->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $economy->heading ), 0, 20))}}</small></a>
-                        @endforeach
-                    </div>
+                            {{--@if($economy->image)--}}
+                            {{--<img src="{{ env('S3_URL') }}{{$economy->image}}" class="card-img-top rounded-0 category-news-img" alt="...">--}}
+                            {{--@endif--}}
+                            {{--<h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$economy->heading}}</h6>--}}
+                        {{--</a>--}}
+                        {{--@else--}}
+                            {{--<p class="card-text main-text-color"><small>No news available</small></p>--}}
+                        {{--@endif--}}
+                        {{--@foreach ($economies as $economy)--}}
+                            {{--<a href="{{$economy->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $economy->heading ), 0, 20))}}</small></a>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
 
-                    <div class="card border-0">
-                        <h4 class="main-text-color">Company</h4>
-                        @if($company)
-                        <a href="{{$company->source}}" target="_blank">
-                            @if($company->image)
-                             <img src="{{ env('S3_URL') }}{{$company->image}}" class="card-img-top rounded-0 category-news-img" alt="...">
-                            @endif
-                            <h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$company->heading}}</h6>
-                        </a>
-                        @else
-                            <p class="card-text main-text-color"><small>No news available</small></p>
-                        @endif
-                        @foreach ($companies as $company)
-                            <a href="{{$company->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $company->heading ), 0, 20))}}</small></a>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="text-center">
-                    <a href="/news" class="btn btn-warning my-5 rounded-pill px-5 mx-auto">Read More News</a>
-                </div>
-            </div>
+                    {{--<div class="card border-0">--}}
+                        {{--<h4 class="main-text-color">Company</h4>--}}
+                        {{--@if($company)--}}
+                        {{--<a href="{{$company->source}}" target="_blank">--}}
+                            {{--@if($company->image)--}}
+                             {{--<img src="{{ env('S3_URL') }}{{$company->image}}" class="card-img-top rounded-0 category-news-img" alt="...">--}}
+                            {{--@endif--}}
+                            {{--<h6 class="card-text main-text-color category-news-heading-border py-2 news-line-height">{{$company->heading}}</h6>--}}
+                        {{--</a>--}}
+                        {{--@else--}}
+                            {{--<p class="card-text main-text-color"><small>No news available</small></p>--}}
+                        {{--@endif--}}
+                        {{--@foreach ($companies as $company)--}}
+                            {{--<a href="{{$company->source}}" target="_blank" class="category-news-heading-border category-news subnews-line-height"><small class="card-text main-text-color">{{implode(' ', array_slice(explode(' ', $company->heading ), 0, 20))}}</small></a>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="text-center">--}}
+                    {{--<a href="/news" class="btn btn-warning my-5 rounded-pill px-5 mx-auto">Read More News</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
-            {{-- <div class="col-md-4">
-                <div class="custom-header-top">
-                    @if($sides->isEmpty())
-                        <h4 class="card-text main-text-color text-center"><small>No news available</small></h4>
-                    @else
-                        @foreach ($sides as $side)
-                            <h5 class="category-news-heading-border category-news pb-3 pt-2">
-                                <a href="{{route('news.single',$side->id)}}">{{$side->heading}}</a>
-                            </h5>
-                        @endforeach
-                    @endif
-                </div>
-            </div> --}}
-        </div>
-    </div>
+            {{-- <div class="col-md-4">--}}
+                {{--<div class="custom-header-top">--}}
+                    {{--@if($sides->isEmpty())--}}
+                        {{--<h4 class="card-text main-text-color text-center"><small>No news available</small></h4>--}}
+                    {{--@else--}}
+                        {{--@foreach ($sides as $side)--}}
+                            {{--<h5 class="category-news-heading-border category-news pb-3 pt-2">--}}
+                                {{--<a href="{{route('news.single',$side->id)}}">{{$side->heading}}</a>--}}
+                            {{--</h5>--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+            {{--</div> --}}
+        {{--</div>--}}
+    {{--</div>--}}
 </header>
 
 
-<section class="call-to-action bg-warning">
-    <div class="container-fluid h-100">
-        <div class="row text-center align-items-center h-100">
-            @if (Auth::user())
-                <div class="col-md-12">
-                    <h1 class="main-text-color">Data Resources BD</h1>
-                </div>
-            @else
-                <div class="col-md-2"></div>
-                <div class="col-md-4">
-                    <p class="main-text-color">Become a member &amp get <br> <strong>3 free downloads </strong></p>
-                </div>
-                <div class="col-md-4">
-                    <a href="{{ route('register') }}" class="btn btn-dark rounded-pill py-2 w-100 main-color">Sign Up</a>
-                </div>
-                <div class="col-md-2"></div>
-            @endif
-        </div>
-    </div>
-</section>
+{{--<section class="call-to-action bg-warning">--}}
+    {{--<div class="container-fluid h-100">--}}
+        {{--<div class="row text-center align-items-center h-100">--}}
+            {{--@if (Auth::user())--}}
+                {{--<div class="col-md-12">--}}
+                    {{--<h1 class="main-text-color">Data Resources BD</h1>--}}
+                {{--</div>--}}
+            {{--@else--}}
+                {{--<div class="col-md-2"></div>--}}
+                {{--<div class="col-md-4">--}}
+                    {{--<p class="main-text-color">Become a member &amp get <br> <strong>3 free downloads </strong></p>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-4">--}}
+                    {{--<a href="{{ route('register') }}" class="btn btn-dark rounded-pill py-2 w-100 main-color">Sign Up</a>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-2"></div>--}}
+            {{--@endif--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</section>--}}
 
 <section class="analyze mb-5">
     <div class="container-fluid">
