@@ -302,6 +302,13 @@ Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
 
+//test routes
+Route::get('/notify-users', function (\App\Service\PackageExpirationNotifyService $packageExpirationNotifyService){
+//    return view('mail.package');
+    //return now()->subDay()->format('d M y');
+    return $packageExpirationNotifyService->notifyPremiumOrCorporateUsersBeforeExpiration();
+});
+
 
 //Page
 Route::get('{slug}', 'PageController@page')->name('page');
