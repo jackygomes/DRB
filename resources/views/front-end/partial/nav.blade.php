@@ -32,11 +32,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto mr-auto">
-                <li class="nav-item nav-custom-margin-top">
-                    <a class="nav-link font-weight-bold text-white" href="{{route('news.index')}}" >
-                        <small class="font-weight-bold nav-item-custom-size">NEWS</small>
-                    </a>
-                </li>
+                {{--<li class="nav-item nav-custom-margin-top">--}}
+                    {{--<a class="nav-link font-weight-bold text-white" href="{{route('news.index')}}" >--}}
+                        {{--<small class="font-weight-bold nav-item-custom-size">NEWS</small>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
 
                 <li class="nav-item nav-custom-margin-top">
                     <a class="nav-link font-weight-bold text-white" href="{{ route('newsletters.index') }}" >

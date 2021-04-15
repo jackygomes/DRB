@@ -5,9 +5,9 @@
     </div>
 
     <ul class="list-unstyled components">
-        <li class="{{ request()->url() == route('news.for.you') ? 'sidebar-active' : '' }}">
-            <a href="{{route('news.for.you')}}">News For You</a>
-        </li>
+        {{--<li class="{{ request()->url() == route('news.for.you') ? 'sidebar-active' : '' }}">--}}
+            {{--<a href="{{route('news.for.you')}}">News For You</a>--}}
+        {{--</li>--}}
 
         @if(Auth::user()->type == 'visitor' || Auth::user()->type == 'paid')
             <li class="{{ request()->url() == route('invoice.user') ? 'sidebar-active' : '' }}">
@@ -66,12 +66,12 @@
             <li class="{{ request()->url() == route('survey.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('survey.index')}}">Survey</a>
             </li>
-            <li class="{{ request()->url() == route('news.portal') ? 'sidebar-active' : '' }}">
-                <a href="{{route('news.portal')}}">News</a>
-            </li>
-            <li class="{{ request()->url() == route('newspapers') ? 'sidebar-active' : '' }}">
-                <a href="{{route('newspapers')}}">Newspaper</a>
-            </li>
+            {{--<li class="{{ request()->url() == route('news.portal') ? 'sidebar-active' : '' }}">--}}
+                {{--<a href="{{route('news.portal')}}">News</a>--}}
+            {{--</li>--}}
+            {{--<li class="{{ request()->url() == route('newspapers') ? 'sidebar-active' : '' }}">--}}
+                {{--<a href="{{route('newspapers')}}">Newspaper</a>--}}
+            {{--</li>--}}
             <li class="{{ request()->url() == route('topnews.index') ? 'sidebar-active' : '' }}">
                 <a href="{{route('topnews.index')}}">Top News</a>
             </li>

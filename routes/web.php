@@ -212,8 +212,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     //for you filter
-    Route::get('news-for-you', 'NewsForYouController@index')->name('news.for.you');
-    Route::post('news-for-you', 'NewsForYouController@store')->name('news.for.you.post');
+//    Route::get('news-for-you', 'NewsForYouController@index')->name('news.for.you');
+//    Route::post('news-for-you', 'NewsForYouController@store')->name('news.for.you.post');
 
     Route::group(['prefix' => 'tutorials'], function (){
         Route::get('/payment/{tutorial_id}','TutorialController@makePayment')->name('tutorials.payment');
@@ -254,10 +254,10 @@ Route::post('/contact-us', 'PublicPagesController@contactUs')->name('contactus')
 Route::post('/subscribe', 'PublicPagesController@subscribe')->name('subscribe');
 
 //News
-Route::get('/news', 'NewsController@index')->name('news.index');
-Route::get('/single-news/{id}', 'NewsController@singleNews')->name('news.single');
-Route::get('/news/{category}', 'NewsController@newsByCategoty')->name('news.bycategoty');
-Route::get('/news/newspaper/{id}', 'NewsController@newsByNewspaper')->name('news.bynewspaper');
+//Route::get('/news', 'NewsController@index')->name('news.index');
+//Route::get('/single-news/{id}', 'NewsController@singleNews')->name('news.single');
+//Route::get('/news/{category}', 'NewsController@newsByCategoty')->name('news.bycategoty');
+//Route::get('/news/newspaper/{id}', 'NewsController@newsByNewspaper')->name('news.bynewspaper');
 
 Route::group(['prefix' => 'newsletters', 'namespace' => 'Newsletter'], function (){
     Route::get('/{category_id?}', 'NewsletterFrontendController@index')->name('newsletters.index');
@@ -301,14 +301,6 @@ Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
 
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
-
-//test routes
-Route::get('/notify-users', function (\App\Service\PackageExpirationNotifyService $packageExpirationNotifyService){
-//    return view('mail.package');
-    //return now()->subDay()->format('d M y');
-    return $packageExpirationNotifyService->notifyPremiumOrCorporateUsersBeforeExpiration();
-});
-
 
 //Page
 Route::get('{slug}', 'PageController@page')->name('page');
