@@ -5,12 +5,12 @@
             @include('front-end.newsletter.sidebar')
             <div class="row mt-2">
                 <div class="col-12 col-md-9 offset-md-2 single-news-border">
-                    {!! json_decode($newsletter->newsletter_content)->data !!}
+                    <iframe id="newsletter" width="100%" height="1000px" scrolling="no" srcdoc="{{json_decode($newsletter->newsletter_content)->data}}" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-9 offset-md-2 subscribe">
                 <div class="col-12 col-md-6 offset-md-3 subscribe_form">
                     <div style="color: #101c53;">
@@ -19,9 +19,9 @@
                     <form action="{{route('subscribe')}}" method="post">
                         @csrf
                         <div class="input-group">
-                            <input type="email" class="form-control rounded-0" name="email" placeholder="Enter your email">
+                            <input type="email" class="form-control rounded-left" name="email" placeholder="Enter your email">
                             <span class="input-group-btn">
-                    <button class="btn btn-warning rounded-0" type="submit">Subscribe</button>
+                    <button class="btn btn-warning" style="border-radius: 0 3px 3px 0;" type="submit">Subscribe</button>
                 </span>
                         </div>
                     </form>
@@ -29,6 +29,15 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script>
+        var iframe = document.getElementById("newsletter");
+        iframe.onload = function(){
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        }
+    </script>
 @endsection
 
 @section('styles')

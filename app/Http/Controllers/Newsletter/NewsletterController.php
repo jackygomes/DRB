@@ -38,12 +38,13 @@ class NewsletterController extends Controller
     public function store(NewsletterPostRequest $request)
     {
         $content = str_replace('<body class', '<body id',$request->newsletter_content);
+        $content = str_replace('max-width', 'no-attribute',$content);
 
-        $filename = $this->storeThumbnailImage($request);
+        $path = $this->storeThumbnailImage($request);
 
         $data = $request->validated();
         $data['readable_publishing_date'] = Carbon::parse($request->publishing_date)->format('d M y');
-        $data['thumbnail'] = $filename;
+        $data['thumbnail'] = $path;
         $data['created_by'] = auth()->user()->id;
         $data['newsletter_content'] = json_encode([
             'data' => $content
@@ -60,14 +61,10 @@ class NewsletterController extends Controller
 
         $thumbnail = Image::make($request->file('thumbnail'))->resize(300, 200);
 
-        if(!Storage::exists('public/newsletter_thumbnail')){
-            Storage::makeDirectory('public/newsletter_thumbnail');
-        }
+        $fileName = time() . '.jpg';
+        Storage::disk('s3')->put(env('APP_ENV') . '/newsletter/' . $fileName, $thumbnail->stream()->__toString());
 
-        $filename = time(). '.' .$request->file('thumbnail')->extension();
-        $thumbnail->save(storage_path('app/public/newsletter_thumbnail/') . $filename);
-
-        return $filename;
+        return $fileName;
     }
 
     /**
@@ -108,8 +105,8 @@ class NewsletterController extends Controller
             $filename = $this->storeThumbnailImage($request);
             $data['thumbnail'] = $filename;
 
-            //removing previous thumbnail from storage
-            Storage::delete('public/newsletter_thumbnail/' . $newsletter->thumbnail);
+            //removing previous thumbnail from s3
+            Storage::disk('s3')->delete(env('APP_ENV') . '/newsletter/' . $newsletter->thumbnail);
         }
 
         if($request->has('newsletter_content')){
@@ -130,7 +127,7 @@ class NewsletterController extends Controller
     public function delete($id)
     {
         $newsletter = Newsletter::findOrFail($id);
-        Storage::delete('public/newsletter_thumbnail/' . $newsletter->thumbnail);
+        Storage::disk('s3')->delete(env('APP_ENV') . '/newsletter/' . $newsletter->thumbnail);
         $newsletter->delete();
         return redirect()->route('newsletter.index')->with(['success' => 'Deleted Successfully']);
     }

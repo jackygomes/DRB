@@ -99,10 +99,6 @@
     {{--<script type="text/javascript" src="{{asset('js/addthis_widget.js#pubid=ra-5dce8059e10469a8&async=1')}}" ></script>--}}
 
     <script>
-    $(window).scroll(function() {
-        sessionStorage.scrollTop = $(this).scrollTop();
-    });
-
     $(document).ready(function() {
     if (sessionStorage.scrollTop != "undefined") {
         $(window).scrollTop(2);
@@ -115,7 +111,7 @@
     <script>
         $(window).on('load', function() {
             // Animate loader off screen
-            $(".se-pre-con").fadeOut("slow");;
+            $(".se-pre-con").fadeOut("slow");
         });
     </script>
     @yield('scripts2')

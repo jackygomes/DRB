@@ -58,13 +58,13 @@ class NewsletterFrontendController extends Controller
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->where('publishing_date', $publishingDate)
                     ->with('category')
-                    ->take(1)
+                    ->take(8)
                     ->get();
             else
                 $newsletters = Newsletter::orderBy('id', 'DESC')
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->with('category')
-                    ->take(1)
+                    ->take(8)
                     ->get();
         }
 
@@ -76,14 +76,14 @@ class NewsletterFrontendController extends Controller
                     ->where('publishing_date', $publishingDate)
                     ->where('category_id', $categoryId)
                     ->with('category')
-                    ->take(1)
+                    ->take(8)
                     ->get();
             else
                 $newsletters = Newsletter::orderBy('id', 'DESC')
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->where('category_id', $categoryId)
                     ->with('category')
-                    ->take(1)
+                    ->take(8)
                     ->get();
         }
 
@@ -106,12 +106,12 @@ class NewsletterFrontendController extends Controller
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->where('publishing_date', $publishingDate)
                     ->with('category')
-                    ->orderBy('id', 'DESC')->take(8)->get();
+                    ->orderBy('id', 'DESC')->take(6)->get();
             else
                 $newsletters = Newsletter::where('id', '<', $lastNewsletterId)
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->with('category')
-                    ->orderBy('id', 'DESC')->take(8)->get();
+                    ->orderBy('id', 'DESC')->take(6)->get();
         }
 
         if($categoryId != 0){
@@ -120,12 +120,12 @@ class NewsletterFrontendController extends Controller
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->where('publishing_date', $publishingDate)
                     ->with('category')
-                    ->orderBy('id', 'DESC')->where('category_id', $categoryId)->take(8)->get();
+                    ->orderBy('id', 'DESC')->where('category_id', $categoryId)->take(6)->get();
             else
                 $newsletters = Newsletter::where('id', '<', $lastNewsletterId)
                     ->where('publishing_date', '<=', now()->timezone('Asia/Dhaka')->toDateString())
                     ->with('category')
-                    ->orderBy('id', 'DESC')->where('category_id', $categoryId)->take(8)->get();
+                    ->orderBy('id', 'DESC')->where('category_id', $categoryId)->take(6)->get();
         }
 
         try{

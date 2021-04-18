@@ -46,7 +46,7 @@
         scrollCollapse: true
       }
     );
-    
+
   });
 
 $(document).ready(function () {
@@ -94,23 +94,23 @@ $(document).ready(function () {
     var ellipsestext = "...";
     var moretext = "Show more >";
     var lesstext = "Show less";
-    
+
 
     $('.more').each(function() {
         var content = $(this).html();
- 
+
         if(content.length > showChar) {
- 
+
             var c = content.substr(0, showChar);
             var h = content.substr(showChar, content.length - showChar);
- 
+
             var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
- 
+
             $(this).html(html);
         }
- 
+
     });
- 
+
     $(".morelink").click(function(){
         if($(this).hasClass("less")) {
             $(this).removeClass("less");
@@ -197,17 +197,19 @@ $(document).ready(function () {
     $('#sidebarCollapse').click(function() {
       $('#news-sidenav').toggleClass('fa-chevron-left fa-chevron-right');
     });
-  }); 
+  });
 
   $(window).scroll(function() {
-    if($('.footer-main').offset().top - $(window).scrollTop() <= 765)
+    if($('.footer-main').offset().top - $(window).scrollTop() <= 600)
      {
+         $('#sidebar').hide()
         $('.news-sidenav-scroll-hide').hide(10);
      }
     else
-     {
-      $('.news-sidenav-scroll-hide').show(10);
-     }
+      {
+          $('#sidebar').show()
+          $('.news-sidenav-scroll-hide').show(10);
+      }
  });
 
 })(jQuery);

@@ -114,7 +114,7 @@
                 },
 
                 getImageUrl(name) {
-                    let url = window.location.origin + "/storage/newsletter_thumbnail/" + name
+                    let url = "{{env('S3_URL')}}" + "{{env('APP_ENV')}}" + "/newsletter/" + name
                     return url;
                 },
 
@@ -217,7 +217,7 @@
         /*used in subscriber page*/
         .subscribe{
             background: #f5f5f5;
-            padding: 60px 0;
+            padding: 30px 0 40px 0;
         }
 
         /*used in sidebar page*/

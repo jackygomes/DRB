@@ -7,9 +7,9 @@
         <form action="{{route('subscribe')}}" method="post">
             @csrf
             <div class="input-group">
-                <input type="email" class="form-control rounded-0" name="email" placeholder="Enter your email">
+                <input type="email" class="form-control rounded-left" name="email" placeholder="Enter your email">
                 <span class="input-group-btn">
-                    <button class="btn btn-warning rounded-0" type="submit">Subscribe</button>
+                    <button class="btn btn-warning" style="border-radius: 0 3px 3px 0;" type="submit">Subscribe</button>
                 </span>
             </div>
         </form>
