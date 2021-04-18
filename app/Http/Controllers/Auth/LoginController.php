@@ -38,11 +38,17 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        if(url()->previous() != url()->to('/login')){
-            Session::put('redirect_route_after_login', url()->previous());
-        }
-
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * @param Request $request
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->to(Session::get('redirect_route_after_login'));
     }
 
     public function login(Request $request)
@@ -89,6 +95,8 @@ class LoginController extends Controller
 
     public function showLoginForm ()
     {
+        Session::put('redirect_route_after_login', url()->previous());
+
         $staticcontent = StaticContent::all(); 
         return view('auth.login', compact('staticcontent'));
     }
