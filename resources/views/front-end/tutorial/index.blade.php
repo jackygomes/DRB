@@ -178,7 +178,7 @@
                     </div>
                 @endforeach
                 @if(count($tutorials) == 0)
-                    <h4>No Training Found </h4>
+                    <h4 class="text-center">No Training Found </h4>
                 @endif
             </div>
 
