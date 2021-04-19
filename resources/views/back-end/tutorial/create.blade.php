@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="form-group">
-                        <label>Image</label>
+                        <label>Image (jpg,png. Image will be resized to 600*400 automatically)</label>
                         <input class="form-control-file" name="tutorial_image" type="file" required>
                     </div>
                 </div>

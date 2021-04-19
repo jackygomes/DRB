@@ -11,6 +11,8 @@ use Google\Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Matrix\Exception;
 
 class TutorialController extends Controller
@@ -57,9 +59,7 @@ class TutorialController extends Controller
     public function storeTutorial(TutorialFormValidation $request)
     {
         $input = (object)$request->validated();
-
-        $imageName = time() . '.' . $input->tutorial_image->extension();
-        $input->tutorial_image->move(storage_path('app/public/tutorial'), $imageName);
+        $imageName = $this->storeImage($input);
 
         Tutorial::create([
             'tutorial_category_id' => $input->tutorial_category_id,
@@ -76,6 +76,19 @@ class TutorialController extends Controller
         ]);
 
         return redirect()->route('tutorial.create')->with('success', 'Tutorial Creation Successful');
+    }
+
+    /**
+     * @param $input
+     * @return string
+     */
+    public function storeImage($input){
+
+        $image = Image::make($input->tutorial_image)->resize(600, 400);
+        $fileName = time() . '.jpg';
+        Storage::disk('s3')->put(env('APP_ENV') . '/training/' . $fileName, $image->stream()->__toString());
+
+        return $fileName;
     }
 
     /**

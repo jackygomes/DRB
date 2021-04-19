@@ -25,7 +25,7 @@
                 <label for="staticEmail" class="col-sm-2 col-form-label">Image</label>
                 <div class="col-md-1">:</div>
                 <div class="col-sm-9 col-md-3 " style="box-shadow: 0 0 4px #c5c5c5; padding: 5px;">
-                    <img src="{{asset('storage/tutorial/' . $tutorial->tutorial_image)}}" alt="" width="100%">
+                    <img src="{{env('S3_URL') . env('APP_ENV') . '/training/' . $tutorial->tutorial_image}}" alt="" width="100%">
                 </div>
             </div>
 
@@ -109,7 +109,7 @@
             <div class="mt-3 mb-3" style="box-shadow: 0 0 3px #c5c5c5; padding: 10px;">
                 <p>
                     @foreach($invoices as $invoice)
-                        {{$invoice->user->email}},
+                        {{isset($invoice->user->email) ? $invoice->user->email : ''}},
                     @endforeach
                 </p>
             </div>
