@@ -225,11 +225,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 //tutorial
-//Route::group(['prefix' => 'trainings'], function (){
-//    Route::get('/view/{category_id?}','TutorialController@index')->name('tutorials.view.index');
-//    Route::get('/{id}/details','TutorialController@showDetails')->name('tutorials.details');
-//    Route::get('/add-to-calendar/{id?}','TutorialController@addToCalendar')->name('tutorials.add.to.calendar');
-//});
+Route::group(['prefix' => 'trainings'], function (){
+    Route::get('/view/{category_id?}','TutorialController@index')->name('tutorials.view.index');
+    Route::get('/{id}/details','TutorialController@showDetails')->name('tutorials.details');
+    Route::get('/add-to-calendar/{id?}','TutorialController@addToCalendar')->name('tutorials.add.to.calendar');
+});
 
 //filtered news
 Route::get('filtered-news', 'NewsForYouController@getFilteredNews')->name('filtered.news');
