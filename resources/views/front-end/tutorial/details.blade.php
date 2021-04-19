@@ -44,7 +44,7 @@
                                 {{--left section--}}
                                 <div class="col-md-5">
                                     <div class="single-news-border">
-                                        <img width="100%" src="{{asset('storage/tutorial/' . $tutorial->tutorial_image)}}" alt="..." class="img-fluid news-index-img">
+                                        <img width="100%" src="{{env('S3_URL') . env('APP_ENV') . '/training/' . $tutorial->tutorial_image}}" alt="..." class="img-fluid news-index-img">
 
                                         <div class="row mt-3">
                                             <div class="col-6">
