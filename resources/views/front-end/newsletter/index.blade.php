@@ -222,7 +222,7 @@
 
         /*used in sidebar page*/
         .sidebar_margin_top_index_page{
-            margin-top: 345px;
+            margin-top: 300px;
         }
         .newsletter_image{max-height: 135px;}
         .newsletter_overview p{
