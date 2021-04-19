@@ -33,10 +33,12 @@
 
 @section('scripts')
     <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
         var iframe = document.getElementById("newsletter");
-        iframe.onload = function(){
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-        }
+            iframe.onload = function(){
+                iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            }
+        });
     </script>
 @endsection
 
