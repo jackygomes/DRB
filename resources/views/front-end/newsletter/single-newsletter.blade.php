@@ -5,7 +5,7 @@
             @include('front-end.newsletter.sidebar')
             <div class="row mt-2">
                 <div class="col-12 col-md-9 offset-md-2 single-news-border">
-                    <iframe id="newsletter" width="100%" height="1000px" scrolling="no" srcdoc="{{json_decode($newsletter->newsletter_content)->data}}" frameborder="0"></iframe>
+                    <iframe id="newsletter" width="100%" scrolling="no" srcdoc="{{json_decode($newsletter->newsletter_content)->data}}" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
@@ -33,10 +33,12 @@
 
 @section('scripts')
     <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
         var iframe = document.getElementById("newsletter");
-        iframe.onload = function(){
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-        }
+            iframe.onload = function(){
+                iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            }
+        });
     </script>
 @endsection
 

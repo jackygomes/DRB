@@ -26,7 +26,7 @@ class TutorialFormValidation extends FormRequest
         return [
             'tutorial_category_id' => 'required',
             'name'              => 'required',
-            'tutorial_image'    => 'required',
+            'tutorial_image'    => 'required|mimes:jpeg,jpg,png',
             'date'              => 'required',
             'end_date'          => 'required',
             'trainers'          => 'required',

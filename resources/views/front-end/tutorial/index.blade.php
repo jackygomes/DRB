@@ -112,7 +112,7 @@
 
                             <div class="col-md-2">
                                 @if(isset($tutorial->tutorial_image))
-                                    <img src="{{asset('storage/tutorial/' . $tutorial->tutorial_image)}}" alt="..." class="img-fluid news-index-img">
+                                    <img src="{{env('S3_URL') . env('APP_ENV') . '/training/' . $tutorial->tutorial_image}}" alt="..." class="img-fluid news-index-img">
                                 @else
                                     <img src="{{asset('img/DRB-logo.jpeg')}}" alt="..." class="img-fluid news-index-img">
                                 @endif
@@ -178,7 +178,7 @@
                     </div>
                 @endforeach
                 @if(count($tutorials) == 0)
-                    <h4>No Research Found </h4>
+                    <h4>No Training Found </h4>
                 @endif
             </div>
 
