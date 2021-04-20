@@ -37,8 +37,7 @@ class NewsletterController extends Controller
      */
     public function store(NewsletterPostRequest $request)
     {
-        $content = str_replace('<body class', '<body id',$request->newsletter_content);
-        $content = str_replace('max-width', 'no-attribute',$content);
+        $content = $this->removeNewsletterBodyCss($request);
 
         $path = $this->storeThumbnailImage($request);
 
@@ -109,12 +108,10 @@ class NewsletterController extends Controller
             Storage::disk('s3')->delete(env('APP_ENV') . '/newsletter/' . $newsletter->thumbnail);
         }
 
-        if($request->has('newsletter_content')){
-            $content = str_replace('<body class', '<body id',$request->newsletter_content);
-            $data['newsletter_content'] = json_encode([
-                'data' => $content
-            ]);
-        }
+        $content = $this->removeNewsletterBodyCss($request);
+        $data['newsletter_content'] = json_encode([
+            'data' => $content
+        ]);
 
         $newsletter->update($data);
         return redirect()->route('newsletter.edit', $newsletter->id)->with(['success' => 'Updated Successfully']);
@@ -130,5 +127,18 @@ class NewsletterController extends Controller
         Storage::disk('s3')->delete(env('APP_ENV') . '/newsletter/' . $newsletter->thumbnail);
         $newsletter->delete();
         return redirect()->route('newsletter.index')->with(['success' => 'Deleted Successfully']);
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function removeNewsletterBodyCss($request)
+    {
+        if($request->has('newsletter_content')){
+            $regex= "/<body [\w=\"-:#; ]+>/";
+            $content = preg_replace($regex, '<body>', $request->newsletter_content);
+            return $content;
+        }
     }
 }
