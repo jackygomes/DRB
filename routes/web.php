@@ -302,15 +302,15 @@ Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
 
-Route::get('test-mail', function (){
-    //testing supervisor and jobs
-    try{
-        \Illuminate\Support\Facades\Mail::to('mahfuz@chatleads.io')->send(new \App\Mail\TestMail());
-    }catch(\Exception $e){
-        return $e->getMessage();
-    }
-    return 'check job';
-});
+//Route::get('test-mail', function (){
+//    //testing supervisor and jobs
+//    try{
+//        \Illuminate\Support\Facades\Mail::to('mahfuz@chatleads.io')->send(new \App\Mail\TestMail());
+//    }catch(\Exception $e){
+//        return $e->getMessage();
+//    }
+//    return 'check job';
+//});
 
 //Page
 Route::get('{slug}', 'PageController@page')->name('page');
