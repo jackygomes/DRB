@@ -44,7 +44,7 @@ class PackageExpirationNotifyService
         $packages = SubscriptionPlan::where('name', 'premium')->orWhere('name', 'corporate')->get();
         //return $packages;
 
-            if(count($packages) > 0){
+            if(count($packages) > 1){
                 $invoices = Invoice::where('expire_date', now()->addDays(3)->toDateString())
                     ->where(function ($q) use ($packages){
                         return $q->where('plan_id', $packages[0]->id)->orWhere('plan_id', $packages[1]->id);
