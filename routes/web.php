@@ -302,6 +302,12 @@ Route::post('/checkout', 'CheckOutController@checkOut')->name('checkout');
 Route::get('/research-list', 'ResearchController@index')->name('research.list');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
 
+Route::get('test-mail', function (){
+    //testing supervisor and jobs
+    \Illuminate\Support\Facades\Mail::to('testuser@gmail.com')->send(new \App\Mail\TestMail());
+    return 'check job';
+});
+
 //Page
 Route::get('{slug}', 'PageController@page')->name('page');
 
