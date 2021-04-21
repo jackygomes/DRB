@@ -304,7 +304,7 @@ Route::get('/pricing', 'PricingController@index')->name('pricing');
 
 Route::get('test-mail', function (){
     //testing supervisor and jobs
-    \Illuminate\Support\Facades\Mail::to('testuser@gmail.com')->send(new \App\Mail\TestMail());
+    \Illuminate\Support\Facades\Mail::to('mahfuz@chatleads.io')->send(new \App\Mail\TestMail());
     return 'check job';
 });
 
