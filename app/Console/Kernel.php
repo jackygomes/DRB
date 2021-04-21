@@ -24,9 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->command('notify:trialUsers')->dailyAt('01:00');
-//        $schedule->command('notify:premiumAndCorporateUsers')->dailyAt('01:00');
-        $schedule->command('cron:test')->everyFiveMinutes();
+        $schedule->command('notify:trialUsers')->dailyAt('01:00');
+        $schedule->command('notify:premiumAndCorporateUsers')->dailyAt('01:00');
+        //$schedule->command('cron:test')->everyFiveMinutes();
     }
 
     /**
