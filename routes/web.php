@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -311,6 +312,16 @@ Route::get('/pricing', 'PricingController@index')->name('pricing');
 //    }
 //    return 'check job';
 //});
+
+Route::group(['prefix' => 'email-tracker'], function (){
+    Route::get('/', 'EmailTrackerController@index')->name('email.tracker.index');
+    Route::get('/analytic', 'EmailTrackerController@getChart')->name('email.tracker.chart');
+    Route::get('/show/{id}', 'EmailTrackerController@show')->name('email.tracker.show');
+    Route::get('/edit/{id}', 'EmailTrackerController@edit')->name('email.tracker.edit');
+    Route::post('/update/{id}', 'EmailTrackerController@update')->name('email.tracker.update');
+    Route::post('/store', 'EmailTrackerController@store')->name('email.tracker.store');
+    Route::get('/{tracking_uid}/{email}/{name?}', 'EmailTrackerController@trackEmail')->name('email.tracker.action');
+});
 
 //Page
 Route::get('{slug}', 'PageController@page')->name('page');
