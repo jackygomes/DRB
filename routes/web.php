@@ -171,7 +171,7 @@ Route::middleware(['auth','admin', 'verified'])->group(function () {
 
         Route::group(['prefix' => 'email-tracker'], function (){
             Route::get('/', 'EmailTrackerController@index')->name('email.tracker.index');
-            Route::get('/analytic', 'EmailTrackerController@getChart')->name('email.tracker.chart');
+            Route::get('/analytics', 'EmailTrackerController@getChart')->name('email.tracker.chart');
             Route::get('/show/{id}', 'EmailTrackerController@show')->name('email.tracker.show');
             Route::get('/edit/{id}', 'EmailTrackerController@edit')->name('email.tracker.edit');
             Route::post('/update/{id}', 'EmailTrackerController@update')->name('email.tracker.update');

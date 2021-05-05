@@ -20,7 +20,7 @@
             data: {
                 labels: {!! json_encode($emailStat['title']) !!},
                 datasets: [{
-                    label: 'Email Tracking Analytic Last For 25 Emails',
+                    label: 'Email Tracking Analytics For Last 25 Emails',
                     data: {!! json_encode($emailStat['ratio']) !!},
                     borderColor: 'rgb(75, 192, 192)',
                     backgroundColor: 'rgb(75, 192, 192, 0.2)',
