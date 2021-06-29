@@ -1369,3 +1369,8 @@ table.dataTable{
         margin-right:20px;
     }
 }
+
+/*data table pagination height issue fix*/
+.DTFC_ScrollWrapper{
+    min-height: 705px !important;
+}
