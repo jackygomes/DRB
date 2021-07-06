@@ -25,7 +25,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="full_name" value="{{ old('full_name') }}"  autocomplete="name" autofocus maxlength="50" pattern="[A-Za-z ]+" title="*Letters only" required>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="full_name" value="{{ old('full_name') }}"  autocomplete="name" autofocus maxlength="50" pattern="^[A-Za-z][A-Za-z ]{1,49}$" title="Letters only, no initial space, max 50 character" required>
 
                                 @error('full_name')
                                     <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                             <label for="contact_number" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="contact_number" type="text" class="form-control @error('contact_number') is-invalid @enderror" name="contact_number" value="{{ old('contact_number') }}"  autocomplete="name" autofocus maxlength="20" pattern="[+0-9]+" title="*Numbers only" required>
+                                <input id="contact_number" type="text" class="form-control @error('contact_number') is-invalid @enderror" name="contact_number" value="{{ old('contact_number') }}"  autocomplete="name" autofocus maxlength="20" pattern="[+0-9]{1,20}$" title="Numbers only" required>
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                             <label for="profession" class="col-md-4 col-form-label text-md-right">{{ __('Profession') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="profession" type="text" class="form-control @error('profession') is-invalid @enderror" name="profession" value="{{ old('profession') }}"  autocomplete="name" autofocus maxlength="25" pattern="[A-Za-z ]+" title="*Letters only" required>
+                                <input id="profession" type="text" class="form-control @error('profession') is-invalid @enderror" name="profession" value="{{ old('profession') }}"  autocomplete="name" autofocus maxlength="25" pattern="^[A-Za-z][A-Za-z ]{1,24}$" title="Letters only, no initial space, max 25 character" required>
                             </div>
                         </div>
 
@@ -55,7 +55,7 @@
                             <label for="institution" class="col-md-4 col-form-label text-md-right">{{ __('Institution') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="institution" type="text" class="form-control @error('institution') is-invalid @enderror" name="institution" value="{{ old('institution') }}"  autocomplete="name" autofocus maxlength="50" pattern="[A-Za-z0-9 ]+" title="*Letters & numbers only" required>
+                                <input id="institution" type="text" class="form-control @error('institution') is-invalid @enderror" name="institution" value="{{ old('institution') }}"  autocomplete="name" autofocus maxlength="50" pattern="^[A-Za-z0-9][A-Za-z0-9 ]{1,49}$" title="Letters, numbers only, no initial space, max 50 character" required>
                             </div>
                         </div>
 
