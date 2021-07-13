@@ -80,7 +80,8 @@ class RegisterController extends Controller
             'profession' => $data['profession'],
             'institution' => $data['institution'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'email_verified_at' => Carbon::now(),
         ]);
     }
 }
