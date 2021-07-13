@@ -116,7 +116,7 @@ class UserController extends Controller
             'institution' => 'required',
             'type' => 'required',
             'email_verified' => 'string',
-            'validity' => 'string',
+            'validity' => '',
             'email'=>'required|email|unique:users,email,'.$id ,
         ]);
 
