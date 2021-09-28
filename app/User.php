@@ -62,7 +62,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function canDownload(){
-        if($this->download == null){
+        if (auth()->user()->type == 'admin')
+            return true;
+        elseif ($this->download == null){
             return true;
         }else{
            if($this->download->how_many_left != 0){

@@ -11,6 +11,10 @@ class DownloadController extends Controller
 
     public function store(Request $request)
     {
+        //admin can download always
+        if(auth()->user()->type == 'admin')
+            return redirect()->away($request->file_path);
+
         $download = Download::where('user_id', '=', auth()->user()->id)->first();
         if($download != null)
         {
